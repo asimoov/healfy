@@ -1,6 +1,6 @@
 "use strict";
 
-var route = function(app) {
+module.exports = function(app) {
 	app.param('patient_id', function(req, res, next, value) {
 		if (value.match(/^\d+$/)) {
 	        next();
@@ -66,5 +66,3 @@ var route = function(app) {
 		});
 	});
 }
-
-module.export = route;

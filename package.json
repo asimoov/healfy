@@ -10,5 +10,8 @@
     "jade": "*",
     "sequelize": "~2.0.0-dev1",
     "pg": "~2.11.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2"
   }
 }
