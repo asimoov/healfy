@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * Module dependencies.
@@ -82,7 +83,7 @@ app.post('/cliente', function(req, res){
 
 app.get('/cliente/:id/editar', function(req, res){
 	var id = req.params.id;
-	User.find(id).success(function(user) {
+	User.find(id).complete(function(err, johnDoe) {
 		var html  = '<html><body>';
 		html += '<h1>Editar dados do cliente: '+user.name+'</h1>';
 		html += '<form action="/cliente/'+ user.id +'" method="post">';
