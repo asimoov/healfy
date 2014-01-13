@@ -7,6 +7,8 @@
   },
   "dependencies": {
     "express": "3.4.7",
-    "jade": "*"
+    "jade": "*",
+    "sequelize": "~2.0.0-dev1",
+    "pg": "~2.11.0"
   }
 }

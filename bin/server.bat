@@ -1,0 +1,1 @@
+node node_modules\node-dev\bin\node-dev app
