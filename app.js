@@ -28,7 +28,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-var sequelize = new Sequelize('group_ti', 'desenvolvimento', 'iat@ti', {
+var sequelize = new Sequelize('healfy_development', 'healfy', 'healfy', {
   host: "localhost",
   port: 5432,
   dialect: 'postgres'
