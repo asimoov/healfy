@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Module dependencies.
  */
@@ -36,15 +34,13 @@ var sequelize = new Sequelize('healfy_development', 'healfy', 'healfy', {
 
 var User = sequelize.define('user', {
   name: Sequelize.STRING
-})
+});
 
-sequelize
-.sync({ force: true })
-.complete(function(err) {
+sequelize.sync({ force: true }).complete(function(err) {
  if (!!err) {
-   console.log('An error occurred while create the table:', err)
+   console.log('An error occurred while create the table:', err);
  } else {
-   console.log('It worked!')
+   console.log('It worked!');
  }
 });
 
@@ -76,7 +72,7 @@ app.get('/', function(req, res) {
 
 app.post('/cliente', function(req, res){
   User.create(req.body.cliente).success(function() {
-	console.log('We have a persisted instance now')
+	console.log('We have a persisted instance now');
     res.redirect('/');
   });
 });

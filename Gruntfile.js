@@ -1,11 +1,10 @@
-'use strict';
-
 module.exports = function (grunt) {
+	"use strict";
 
 	// load jshint plugin
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-less');
-	grunt.loadNpmTasks('grunt-express');
+	grunt.loadNpmTasks('grunt-express-server');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.initConfig({
@@ -32,19 +31,27 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-	},
-	// running `grunt watch` will watch for changes
-	watch: {
-		stylesheets: {
-			files: "public/stylesheets/*.less",
-			tasks: ["less"]
+		express: {
+			dev: {
+				options: {
+					script: './app.js'
+				}
+			}
 		},
-		javascript: {
-		    files: ['apps/**/*.js'],
-		    tasks: ['jshint'],
-		    options: {
-		      spawn: false,
-		    }
+		watch: {
+			stylesheets: {
+				files: "public/stylesheets/*.less",
+				tasks: ["less"]
+			},
+			javascript: {
+				files: ['app.js', 'apps/**/*.js'],
+				tasks: ['jshint:all', 'express:dev'],
+				options: {
+					spawn: false,
+				}
+			}
 		}
 	});
+
+	grunt.registerTask('server', [ 'jshint', 'less', 'express:dev', 'watch' ]);
 };
