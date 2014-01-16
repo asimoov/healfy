@@ -48,62 +48,34 @@ sequelize.sync({ force: true }).complete(function(err) {
 
 app.get('/', function(req, res) {
 	User.findAll().success(function(users) {
-		var html  = '<html><body>';
-		html += '<form action="/cliente" method="post">';
-		html += '<label>Nome: <input type="text" name="cliente[name]"></label><br>';
-		html += '<button type="submit">Enviar</button>';
-		html += '</form>';
-		html += '<br>';
-		html += '<h1>Lista de clientes</h1>';
-		html += '<ul>';
-		html += 'ddsgdfgdgdgdfgdfg';
-		html += '<ul>';
-		for(var i = 0; i < users.length; i++){
-			html += '<li>'+users[i].name;
-			html += '<a href="/cliente/'+users[i].id+'/editar">Editar</a> | ';		
-			
-			html += '<form method="post" action="/cliente/'+users[i].id+'">';		
-			html += '<input name="_method" type="hidden" value="delete">';		
-			html += '<li><a href="#" onClick="javascript:submit();">Excluir</a></li>'; 
-			html += '</form>';		
-		}
-		html += '</ul></body></html>';
-		res.send(html);
+		res.render('index', {title: "Home", users: users});
 	});
 });
 
-app.post('/cliente', function(req, res){
-	User.create(req.body.cliente).success(function() {
+app.post('/users', function(req, res) {
+	User.create(req.body.user).success(function() {
 		console.log('We have a persisted instance now');
 		res.redirect('/');
 	});
 });
 
-app.get('/cliente/:id/editar', function(req, res){
+app.get('/users/:id/edit', function(req, res){
 	var id = req.params.id;
 	User.find(id).complete(function(err, user) {
-		var html  = '<html><body>';
-		html += '<h1>Editar dados do cliente: '+user.name+'</h1>';
-		html += '<form action="/cliente/'+ user.id +'" method="post">';
-		html += '<input type="hidden" name="_method" value="put">'; // Força o formulário realizar um comando PUT no submit.
-		html += '<label>Nome: <input type="text" name="cliente[name]" value="'+user.name+'"></label>';
-		html += '<button type="submit">Enviar</button>';
-		html += '</form>';
-		html += '</html>';
-		res.send(html);
+		res.render('edit', {title: "edit", user: user});
 	});
 });
 
-app.put('/cliente/:id', function(req, res){
+app.put('/users/:id', function(req, res){
 	var id = req.params.id;
 	User.find(id).success(function(user) {
-		user.updateAttributes(req.body.cliente).success(function() {
+		user.updateAttributes(req.body.user).success(function() {
 			res.redirect('/');
 		});
 	});
 });
 
-app.delete('/cliente/:id', function(req, res){
+app.delete('/users/:id', function(req, res){
 	var id = req.params.id;
 	User.find(id).success(function(user) {
 		user.destroy().success(function() {

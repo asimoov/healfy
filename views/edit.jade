@@ -1,0 +1,6 @@
+h1 Editar dados do user: #{user.name}
+form(action="/users/" + user.id method="post")
+	input(type="hidden" name="_method" value="put")
+	label Nome: 
+		input(type="text" name="user[name]" value=user.name)
+		button(type="submit") Enviar

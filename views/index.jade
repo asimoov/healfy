@@ -1,5 +1,21 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+	h1= title
+	p Welcome to #{title}
+
+	form(action="/users" method="post")
+		label Nome:
+			input(type="text" name="user[name]")
+		br
+		button(type="submit") Enviar
+		br
+
+	h1 Lista de Users
+	ul
+		for user in users
+			li= user.name
+				a(href="/users/" + user.id + "/edit") Editar 
+				form(method="post" action="/users/" + user.id)
+					input(name="_method" type="hidden" value="delete")
+					a(href="#" onClick="javascript:submit();") Excluir
