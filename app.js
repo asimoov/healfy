@@ -46,7 +46,7 @@ Object.keys(routes).forEach(function(routesName) {
 	require(routes[routesName])(app, db);
 });
 
-sequelize.sync({ force: true }).complete(function(err) {
+sequelize.sync().complete(function(err) {
 	if (!!err) {
 		console.log('An error occurred while create the table:', err);
 	} else {
