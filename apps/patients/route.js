@@ -1,6 +1,7 @@
-module.exports = function(app) {
+module.exports = function(app, db) {
 	"use strict";
 
+	var Patient = db.Patient;
 	app.param('patient_id', function(req, res, next, value) {
 		if (value.match(/^\d+$/)) {
 			next();
@@ -9,7 +10,7 @@ module.exports = function(app) {
 
 	app.get('/patients', function(req, res) {
 		Patient.findAll().success(function(patients) {
-			res.json({patients: patients});
+			res.json(patients);
 		});
 	});
 
@@ -28,7 +29,7 @@ module.exports = function(app) {
 	});
 
 	app.post('/patients', function(req, res) {
-		Patient.create(req.body.cliente).complete(function(err, patient) {
+		Patient.create(req.body).complete(function(err, patient) {
 			if (!!err) {
 				res.status(400);
 				res.json({ error: err.clientError.message });
@@ -60,7 +61,7 @@ module.exports = function(app) {
 				res.json({ error: err.clientError.message });
 			} else {
 				patient.destroy().success(function() {
-					res.redirect('/');
+					res.status(204);
 				});
 			}
 		});

@@ -1,18 +1,14 @@
 var path       = require('path');
 
-module.exports = function() {
-	"use strict";
-
-	return {
-		models: function() {
-			return { 
-				patient: path.join(__dirname, 'models/patient') 
-			};
-		},
-		routers: function() {
-			return { 
-				patients: path.join(__dirname, 'router') 
-			};
-		}
-	};
+module.exports = {
+	models: function() {
+		return {
+			Patient: path.join(__dirname, 'models/patient') 
+		};
+	},
+	routes: function() {
+		return {
+			Patients: path.join(__dirname, 'route') 
+		};
+	}
 };

@@ -34,56 +34,24 @@ var sequelize = new Sequelize('healfy_development', 'healfy', 'healfy', {
 	dialect: 'postgres'
 });
 
-var User = sequelize.define('user', {
-	name: Sequelize.STRING
+var db = {};
+var module = require('./apps/patients');
+var models = module.models();
+Object.keys(models).forEach(function(modelName) {
+	db[modelName] = sequelize.import(models[modelName]);
+});
+
+var routes = module.routes();
+Object.keys(routes).forEach(function(routesName) {
+	require(routes[routesName])(app, db);
 });
 
 sequelize.sync({ force: true }).complete(function(err) {
 	if (!!err) {
 		console.log('An error occurred while create the table:', err);
 	} else {
-		console.log('It worked!');
+		http.createServer(app).listen(app.get('port'), function() {
+			console.log('Express server listening on port ' + app.get('port'));
+		});
 	}
-});
-
-app.get('/', function(req, res) {
-	User.findAll().success(function(users) {
-		res.render('index', {title: "Home", users: users});
-	});
-});
-
-app.post('/users', function(req, res) {
-	User.create(req.body.user).success(function() {
-		console.log('We have a persisted instance now');
-		res.redirect('/');
-	});
-});
-
-app.get('/users/:id/edit', function(req, res){
-	var id = req.params.id;
-	User.find(id).complete(function(err, user) {
-		res.render('edit', {title: "edit", user: user});
-	});
-});
-
-app.put('/users/:id', function(req, res){
-	var id = req.params.id;
-	User.find(id).success(function(user) {
-		user.updateAttributes(req.body.user).success(function() {
-			res.redirect('/');
-		});
-	});
-});
-
-app.delete('/users/:id', function(req, res){
-	var id = req.params.id;
-	User.find(id).success(function(user) {
-		user.destroy().success(function() {
-			res.redirect('/');
-		});
-	});
-});
-
-http.createServer(app).listen(app.get('port'), function(){
-	console.log('Express server listening on port ' + app.get('port'));
 });
