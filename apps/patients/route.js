@@ -2,9 +2,12 @@ module.exports = function(app, db) {
 	"use strict";
 
 	var Patient = db.Patient;
-	app.param('patient_id', function(req, res, next, value) {
-		if (value.match(/^\d+$/)) {
+	app.param('id', function(req, res, next, id) {
+		var regex = new RegExp(/^\d+$/);
+		if (regex.test(id)) {
 			next();
+		} else {
+			next('route');
 		}
 	});
 
@@ -14,8 +17,9 @@ module.exports = function(app, db) {
 		});
 	});
 
-	app.get('/patients/:patient_id', function(req, res, next) {
+	app.get('/patients/:id', function(req, res, next) {
 		var id = req.params.id;
+		console.log(id);
 		Patient.find(id).complete(function(err, patient) {
 			if (!!err) {
 				console.log('An error occurred while searching for John:', err);
@@ -40,7 +44,7 @@ module.exports = function(app, db) {
 		});
 	});
 
-	app.put('/patients/:patient_id', function(req, res) {
+	app.put('/patients/:id', function(req, res) {
 		var id = req.params.id;
 		Patient.find(id).complete(function(err, patient) {
 			if (!!err) {
@@ -52,7 +56,8 @@ module.exports = function(app, db) {
 		});
 	});
 
-	app.delete('/patients/:patient_id', function(req, res) {
+	app.delete('/patients/:id', function(req, res) {
+		var id = req.params.id;
 		Patient.find(id).complete(function(err, patient) {
 			if (!!err) {
 				console.log('An error occurred while searching for patient:', err);
