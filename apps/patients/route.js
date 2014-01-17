@@ -21,7 +21,7 @@ module.exports = function(app, db) {
 				console.log('An error occurred while searching for John:', err);
 			} else if (!patient) {
 				res.status(404);
-				res.json({ error: err.clientError.message });
+				res.json({ error: err });
 			} else {
 				res.json(patient);
 			}
@@ -32,7 +32,7 @@ module.exports = function(app, db) {
 		Patient.create(req.body).complete(function(err, patient) {
 			if (!!err) {
 				res.status(400);
-				res.json({ error: err.clientError.message });
+				res.json({ error: err });
 			}
 
 			res.status(201);
@@ -45,7 +45,7 @@ module.exports = function(app, db) {
 		Patient.find(id).complete(function(err, patient) {
 			if (!!err) {
 				res.status(400);
-				res.json({ error: err.clientError.message });
+				res.json({ error: err });
 			}
 
 			res.json(patient);
@@ -58,7 +58,7 @@ module.exports = function(app, db) {
 				console.log('An error occurred while searching for patient:', err);
 			} else if (!patient) {
 				res.status(404);
-				res.json({ error: err.clientError.message });
+				res.json({ error: err });
 			} else {
 				patient.destroy().success(function() {
 					res.status(204);
