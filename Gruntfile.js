@@ -8,15 +8,24 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	grunt.initConfig({
-		options: {
-			node: true
-		},
 		jshint: {
-			all: [
-				'Gruntfile.js',
-				'app.js',
-				'apps/**/*.js'
-			]
+			backend: {
+				options: {
+					node: true
+				},
+				src: [
+					'Gruntfile.js',
+					'app.js',
+					'apps/**/*.js'
+				]
+			},
+			frontend: {
+				options: {
+					node: true,
+					ignores: ['public/scripts/vendors/*.js']
+				},
+				src: ['public/scripts/**/*.js']
+			}
 		},
 		less: {
 			development: {
@@ -43,12 +52,9 @@ module.exports = function (grunt) {
 				files: "public/stylesheets/*.less",
 				tasks: ["less"]
 			},
-			javascript: {
-				files: ['app.js', 'apps/**/*.js'],
-				tasks: ['jshint:all', 'express:dev'],
-				options: {
-					spawn: false,
-				}
+			scripts: {
+				files: ['app.js', 'apps/**/*.js', 'public/scripts/**/*.js'],
+				tasks: ['jshint:frontend',, 'jshint:backend', 'express:dev']
 			}
 		}
 	});

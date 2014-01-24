@@ -17,7 +17,7 @@ app.configure(function() {
 	app.set('views', path.join(__dirname, 'views'));
 	app.set('view engine', 'jade');
 	app.use(express.favicon());
-	app.use(express.logger());
+	app.use(express.logger('dev'));
 	app.use(express.cookieParser());
     app.use(express.session({ secret: "changeme" }));
 	app.use(express.json());
@@ -39,13 +39,13 @@ var sequelize = new Sequelize('healfy_development', 'healfy', 'healfy', {
 });
 
 var db = {};
-var module = require('./apps/patients');
-var models = module.models();
+var patientsModule = require('./apps/patients');
+var models = patientsModule.models();
 Object.keys(models).forEach(function(modelName) {
 	db[modelName] = sequelize.import(models[modelName]);
 });
 
-var routes = module.routes();
+var routes = patientsModule.routes();
 Object.keys(routes).forEach(function(routesName) {
 	require(routes[routesName])(app, db);
 });
