@@ -2,18 +2,13 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'collections/patients',
-  'views/patients/list'
-], function($, _, Backbone, Patients, ListView) {
+  'routes/patients'
+], function($, _, Backbone, PatientsRoute) {
   "use strict";
   
   var initialize = function() {
-    var collection = new Patients();
-    collection.fetch({reset :true});
-
-    var listView = new ListView({collection: collection});
-    listView.render();
-    $("body").append(listView.$el);
+    new PatientsRoute();
+    Backbone.history.start();
   };
   
   return {

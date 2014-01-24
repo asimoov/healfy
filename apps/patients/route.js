@@ -19,7 +19,6 @@ module.exports = function(app, db) {
 
 	app.get('/patients/:id', function(req, res, next) {
 		var id = req.params.id;
-		console.log(id);
 		Patient.find(id).complete(function(err, patient) {
 			if (!!err) {
 				console.log('An error occurred while searching for John:', err);
@@ -50,9 +49,13 @@ module.exports = function(app, db) {
 			if (!!err) {
 				res.status(400);
 				res.json({ error: err });
+			} if(patient) {
+				patient.updateAttributes(req.body).complete(function(err, patient) {
+					res.json(patient);
+				});
+			} else {
+				res.status(404);
 			}
-
-			res.json(patient);
 		});
 	});
 

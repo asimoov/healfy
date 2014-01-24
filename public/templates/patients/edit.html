@@ -1,0 +1,9 @@
+<h1>Edit data the patient: <%= model.get('name') %> </h1>
+<form action="/patients/<%= model.id %>" method="post">
+	<input type="hidden" name="_method" value="put" />
+	<label> 
+		Name:
+		<input type="text" name="name" value="<%= model.get('name') %>" />
+		<button type="submit">Enviar</button>
+	</label>
+</form>
