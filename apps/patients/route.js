@@ -70,6 +70,7 @@ module.exports = function(app, db) {
 			} else {
 				patient.destroy().success(function() {
 					res.status(204);
+					res.json(patient);
 				});
 			}
 		});

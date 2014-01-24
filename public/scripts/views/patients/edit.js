@@ -23,7 +23,8 @@ define([
 			ev.preventDefault();
 			ev.stopPropagation();
 
-			console.log('edit');
+			this.model.set({name : $('input[name="name"]', ev.target).val()});
+			this.model.save();
 		}
 	});
 });

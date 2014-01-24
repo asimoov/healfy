@@ -3,8 +3,8 @@ define([
   'underscore', 
   'backbone', 
   'models/patient', 
-  'views/patients/show',
-], function($, _, Backbone, Patient, PatientView) {
+  'views/patients/item',
+], function($, _, Backbone, Patient, PatientItemView) {
 	"use strict";
 	
 	return Backbone.View.extend({
@@ -17,10 +17,10 @@ define([
 
 			var frag = document.createDocumentFragment();
 			this.collection.each(function(patient) {
-				var patientView = new PatientView({model: patient});
-				patientView.render();
+				var patientItemView = new PatientItemView({model: patient});
+				patientItemView.render();
 				
-				frag.appendChild(patientView.el);
+				frag.appendChild(patientItemView.el);
 			}, this);
 			
 			this.$el.append(frag);
