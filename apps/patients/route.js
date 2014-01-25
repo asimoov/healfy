@@ -36,10 +36,10 @@ module.exports = function(app, db) {
 			if (!!err) {
 				res.status(400);
 				res.json({ error: err });
+			} else {
+				res.status(201);
+				res.json({patient: req.patient, err: err});
 			}
-
-			res.status(201);
-			res.json(req.patient);
 		});
 	});
 

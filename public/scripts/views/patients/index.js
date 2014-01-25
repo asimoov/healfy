@@ -16,6 +16,7 @@ define([
 			this.$el.empty();
 
 			var frag = document.createDocumentFragment();
+			frag.appendChild($("<a href='/#new'>Novo</a>")[0]);
 			this.collection.each(function(patient) {
 				var patientItemView = new PatientItemView({model: patient});
 				patientItemView.render();

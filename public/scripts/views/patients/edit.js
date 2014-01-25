@@ -24,6 +24,7 @@ define([
 			ev.stopPropagation();
 
 			this.model.set({name : $('input[name="name"]', ev.target).val()});
+			this.model.set({handbook : $('input[name="handbook"]', ev.target).val()});
 			this.model.save();
 		}
 	});

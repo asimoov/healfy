@@ -5,13 +5,15 @@ define([
 	'models/patient',
 	'collections/patients',
 	'views/patients/index',
+	'views/patients/new',
 	'views/patients/edit'
-], function($, _, Backbone, Patient, Patients, IndexView, EditView) {
+], function($, _, Backbone, Patient, Patients, IndexView, NewView, EditView) {
 	"use strict";
 
 	return Backbone.Router.extend({
 		routes: {
 			''                 : "index",
+			'new'              : "new",
 			':patient_id'      : "show",
 			':patient_id/edit' : "edit",
 			'*actions'         : "defaultAction"
@@ -23,6 +25,11 @@ define([
 			var indexView = new IndexView({collection: collection});
 			indexView.render();
 			$("body").empty().append(indexView.$el);
+		},
+		new: function() {
+			var newView = new NewView();
+			newView.render();
+			$("body").empty().append(newView.$el);
 		},
 		show: function(id) {
 			console.log('show');

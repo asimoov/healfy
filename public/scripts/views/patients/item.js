@@ -11,7 +11,7 @@ define([
 		tagName:  "li",
 		template: _.template(item),
 		events: {
-			'click.delete': 'delete'
+			'click .delete': 'delete'
 		},
 		render: function() {
 			this.$el.append(this.template({model: this.model}));
