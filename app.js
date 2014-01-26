@@ -35,7 +35,8 @@ app.configure('development', function() {
 var sequelize = new Sequelize('healfy_development', 'healfy', 'healfy', {
 	host: "localhost",
 	port: 5432,
-	dialect: 'postgres'
+	dialect: 'postgres',
+	logging: true
 });
 
 var db = {};
