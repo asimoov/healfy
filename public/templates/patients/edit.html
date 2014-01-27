@@ -1,13 +1,32 @@
 <h1>Edit data the patient: <%= model.get('name') %> </h1>
 <form action="/patients/<%= model.id %>" method="post">
 	<input type="hidden" name="_method" value="put" />
-	<label> 
+	<label>
 		Name:
-		<input type="text" name="name" value="<%= model.get('name') %>" />
+		<input type="text" name="name" value="<%- model.get('name') %>" required />
 	</label>
-	<label> 
-		Prontuario:
-		<input type="text" name="handbook"  value="<%= model.get('handbook') %>"/>
+	<label>
+		RG:
+		<input type="text" name="rg"  value="<%- model.get('rg') %>" required />
+	</label>
+	<label>
+		CPF:
+		<input type="text" name="cpf"  value="<%- model.get('cpf') %>" required />
+	</label>
+	<label>
+		Nascimento:
+		<input type="date" name="birthday"  value="<%- model.get('birthday') %>" required />
+	</label>
+	<label>
+		Sexo:
+		<select name="sex">
+			<option value ="0">M</option>
+			<option value ="1">F</option>
+		</select>
+	</label>
+	<label>
+		Endereço:
+		<input type="text" name="address"  value="<%- model.get('address') %>" required="required" />
 	</label>
 	<button type="submit">Enviar</button>
 </form>

@@ -9,15 +9,46 @@ module.exports = function(sequelize, DataTypes) {
 				notEmpty: true
 			}
 		},
-		handbook: {
-			type: DataTypes.INTEGER,
-			unique: true,
+		foto: {
+			type: DataTypes.STRING
+		},
+		rg: {
+			type: DataTypes.STRING,
 			allowNull: false,
 			validate: {
-				isInt: true
+				notEmpty: true
+			}
+		},
+		status: {
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
+		cpf: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		birthday: {
+			type: DataTypes.DATE,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		sex: {
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
+		address: {
+			type: DataTypes.HSTORE,
+			allowNull: false,
+			validate: {
+				notEmpty: true
 			}
 		}
-	}, {paranoid: true});
+	});
 
 	return Patient;
 };

@@ -27,7 +27,15 @@ require([
 ], function(Modernizr, Application) {
 	"use strict";
 
-	if (Modernizr.input.required && (Modernizr.flexbox || Modernizr.flexboxlegacy)) {
+	if (Modernizr.borderradius && 
+		Modernizr.boxshadow && 
+		Modernizr.applicationcache && 
+		Modernizr.indexeddb && 
+		Modernizr.history && 
+		Modernizr.inputtypes.number &&
+		Modernizr.input.required && 
+		Modernizr.input.placeholder &&
+		(Modernizr.flexbox || Modernizr.flexboxlegacy)) {
 		Application.initialize();
 	}
 });

@@ -3,11 +3,30 @@
 	<input type="hidden" name="_method" value="post" />
 	<label> 
 		Name:
-		<input type="text" name="name" />
+		<input type="text" name="name" required />
 	</label>
-	<label> 
-		Prontuario:
-		<input type="text" name="handbook" />
+	<label>
+		RG:
+		<input type="text" name="rg" required />
+	</label>
+	<label>
+		CPF:
+		<input type="text" name="cpf" required />
+	</label>
+	<label>
+		Nascimento:
+		<input type="date" name="birthday" required />
+	</label>
+	<label>
+		Sexo:
+		<select name="sex">
+			<option value ="0">M</option>
+			<option value ="1">F</option>
+		</select>
+	</label>
+	<label>
+		Endereço:
+		<input type="text" name="address" required />
 	</label>
 	<button type="submit">Enviar</button>
 </form>

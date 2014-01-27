@@ -24,7 +24,12 @@ define([
 			ev.stopPropagation();
 
 			this.model.set({name : $('input[name="name"]', ev.target).val()});
-			this.model.set({handbook : $('input[name="handbook"]', ev.target).val()});
+			this.model.set({rg : $('input[name="rg"]', ev.target).val()});
+			this.model.set({cpf : $('input[name="cpf"]', ev.target).val()});
+			this.model.set({birthday : $('input[name="birthday"]', ev.target).val()});
+			this.model.set({sex : $('input[name="sex"]', ev.target).val()});
+			this.model.set({address : $('input[name="address"]', ev.target).val()});
+
 			this.model.save();
 		}
 	});

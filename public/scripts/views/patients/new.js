@@ -22,7 +22,12 @@ define([
 
 			var patient = new Patient();
 			patient.set({name : $('input[name="name"]', ev.target).val()});
-			patient.set({handbook : $('input[name="handbook"]', ev.target).val()});
+			patient.set({rg : $('input[name="rg"]', ev.target).val()});
+			patient.set({cpf : $('input[name="cpf"]', ev.target).val()});
+			patient.set({birthday : $('input[name="birthday"]', ev.target).val()});
+			patient.set({sex : $('select[name="sex"] option:selected', ev.target).val()});
+			patient.set({status : 0});
+			patient.set({address : $('input[name="address"]', ev.target).val()});
 			patient.save().then(function() {
 				Backbone.history.navigate('', {trigger: true});
 			});

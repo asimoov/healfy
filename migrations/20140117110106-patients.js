@@ -12,19 +12,35 @@ module.exports = {
 			updatedAt: {
 				type: DataTypes.DATE
 			},
-			deletedAt: {
-				type: DataTypes.DATE
-			},
 			name: {
 				type: DataTypes.STRING,
-				allowNull: false,
-				validate: {
-					notEmpty: true
-				}
+				allowNull: false
 			},
-			handbook: {
+			foto: {
+				type: DataTypes.STRING
+			},
+			rg: {
+				type: DataTypes.STRING,
+				allowNull: false
+			},
+			status: {
 				type: DataTypes.INTEGER,
-				unique: true,
+				allowNull: false
+			},
+			cpf: {
+				type: DataTypes.STRING,
+				allowNull: false
+			},
+			birthday: {
+				type: DataTypes.DATE,
+				allowNull: false
+			},
+			sex: {
+				type: DataTypes.INTEGER,
+				allowNull: false
+			},
+			address: {
+				type: DataTypes.HSTORE,
 				allowNull: false
 			}
 		});
