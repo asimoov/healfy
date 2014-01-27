@@ -11,9 +11,13 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		handbook: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			unique: true,
+			allowNull: false,
+			validate: {
+				isInt: true
+			}
 		}
-	});
+	}, {paranoid: true});
 
 	return Patient;
 };

@@ -6,6 +6,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-express-server');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-shell');
 
 	grunt.initConfig({
 		jshint: {
@@ -55,6 +56,14 @@ module.exports = function (grunt) {
 			scripts: {
 				files: ['app.js', 'apps/**/*.js', 'public/scripts/**/*.js'],
 				tasks: ['jshint:frontend',, 'jshint:backend', 'express:dev']
+			}
+		},
+		shell: {
+			migrate: {
+				options: {
+					stdout: true
+				},
+				command: './node_modules/sequelize/bin/sequelize --migrate'
 			}
 		}
 	});

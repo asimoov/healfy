@@ -12,6 +12,9 @@ module.exports = {
 			updatedAt: {
 				type: DataTypes.DATE
 			},
+			deletedAt: {
+				type: DataTypes.DATE
+			},
 			name: {
 				type: DataTypes.STRING,
 				allowNull: false,
@@ -21,6 +24,7 @@ module.exports = {
 			},
 			handbook: {
 				type: DataTypes.INTEGER,
+				unique: true,
 				allowNull: false
 			}
 		});
