@@ -1,57 +1,69 @@
 <h1>Edit data the patient: {{name}}</h1>
-<form action="/patients/<%= model.id %>" method="post">
+<form role="form" action="/patients/<%= model.id %>" method="post">
 	<input type="hidden" name="_method" value="put" />
-	<label>
-		Name:
-		<input type="text" name="name" value="{{name}}" required />
-	</label>
-	<label>
-		RG:
-		<input type="text" name="rg"  value="{{rg}}" required pattern="^[0-9]{2}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}$" placeholder="xx.xxx.xxx-xx"/>
-	</label>
-	<label>
-		CPF:
-		<input type="text" name="cpf"  value="{{cpf}}" required pattern="^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}$" placeholder="xxx.xxx.xxx-xx"/>
-	</label>
-	<label>
-		Nascimento:
-		<input type="date" name="birthday"  value="{{dateFormat birthday}}" required />
-	</label>
-	<label>
-		Sexo:
-		<select name="sex">
+	<div class="form-group">
+		<label>Name:</label>
+		<input class="form-control" type="text" name="name" value="{{name}}" required />
+	</div>
+
+	<div class="form-group">
+		<label>RG:</label>
+		<input class="form-control" type="text" name="rg"  value="{{rg}}" required pattern="^[0-9]{2}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}$" placeholder="xx.xxx.xxx-xx"/>
+	</div>
+
+	<div class="form-group">
+		<label>
+		CPF:</label>
+		<input class="form-control" type="text" name="cpf"  value="{{cpf}}" required pattern="^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}$" placeholder="xxx.xxx.xxx-xx"/>
+	</div>
+
+	<div class="form-group">
+		<label>Nascimento:</label>
+		<input class="form-control" type="date" name="birthday"  value="{{dateFormat birthday}}" required />
+	</div>
+
+	<div class="form-group">
+		<label>Sexo:</label>
+		<select class="form-control" name="sex">
 			<option value ="0">M</option>
 			<option value ="1">F</option>
 		</select>
-	</label>
-	<label>
-		Logradouro:
-		<input type="text" name="street"  value="{{street}}" required="required" />
-	</label>
-	<label>
-		Numero:
-		<input type="text" name="number"  value="{{number}}" required="required" />
-	</label>
-	<label>
-		Bairro:
-		<input type="text" name="district"  value="{{district}}" required="required" />
-	</label>
-	<label>
-		Cidade:
-		<input type="text" name="city"  value="{{city}}" required="required" />
-	</label>
-	<label>
-		UF:
-		<input type="text" name="state"  value="{{state}}" required="required" />
-	</label>
-	<label>
-		CEP:
-		<input type="text" name="cep" value="{{cep}}" required="required" pattern="^[0-9]{2}.[0-9]{3}-[0-9]{3}$" placeholder="xx.xxx-xxx" />
-	</label>
-	<label>
-		Complemento:
-		<input type="text" name="complement"  value="{{complement}}" required="required" />
-	</label>
+	</div>
+
+	<div class="form-group">
+		<label>Logradouro:</label>
+		<input class="form-control" type="text" name="street"  value="{{street}}" required="required" />
+	</div>
+
+	<div class="form-group">
+		<label>Numero:</label>
+		<input class="form-control" type="text" name="number"  value="{{number}}" required="required" />
+	</div>
+
+	<div class="form-group">
+		<label>Bairro:</label>
+		<input class="form-control" type="text" name="district"  value="{{district}}" required="required" />
+	</div>
+
+	<div class="form-group">
+		<label>Cidade:</label>
+		<input class="form-control" type="text" name="city"  value="{{city}}" required="required" />
+	</div>
+
+	<div class="form-group">
+		<label>UF:</label>
+		<input class="form-control" type="text" name="state"  value="{{state}}" required="required" />
+	</div>
+	
+	<div class="form-group">
+		<label>CEP:</label>
+		<input class="form-control" type="text" name="cep" value="{{cep}}" required="required" pattern="^[0-9]{2}.[0-9]{3}-[0-9]{3}$" placeholder="xx.xxx-xxx" />
+	</div>
+
+	<div class="form-group">
+		<label>Complemento:</label>
+		<input class="form-control" type="text" name="complement"  value="{{complement}}" required="required" />
+	</div>
 	
 	<button type="submit">Enviar</button>
 </form>
