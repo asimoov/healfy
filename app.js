@@ -40,15 +40,17 @@ var sequelize = new Sequelize('healfy_development', 'healfy', 'healfy', {
 });
 
 var db = {};
-var patientsModule = require('./apps/patients');
-var models = patientsModule.models();
-Object.keys(models).forEach(function(modelName) {
-	db[modelName] = sequelize.import(models[modelName]);
-});
+var modules = [require('./apps/patients'), require('./apps/agendas')];
+modules.forEach(function(mmmm) {
+	var models = mmmm.models();
+	Object.keys(models).forEach(function(modelName) {
+		db[modelName] = sequelize.import(models[modelName]);
+	});
 
-var routes = patientsModule.routes();
-Object.keys(routes).forEach(function(routesName) {
-	require(routes[routesName])(app, db);
+	var routes = mmmm.routes();
+	Object.keys(routes).forEach(function(routesName) {
+		require(routes[routesName])(app, db);
+	});
 });
 
 sequelize.sync().complete(function(err) {
