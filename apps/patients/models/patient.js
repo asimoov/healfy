@@ -42,7 +42,42 @@ module.exports = function(sequelize, DataTypes) {
 			allowNull: false
 		},
 		address: {
-			type: DataTypes.HSTORE,
+			type: DataTypes.STRING,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		city: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		district: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		cep: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		number: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		complement: {
+			type: DataTypes.STRING,
 			allowNull: false,
 			validate: {
 				notEmpty: true

@@ -27,8 +27,14 @@ define([
 			this.model.set({rg : $('input[name="rg"]', ev.target).val()});
 			this.model.set({cpf : $('input[name="cpf"]', ev.target).val()});
 			this.model.set({birthday : $('input[name="birthday"]', ev.target).val()});
-			this.model.set({sex : $('input[name="sex"]', ev.target).val()});
+			this.model.set({sex : $('select[name="sex"] option:selected', ev.target).val()});
+			this.model.set({status : 0});
 			this.model.set({address : $('input[name="address"]', ev.target).val()});
+			this.model.set({number : $('input[name="number"]', ev.target).val()});
+			this.model.set({district : $('input[name="district"]', ev.target).val()});
+			this.model.set({city : $('input[name="city"]', ev.target).val()});
+			this.model.set({cep : $('input[name="cep"]', ev.target).val()});
+			this.model.set({complement : $('input[name="complement"]', ev.target).val()});
 
 			this.model.save();
 		}

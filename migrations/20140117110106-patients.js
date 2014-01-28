@@ -40,7 +40,27 @@ module.exports = {
 				allowNull: false
 			},
 			address: {
-				type: DataTypes.HSTORE,
+				type: DataTypes.STRING,
+				allowNull: false
+			},
+			city: {
+				type: DataTypes.STRING,
+				allowNull: false
+			},
+			district: {
+				type: DataTypes.STRING,
+				allowNull: false
+			},
+			cep: {
+				type: DataTypes.STRING,
+				allowNull: false
+			},
+			number: {
+				type: DataTypes.STRING,
+				allowNull: false
+			},
+			complement: {
+				type: DataTypes.STRING,
 				allowNull: false
 			}
 		});

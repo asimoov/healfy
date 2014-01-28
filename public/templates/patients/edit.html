@@ -15,7 +15,8 @@
 	</label>
 	<label>
 		Nascimento:
-		<input type="date" name="birthday"  value="<%- model.get('birthday') %>" required />
+		<% var birthday = new Date(model.get('birthday')) %>
+		<input type="date" name="birthday"  value="<%- [birthday.getFullYear(), ("0" + (birthday.getMonth() + 1)).slice(-2), ("0" + (birthday.getDate() + 1)).slice(-2)].join('-') %>" required />
 	</label>
 	<label>
 		Sexo:
@@ -28,5 +29,26 @@
 		Endereço:
 		<input type="text" name="address"  value="<%- model.get('address') %>" required="required" />
 	</label>
+	<label>
+		Numero:
+		<input type="text" name="number"  value="<%- model.get('number') %>" required="required" />
+	</label>
+	<label>
+		Bairro:
+		<input type="text" name="district"  value="<%- model.get('district') %>" required="required" />
+	</label>
+	<label>
+		Cidade:
+		<input type="text" name="city"  value="<%- model.get('city') %>" required="required" />
+	</label>
+	<label>
+		CEP:
+		<input type="text" name="cep"  value="<%- model.get('cep') %>" required="required" />
+	</label>
+	<label>
+		Complemento:
+		<input type="text" name="complement"  value="<%- model.get('complement') %>" required="required" />
+	</label>
+	
 	<button type="submit">Enviar</button>
 </form>

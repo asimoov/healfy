@@ -55,7 +55,10 @@ module.exports = function (grunt) {
 			},
 			scripts: {
 				files: ['app.js', 'apps/**/*.js', 'public/scripts/**/*.js'],
-				tasks: ['jshint:frontend',, 'jshint:backend', 'express:dev']
+				tasks: ['jshint:frontend',, 'jshint:backend', 'express:dev'],
+				options: {
+					spawn: false,
+				}
 			}
 		},
 		shell: {

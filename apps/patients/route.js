@@ -51,7 +51,13 @@ module.exports = function(app, db) {
 				res.json({ error: err });
 			} if(patient) {
 				patient.updateAttributes(req.body).complete(function(err, patient) {
-					res.json(patient);
+					if (!!err) {
+						res.status(400);
+						res.json({ error: err });
+					} if(patient) {
+						res.status(200);
+						res.json(patient);
+					}
 				});
 			} else {
 				res.status(404);

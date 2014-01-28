@@ -27,7 +27,7 @@ define([
 			$("body").empty().append(indexView.$el);
 		},
 		new: function() {
-			var newView = new NewView();
+			var newView = new NewView({model: new Patient()});
 			newView.render();
 			$("body").empty().append(newView.$el);
 		},
