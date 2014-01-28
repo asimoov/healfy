@@ -7,11 +7,11 @@
 	</label>
 	<label>
 		RG:
-		<input type="text" name="rg"  value="{{rg}}" required />
+		<input type="text" name="rg"  value="{{rg}}" required pattern="^[0-9]{2}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}$" placeholder="xx.xxx.xxx-xx"/>
 	</label>
 	<label>
 		CPF:
-		<input type="text" name="cpf"  value="{{cpf}}" required />
+		<input type="text" name="cpf"  value="{{cpf}}" required pattern="^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}$" placeholder="xxx.xxx.xxx-xx"/>
 	</label>
 	<label>
 		Nascimento:
@@ -25,8 +25,8 @@
 		</select>
 	</label>
 	<label>
-		Endereço:
-		<input type="text" name="address"  value="{{address}}" required="required" />
+		Logradouro:
+		<input type="text" name="street"  value="{{street}}" required="required" />
 	</label>
 	<label>
 		Numero:
@@ -41,8 +41,12 @@
 		<input type="text" name="city"  value="{{city}}" required="required" />
 	</label>
 	<label>
+		UF:
+		<input type="text" name="state"  value="{{state}}" required="required" />
+	</label>
+	<label>
 		CEP:
-		<input type="text" name="cep" value="{{cep}}" required="required" pattern="^[0-9]{2}.[0-9]{3}-[0-9]{3}$" placeholder="xx.xxx-xxx"/>
+		<input type="text" name="cep" value="{{cep}}" required="required" pattern="^[0-9]{2}.[0-9]{3}-[0-9]{3}$" placeholder="xx.xxx-xxx" />
 	</label>
 	<label>
 		Complemento:

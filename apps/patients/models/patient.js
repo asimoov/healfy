@@ -41,7 +41,14 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		address: {
+		street: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		number: {
 			type: DataTypes.STRING,
 			allowNull: false,
 			validate: {
@@ -69,7 +76,7 @@ module.exports = function(sequelize, DataTypes) {
 				notEmpty: true
 			}
 		},
-		number: {
+		state: {
 			type: DataTypes.STRING,
 			allowNull: false,
 			validate: {

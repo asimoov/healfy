@@ -39,7 +39,11 @@ module.exports = {
 				type: DataTypes.INTEGER,
 				allowNull: false
 			},
-			address: {
+			street: {
+				type: DataTypes.STRING,
+				allowNull: false
+			},
+			number: {
 				type: DataTypes.STRING,
 				allowNull: false
 			},
@@ -51,11 +55,11 @@ module.exports = {
 				type: DataTypes.STRING,
 				allowNull: false
 			},
-			cep: {
+			state: {
 				type: DataTypes.STRING,
 				allowNull: false
 			},
-			number: {
+			cep: {
 				type: DataTypes.STRING,
 				allowNull: false
 			},

@@ -2,19 +2,20 @@ define([
   'jquery', 
   'underscore', 
   'backbone', 
+  'handlebars',
   'models/patient',
   'text!templates/patients/item.html'
-], function($, _, Backbone, Patient, item) {
+], function($, _, Backbone, Handlebars, Patient, item) {
 	"use strict";
 	
 	return Backbone.View.extend({
 		tagName:  "li",
-		template: _.template(item),
+		template: Handlebars.compile(item),
 		events: {
 			'click .delete': 'delete'
 		},
 		render: function() {
-			this.$el.append(this.template({model: this.model}));
+			this.$el.append(this.template(this.model.toJSON()));
 		},
 		delete: function(ev) {
 			ev.preventDefault();
