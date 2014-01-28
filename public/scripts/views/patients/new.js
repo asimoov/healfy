@@ -2,13 +2,14 @@ define([
   'jquery', 
   'underscore', 
   'backbone', 
+  'handlebars',
   'models/patient',
   'text!templates/patients/new.html'
-], function($, _, Backbone, Patient, n) {
+], function($, _, Backbone, Handlebars, Patient, n) {
 	"use strict";
 	
 	return Backbone.View.extend({
-		template: _.template(n),
+		template: Handlebars.compile(n),
 		events: {
 			'submit.form': "submit"
 		},

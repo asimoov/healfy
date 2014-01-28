@@ -1,14 +1,20 @@
 define([ 
   'jquery', 
   'underscore', 
-  'backbone', 
+  'backbone',
+  'handlebars',
   'models/patient',
   'text!templates/patients/edit.html'
-], function($, _, Backbone, Patient, edit) {
+], function($, _, Backbone, Handlebars, Patient, edit) {
 	"use strict";
 	
+	Handlebars.registerHelper('dateFormat', function(date) {
+		date = new Date();
+		return [date.getFullYear(), ("0" + (date.getMonth() + 1)).slice(-2), ("0" + (date.getDate() + 1)).slice(-2)].join('-');
+	});
+
 	return Backbone.View.extend({
-		template: _.template(edit),
+		template: Handlebars.compile(edit),
 		events: {
 			'submit.form': "submit"
 		},
@@ -17,7 +23,7 @@ define([
 		},
 		render: function() {
 			this.$el.empty();
-			this.$el.append(this.template({model: this.model}));
+			this.$el.append(this.template(this.model.toJSON()));
 		},
 		submit: function(ev) {
 			ev.preventDefault();

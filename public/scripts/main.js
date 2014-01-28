@@ -3,6 +3,7 @@ require.config({
 		jquery: 'vendors/jquery',
 		underscore: 'vendors/underscore',
 		backbone: 'vendors/backbone',
+		handlebars: 'vendors/handlebars',
 		modernizr: 'vendors/modernizr',
 		templates: '../templates'
 	},
@@ -16,6 +17,9 @@ require.config({
 	backbone: {
 		deps: ["underscore", "jquery"],
 		exports: "Backbone"
+	},
+	handlebars: {
+		exports: 'Handlebars'
 	}
   }
 });
@@ -34,6 +38,7 @@ require([
 		Modernizr.history && 
 		Modernizr.inputtypes.number &&
 		Modernizr.input.required && 
+		Modernizr.input.pattern &&
 		Modernizr.input.placeholder &&
 		(Modernizr.flexbox || Modernizr.flexboxlegacy)) {
 		Application.initialize();
