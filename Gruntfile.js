@@ -53,12 +53,16 @@ module.exports = function (grunt) {
 				files: "public/stylesheets/*.less",
 				tasks: ["less"]
 			},
-			scripts: {
-				files: ['app.js', 'apps/**/*.js', 'public/scripts/**/*.js'],
-				tasks: ['jshint:frontend',, 'jshint:backend', 'express:dev'],
-				options: {
-					spawn: false,
-				}
+			frontend: {
+				files: ['public/scripts/**/*.js'],
+				tasks: ['jshint:frontend']
+			},
+			backend: {
+				files: ['app.js', 'apps/**/*.js'],
+				tasks: ['jshint:backend', 'express:dev']
+			},
+			options: {
+				spawn: false,
 			}
 		},
 		shell: {
