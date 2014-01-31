@@ -5,16 +5,12 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-//var mime = require('mime');
-
-var Sequelize = require('sequelize');
 
 var app = module.exports = express();
+require('./lib/database')(app);
 
 // all environments
 app.configure(function() {
-	//mime.define({'text/cache-manifest': ['manifest']});
-
 	app.disable('x-powered-by');
 
 	app.set('port', process.env.PORT || 3000);
@@ -41,19 +37,12 @@ app.configure('test', function() {
 	app.set('port', 3001);
 });
 
-var sequelize = new Sequelize('healfy_development', 'healfy', 'healfy', {
-	host: "localhost",
-	port: 5432,
-	dialect: 'postgres',
-	logging: console.log
-});
-
-var db = {};
+var db = app.get('db');
 var modules = [require('./apps/patients'), require('./apps/agendas')];
 modules.forEach(function(mmmm) {
 	var models = mmmm.models();
 	Object.keys(models).forEach(function(modelName) {
-		db[modelName] = sequelize.import(models[modelName]);
+		db.models[modelName] = db.import(models[modelName]);
 	});
 
 	var routes = mmmm.routes();
@@ -62,7 +51,7 @@ modules.forEach(function(mmmm) {
 	});
 });
 
-sequelize.sync().complete(function(err) {
+db.done(function(err) {
 	if (!!err) {
 		console.log('An error occurred while create the table:', err);
 	}
