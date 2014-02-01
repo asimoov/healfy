@@ -17,8 +17,11 @@ define([
 			this.listenTo(this.model, 'sync', this.render, this);
 		},
 		render: function() {
-			this.$el.empty();
-			this.$el.append(this.template(this.model.toJSON()));
+			var that = this;
+			window.requestAnimationFrame(function() {
+				that.$el.empty();
+				that.$el.append(that.template(that.model.toJSON()));
+			});
 		},
 		submit: function(ev) {
 			ev.preventDefault();

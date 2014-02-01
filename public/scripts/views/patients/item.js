@@ -15,7 +15,10 @@ define([
 			'click .delete': 'delete'
 		},
 		render: function() {
-			this.$el.append(this.template(this.model.toJSON()));
+			var that = this;
+			window.requestAnimationFrame(function() {
+				that.$el.append(that.template(that.model.toJSON()));
+			});
 		},
 		delete: function(ev) {
 			ev.preventDefault();
