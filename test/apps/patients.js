@@ -47,8 +47,8 @@ describe('patients', function() {
 	});
 
 	describe('DELETE', function() {
-		it('DELETE /patients', function(done) {
-			request.delete('http://localhost:3001/patients/1')
+		it('DELETE /patients/1', function(done) {
+			request.del('http://localhost:3001/patients/1')
 				.end(function(res) {
 				expect(res).to.exist
 				expect(res.status).to.equal(200);

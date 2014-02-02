@@ -75,7 +75,7 @@ module.exports = function(app) {
 				res.json({ error: err });
 			} else {
 				patient.destroy().success(function() {
-					res.status(204);
+					res.status(200);
 					res.json(patient);
 				});
 			}
