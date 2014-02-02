@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "healfy",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -17,6 +17,9 @@
     "grunt-contrib-less": "~0.9.0",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-express-server": "~0.4.11",
-    "grunt-shell": "~0.6.4"
+    "grunt-mocha-test": "~0.8.2",
+    "superagent": "~0.16.0",
+    "expect.js": "~0.2.0",
+    "mocha": "~1.17.1"
   }
 }

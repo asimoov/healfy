@@ -14,8 +14,11 @@ define([
 			'submit.form': "submit"
 		},
 		render: function() {
-			this.$el.empty();
-			this.$el.append(this.template());
+			var that = this;
+			window.requestAnimationFrame(function() {
+				that.$el.empty();
+				that.$el.append(that.template());
+			});
 		},
 		submit: function(ev) {
 			ev.preventDefault();

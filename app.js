@@ -5,9 +5,9 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
-var Sequelize = require('sequelize');
 
-var app = express();
+var app = module.exports = express();
+require('./lib/database')(app);
 
 // all environments
 app.configure(function() {
@@ -16,8 +16,8 @@ app.configure(function() {
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', path.join(__dirname, 'views'));
 	app.set('view engine', 'jade');
-	app.use(express.favicon());
 	app.use(express.logger('dev'));
+	app.use(express.favicon());
 	app.use(express.cookieParser());
     app.use(express.session({ secret: "changeme" }));
 	app.use(express.json());
@@ -32,33 +32,32 @@ app.configure('development', function() {
 	app.use(express.errorHandler());
 });
 
-var sequelize = new Sequelize('healfy_development', 'healfy', 'healfy', {
-	host: "localhost",
-	port: 5432,
-	dialect: 'postgres',
-	logging: console.log
+// test only
+app.configure('test', function() {
+	app.set('port', 3001);
 });
 
-var db = {};
 var modules = [require('./apps/patients'), require('./apps/agendas')];
-modules.forEach(function(mmmm) {
-	var models = mmmm.models();
+modules.forEach(function(componet) {
+	var db = app.get('db');
+
+	var models = componet.models();
 	Object.keys(models).forEach(function(modelName) {
-		db[modelName] = sequelize.import(models[modelName]);
+		db.models[modelName] = db.import(models[modelName]);
 	});
 
-	var routes = mmmm.routes();
+	db.done(function(err) {
+		if (!!err) {
+			console.log('An error occurred while create the table:', err);
+		}
+	});
+
+	var routes = componet.routes();
 	Object.keys(routes).forEach(function(routesName) {
 		require(routes[routesName])(app, db);
 	});
 });
 
-sequelize.sync().complete(function(err) {
-	if (!!err) {
-		console.log('An error occurred while create the table:', err);
-	} else {
-		http.createServer(app).listen(app.get('port'), function() {
-			console.log('Express server listening on port ' + app.get('port'));
-		});
-	}
+http.createServer(app).listen(app.get('port'), function() {
+	console.log('Express server listening on port ' + app.get('port'));
 });

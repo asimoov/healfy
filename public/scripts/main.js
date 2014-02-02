@@ -42,5 +42,17 @@ require([
 		Modernizr.input.placeholder &&
 		(Modernizr.flexbox || Modernizr.flexboxlegacy)) {
 		Application.initialize();
+	} else {
+		console.log("borderradius: " + Modernizr.borderradius);
+		console.log("boxshadow: " + Modernizr.boxshadow);
+		console.log("applicationcache: " + Modernizr.applicationcache);
+		console.log("indexeddb: " + Modernizr.indexeddb);
+		console.log("history: " + Modernizr.history);
+		console.log("inputtypes.number: " + Modernizr.inputtypes.number);
+		console.log("input.required: " + Modernizr.input.required);
+		console.log("input.pattern: " + Modernizr.input.pattern);
+		console.log("input.placeholder: " + Modernizr.input.placeholder);
+		console.log("flexbox: " + Modernizr.flexbox);
+		console.log("flexboxlegacy: " + Modernizr.flexboxlegacy);
 	}
 });

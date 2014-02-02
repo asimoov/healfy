@@ -1,7 +1,7 @@
-module.exports = function(app, db) {
+module.exports = function(app) {
 	"use strict";
 
-	var Patient = db.Patient;
+	var Patient = app.get('db').models.Patient;
 	app.param('id', function(req, res, next, id) {
 		var regex = new RegExp(/^\d+$/);
 		if (regex.test(id)) {
@@ -75,7 +75,7 @@ module.exports = function(app, db) {
 				res.json({ error: err });
 			} else {
 				patient.destroy().success(function() {
-					res.status(204);
+					res.status(200);
 					res.json(patient);
 				});
 			}

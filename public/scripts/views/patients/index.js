@@ -13,18 +13,21 @@ define([
 			this.listenTo(this.collection, 'reset', this.render, this);
 		},
 		render: function() {
-			this.$el.empty();
+			var that = this;
+			window.requestAnimationFrame(function() {
+				that.$el.empty();
 
-			var frag = document.createDocumentFragment();
-			frag.appendChild($("<a href='/#new'>Novo</a>")[0]);
-			this.collection.each(function(patient) {
-				var patientItemView = new PatientItemView({model: patient});
-				patientItemView.render();
+				var frag = document.createDocumentFragment();
+				frag.appendChild($("<a href='/#new'>Novo</a>")[0]);
+				that.collection.each(function(patient) {
+					var patientItemView = new PatientItemView({model: patient});
+					patientItemView.render();
+					
+					frag.appendChild(patientItemView.el);
+				}, that);
 				
-				frag.appendChild(patientItemView.el);
-			}, this);
-			
-			this.$el.append(frag);
+				that.$el.append(frag);
+			});
 		}
 	});
 });

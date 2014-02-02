@@ -6,7 +6,7 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-express-server');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-shell');
+	grunt.loadNpmTasks('grunt-mocha-test');
 
 	grunt.initConfig({
 		jshint: {
@@ -65,15 +65,16 @@ module.exports = function (grunt) {
 				spawn: false,
 			}
 		},
-		shell: {
-			migrate: {
+		mochaTest: {
+			test: {
 				options: {
-					stdout: true
+					reporter: 'spec'
 				},
-				command: './node_modules/sequelize/bin/sequelize --migrate'
+				src: ['test/**/*.js']
 			}
 		}
 	});
 
-	grunt.registerTask('server', [ 'jshint', 'less', 'express:dev', 'watch' ]);
+	grunt.registerTask('server', [ 'jshint', 'less', 'express', 'watch' ]);
+	grunt.registerTask('test', ['mochaTest']);
 };
