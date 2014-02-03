@@ -6,7 +6,8 @@
     "host": "localhost",
     "port": 5432,
     "dialect": "postgres",
-    "logging": true
+    "logging": true,
+    "force": false
   },
   "test": {
     "username": "healfy",
@@ -15,7 +16,8 @@
     "host": "localhost",
     "port": 5432,
     "dialect": "postgres",
-    "logging": false
+    "logging": false,
+    "force": true
   },
   "production": {
     "username": "healfy",
@@ -24,6 +26,7 @@
     "host": "localhost",
     "port": 5432,
     "dialect": "postgres",
-    "logging": false
+    "logging": false,
+    "force": false
   }
 }

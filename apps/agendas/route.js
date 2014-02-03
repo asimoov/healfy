@@ -1,7 +1,7 @@
-module.exports = function(app, db) {
+module.exports = function(app) {
 	"use strict";
 
-	var Agenda = db.Agenda;
+	var Agenda = app.get('db').models.Agenda;
 	app.param('id', function(req, res, next, id) {
 		var regex = new RegExp(/^\d+$/);
 		if (regex.test(id)) {
