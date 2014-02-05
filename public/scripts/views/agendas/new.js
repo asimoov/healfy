@@ -21,8 +21,10 @@ define([
 			ev.preventDefault();
 			ev.stopPropagation();
 
-			this.model.set({status: $('input[name="status"]', ev.target).val()});
-			this.model.set({day: $('input[name="day"]', ev.target).val()});
+			this.model.set({status: $('select[name="status"] option:selected', ev.target).val()});
+			this.model.set({day: $('select[name="day"] option:selected', ev.target).val()});
+			this.model.set({start: $('input[name="start"]', ev.target).val()});
+			this.model.set({end: $('input[name="end"]', ev.target).val()});
 			this.model.set({doctor: $('input[name="doctor"]', ev.target).val()});
 
 			this.model.save().then(function() {

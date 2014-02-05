@@ -3,14 +3,15 @@ define([
   'underscore', 
   'backbone',
   'helpers/handlebars',
-  'routes/patients'
-], function($, _, Backbone, Helpers, PatientsRoute) {
+  'routes/patients',
+  'routes/agendas'
+], function($, _, Backbone, Helpers, PatientsRoute, AgendasRoute) {
   "use strict";
 
   var initialize = function() {
     Helpers.initialize();
 
-    new PatientsRoute();
+    new AgendasRoute();
     Backbone.history.start();
   };
 
