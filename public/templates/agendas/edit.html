@@ -3,29 +3,39 @@
 <form role="form" action="/patients/<%= model.id %>" method="post">
 	<input type="hidden" name="_method" value="put" />
 	<div class="form-group">
-		<label>Name:</label>
-		<input class="form-control" type="text" name="day" value="{{day}}" required />
+		<label>Dia da semana:</label>
+		<select name="day" class="form-control" required>
+			<option value="0">Domingo</option>
+			<option value="1">Segunda</option>
+			<option value="2">Terça</option>
+			<option value="3">Quarta</option>
+			<option value="4">Quinta</option>
+			<option value="5">Sexta</option>
+			<option value="6">Sabado</option>
+		</select>
 	</div>
 
 	<div class="form-group">
-		<label>Name:</label>
-		<input class="form-control" type="date" name="start" value="{{start}}" required />
+		<label>Data Inicio:</label>
+		<input class="form-control" type="date" name="start" value="{{dateFormat start}}" required />
 	</div>
 
 	<div class="form-group">
-		<label>Name:</label>
-		<input class="form-control" type="date" name="end" value="{{end}}" required />
-	</div>
-
-
-	<div class="form-group">
-		<label>Name:</label>
-		<input class="form-control" type="date" name="status" value="{{status}}" required />
+		<label>Data final:</label>
+		<input class="form-control" type="date" name="end" value="{{dateFormat end}}" required />
 	</div>
 
 	<div class="form-group">
-		<label>Name:</label>
-		<input class="form-control" type="date" name="doctor" value="{{doctor}}" required />
+		<label>Status:</label>
+		<select name="status" class="form-control" required>
+			<option value="0">Ativo</option>
+			<option value="1">Inativo</option>
+		</select>
+	</div>
+
+	<div class="form-group">
+		<label>Nome do Doutor:</label>
+		<input class="form-control" type="text" name="doctor" value="{{doctor}}" required />
 	</div>
 
 	<button type="submit" class="btn btn-default">Enviar</button>

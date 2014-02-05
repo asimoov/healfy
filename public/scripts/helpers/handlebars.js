@@ -5,8 +5,10 @@ define([
 
 	var initialize = function() {
 		Handlebars.registerHelper('dateFormat', function(date) {
-			date = new Date(date);
-			return [date.getFullYear(), ("0" + (date.getMonth() + 1)).slice(-2), ("0" + (date.getDate() + 1)).slice(-2)].join('-');
+			var d = new Date(Date.parse(date));
+			var utc = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
+
+			return [utc.getFullYear(), ("0" + (utc.getMonth() + 1)).slice(-2), ("0" + (utc.getDate())).slice(-2)].join('-');
 		});
 	};
 
