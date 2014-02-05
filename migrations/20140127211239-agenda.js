@@ -19,7 +19,7 @@ module.exports = {
 		start: {
 			type: DataTypes.DATE
 		},
-		end: {
+		stop: {
 			type: DataTypes.DATE,
 			allowNull: false
 		},

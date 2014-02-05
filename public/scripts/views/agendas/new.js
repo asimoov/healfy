@@ -23,8 +23,8 @@ define([
 
 			this.model.set({status: $('select[name="status"] option:selected', ev.target).val()});
 			this.model.set({day: $('select[name="day"] option:selected', ev.target).val()});
-			this.model.set({start: $('input[name="start"]', ev.target).val()});
-			this.model.set({end: $('input[name="end"]', ev.target).val()});
+			this.model.set({start: "1970-01-01T" + $('input[name="start"]', ev.target).val()});
+			this.model.set({stop: "1970-01-01T" + $('input[name="stop"]', ev.target).val()});
 			this.model.set({doctor: $('input[name="doctor"]', ev.target).val()});
 
 			this.model.save().then(function() {

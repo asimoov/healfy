@@ -4,11 +4,18 @@ define([
 	"use strict";
 
 	var initialize = function() {
-		Handlebars.registerHelper('dateFormat', function(date) {
+		Handlebars.registerHelper('format_d', function(date) {
 			var d = new Date(Date.parse(date));
 			var utc = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
 
 			return [utc.getFullYear(), ("0" + (utc.getMonth() + 1)).slice(-2), ("0" + (utc.getDate())).slice(-2)].join('-');
+		});
+
+		Handlebars.registerHelper('format_t', function(date) {
+			var d = new Date(Date.parse(date));
+			var utc = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
+
+			return [("0" + utc.getHours()).slice(-2), ("0" + utc.getMinutes()).slice(-2)].join(':');
 		});
 
 		Handlebars.registerHelper('select_to', function(data, selected, html) {

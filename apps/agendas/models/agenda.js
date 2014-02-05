@@ -10,9 +10,13 @@ module.exports = function(sequelize, DataTypes) {
 			}
 		},
 		start: {
-			type: DataTypes.DATE
+			type: DataTypes.DATE,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
 		},
-		end: {
+		stop: {
 			type: DataTypes.DATE,
 			allowNull: false,
 			validate: {
