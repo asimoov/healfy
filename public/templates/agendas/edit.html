@@ -4,15 +4,7 @@
 	<input type="hidden" name="_method" value="put" />
 	<div class="form-group">
 		<label>Dia da semana:</label>
-		<select name="day" class="form-control" required>
-			<option value="0">Domingo</option>
-			<option value="1">Segunda</option>
-			<option value="2">Terça</option>
-			<option value="3">Quarta</option>
-			<option value="4">Quinta</option>
-			<option value="5">Sexta</option>
-			<option value="6">Sabado</option>
-		</select>
+		{{week_select_to day "name='day' class='form-control' required"}}
 	</div>
 
 	<div class="form-group">
@@ -27,10 +19,7 @@
 
 	<div class="form-group">
 		<label>Status:</label>
-		<select name="status" class="form-control" required>
-			<option value="0">Ativo</option>
-			<option value="1">Inativo</option>
-		</select>
+		{{status_select_to status "name='status' class='form-control' required"}}
 	</div>
 
 	<div class="form-group">

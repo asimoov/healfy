@@ -10,6 +10,31 @@ define([
 
 			return [utc.getFullYear(), ("0" + (utc.getMonth() + 1)).slice(-2), ("0" + (utc.getDate())).slice(-2)].join('-');
 		});
+
+		Handlebars.registerHelper('select_to', function(data, selected, html) {
+			return new Handlebars.SafeString("<select "+ html + ">" +
+					(Object.keys(data).map(function(key) {
+						var value = data[key];
+						if (selected == value) {
+							return "<option value='" + value + "' selected='selected' >" + key + "</option>";
+						} 
+
+						return "<option value='" + value + "'>" + key + "</option>";
+					})).join("") +
+				"</select>");
+		});
+
+		Handlebars.registerHelper('week_select_to', function(selected, html) {
+			var data = {"Domingo": 0, "Segunda": 1, "Terça": 2, "Quarta": 3, "Quinta": 4, "Sexta": 5, "Sabado": 6};
+
+			return Handlebars.helpers.select_to(data, selected, html);
+		});
+
+		Handlebars.registerHelper('status_select_to', function(selected, html) {
+			var data = {"Ativo": 0, "Inativo": 1};
+
+			return Handlebars.helpers.select_to(data, selected, html);
+		});
 	};
 
 	return {

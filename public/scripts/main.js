@@ -36,7 +36,8 @@ require([
 		Modernizr.applicationcache && 
 		Modernizr.indexeddb && 
 		Modernizr.history && 
-		Modernizr.inputtypes.number &&
+		//Modernizr.inputtypes.number &&
+		//Modernizr.inputtypes.date &&
 		Modernizr.input.required && 
 		Modernizr.input.pattern &&
 		Modernizr.input.placeholder &&
