@@ -3,7 +3,8 @@ var path       = require('path');
 module.exports = {
 	models: function() {
 		return {
-			Agenda: path.join(__dirname, 'models/agenda') 
+			Agenda: path.join(__dirname, 'models/agenda'),
+			Schedule: path.join(__dirname, 'models/schedule')
 		};
 	},
 	routes: function() {

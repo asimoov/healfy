@@ -5,5 +5,7 @@ define([
 
 	return Backbone.Model.extend({
 		urlRoot: 'patients'
+	}, {
+		status: ["Ativo", "Inativo"]
 	});
 });

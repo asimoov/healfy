@@ -16,6 +16,10 @@ module.exports = {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
+		interval: {
+			type: DataTypes.DATE,
+			allowNull: false
+		},
 		start: {
 			type: DataTypes.DATE
 		},

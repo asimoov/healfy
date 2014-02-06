@@ -1,30 +1,23 @@
 module.exports = function(sequelize, DataTypes) {
 	"use strict";
 	
-	var Agenda = sequelize.define('agendas', {
-		day: {
+	var Schedule = sequelize.define('schedules', {
+		predict: {
+			type: DataTypes.DATE,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		patient: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		agenda_id: {
 			type: DataTypes.INTEGER,
-			allowNull: false,
-			validate: {
-				notEmpty: true
-			}
-		},
-		interval: {
-			type: DataTypes.DATE,
-			allowNull: false,
-			validate: {
-				notEmpty: true
-			}
-		},
-		start: {
-			type: DataTypes.DATE,
-			allowNull: false,
-			validate: {
-				notEmpty: true
-			}
-		},
-		stop: {
-			type: DataTypes.DATE,
 			allowNull: false,
 			validate: {
 				notEmpty: true
@@ -32,19 +25,18 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		status: {
 			type: DataTypes.INTEGER,
-			allowNull: false
-		},
-		doctor: {
-			type: DataTypes.STRING,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
 		}
 	}, {
 		classMethods: {
 			associate: function(models) {
-				Agenda.hasMany(models.Schedule);
+				Schedule.hasOne(models.Agenda);
 			}
 		}
 	});
 
-	return Agenda;
+	return Schedule;
 };

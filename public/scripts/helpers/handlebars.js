@@ -1,9 +1,19 @@
 define([ 
   'handlebars',
-], function(Handlebars) {
+  'models/agenda',
+  'models/patient'
+], function(Handlebars, Agenda, Patient) {
 	"use strict";
 
 	var initialize = function() {
+		Handlebars.registerHelper('quantity_predictions', function(model) {
+			var start = new Date(model.start);
+			var stop = new Date(model.stop);
+			var interval = new Date(model.interval);
+
+			return ((stop.getTime() - start.getTime()) / interval.getTime());
+		});
+
 		Handlebars.registerHelper('format_d', function(date) {
 			var d = new Date(Date.parse(date));
 			var utc = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
@@ -18,29 +28,33 @@ define([
 			return [("0" + utc.getHours()).slice(-2), ("0" + utc.getMinutes()).slice(-2)].join(':');
 		});
 
+		Handlebars.registerHelper('week_s', function(w) {
+			return Agenda.week[w];
+		});
+
+		Handlebars.registerHelper('status_s', function(s) {
+			return Patient.status[s];
+		});
+
 		Handlebars.registerHelper('select_to', function(data, selected, html) {
 			return new Handlebars.SafeString("<select "+ html + ">" +
 					(Object.keys(data).map(function(key) {
 						var value = data[key];
-						if (selected == value) {
-							return "<option value='" + value + "' selected='selected' >" + key + "</option>";
-						} 
+						if (selected == key) {
+							return "<option value='" + key + "' selected='selected' >" + value + "</option>";
+						}
 
-						return "<option value='" + value + "'>" + key + "</option>";
+						return "<option value='" + key + "'>" + value + "</option>";
 					})).join("") +
 				"</select>");
 		});
 
 		Handlebars.registerHelper('week_select_to', function(selected, html) {
-			var data = {"Domingo": 0, "Segunda": 1, "Terça": 2, "Quarta": 3, "Quinta": 4, "Sexta": 5, "Sabado": 6};
-
-			return Handlebars.helpers.select_to(data, selected, html);
+			return Handlebars.helpers.select_to(Agenda.week, selected, html);
 		});
 
 		Handlebars.registerHelper('status_select_to', function(selected, html) {
-			var data = {"Ativo": 0, "Inativo": 1};
-
-			return Handlebars.helpers.select_to(data, selected, html);
+			return Handlebars.helpers.select_to(Patient.status, selected, html);
 		});
 	};
 
