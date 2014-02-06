@@ -11,7 +11,7 @@ define([
 			var stop = new Date(model.stop);
 			var interval = new Date(model.interval);
 
-			return ((stop.getTime() - start.getTime()) / interval.getTime());
+			return ((stop.getTime() - start.getTime()) / interval.getTime()).toFixed(0);
 		});
 
 		Handlebars.registerHelper('format_d', function(date) {

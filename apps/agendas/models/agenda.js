@@ -29,6 +29,10 @@ module.exports = function(sequelize, DataTypes) {
 			validate: {
 				notEmpty: true
 			}
+		},		
+		extra: {
+			type: DataTypes.INTEGER,
+			allowNull: false
 		},
 		status: {
 			type: DataTypes.INTEGER,
