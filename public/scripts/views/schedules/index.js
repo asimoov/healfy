@@ -2,9 +2,9 @@ define([
   'jquery', 
   'underscore', 
   'backbone', 
-  'models/agenda', 
+  'models/schedule', 
   'views/agendas/item',
-], function($, _, Backbone, Agenda, AgendaItemView) {
+], function($, _, Backbone, Schedule, ScheduleItemView) {
 	"use strict";
 	
 	return Backbone.View.extend({
@@ -14,14 +14,13 @@ define([
 		},
 		render: function() {
 			this.$el.empty();
+
 			var frag = document.createDocumentFragment();
-			frag.appendChild($("<a href='/#new'>Novo</a>")[0]);
 			this.collection.each(function(agenda) {
-				console.log(agenda.getSchedules());
-				var agendaItemView = new AgendaItemView({model: agenda});
-				agendaItemView.render();
+				var scheduleItemView = new ScheduleItemView({model: agenda});
+				scheduleItemView.render();
 				
-				frag.appendChild(agendaItemView.el);
+				frag.appendChild(scheduleItemView.el);
 			}, this);
 			
 			this.$el.append(frag);
