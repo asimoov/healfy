@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
 				notEmpty: true
 			}
 		},
-		agenda_id: {
+		agendaId: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 			validate: {

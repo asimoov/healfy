@@ -2,6 +2,7 @@ module.exports = function(app) {
 	"use strict";
 
 	var Agenda = app.get('db').models.Agenda;
+	var Schedule = app.get('db').models.Schedule;
 	app.param('id', function(req, res, next, id) {
 		var regex = new RegExp(/^\d+$/);
 		if (regex.test(id)) {
@@ -12,7 +13,7 @@ module.exports = function(app) {
 	});
 
 	app.get('/agendas', function(req, res) {
-		Agenda.findAll().success(function(agendas) {
+		Agenda.findAll({include: [Schedule]}).success(function(agendas) {
 			res.json(agendas);
 		});
 	});

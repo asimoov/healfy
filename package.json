@@ -20,6 +20,7 @@
     "grunt-mocha-test": "~0.8.2",
     "superagent": "~0.16.0",
     "expect.js": "~0.2.0",
-    "mocha": "~1.17.1"
+    "mocha": "~1.17.1",
+    "grunt-contrib-requirejs": "~0.4.1"
   }
 }

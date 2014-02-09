@@ -46,6 +46,12 @@ modules.forEach(function(componet) {
 		db.models[modelName] = db.import(models[modelName]);
 	});
 
+	Object.keys(models).forEach(function(modelName) {
+		if ('associate' in db.models[modelName]) {
+			db.models[modelName].associate(db.models);
+		}
+	});
+
 	db.done(function(err) {
 		if (!!err) {
 			console.log('An error occurred while create the table:', err);

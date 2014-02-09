@@ -4,6 +4,7 @@ module.exports = function (grunt) {
 	// load jshint plugin
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-express-server');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-mocha-test');
@@ -23,7 +24,7 @@ module.exports = function (grunt) {
 			frontend: {
 				options: {
 					node: true,
-					ignores: ['public/scripts/vendors/*.js']
+					ignores: ['public/scripts/vendors/*.js', 'public/scripts/main-min.js']
 				},
 				src: ['public/scripts/**/*.js']
 			}
@@ -38,6 +39,16 @@ module.exports = function (grunt) {
 				files: {
 					// target.css file: source.less file
 					"public/stylesheets/style.css": "public/stylesheets/style.less"
+				}
+			}
+		},
+		requirejs: {
+			compile: {
+				options: {
+					baseUrl: "public/scripts",
+					mainConfigFile: "public/scripts/main.js",
+					name: "main",
+					out: "public/scripts/main-min.js"
 				}
 			}
 		},

@@ -20,7 +20,7 @@ module.exports = {
 				type: DataTypes.STRING,
 				allowNull: false
 			},
-			agenda_id: {
+			agendaId: {
 				type: DataTypes.INTEGER,
 				allowNull: false
 			},
