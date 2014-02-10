@@ -17,7 +17,6 @@ define([
 			var frag = document.createDocumentFragment();
 			frag.appendChild($("<a href='/#new'>Novo</a>")[0]);
 			this.collection.each(function(agenda) {
-				console.log(agenda.getSchedules());
 				var agendaItemView = new AgendaItemView({model: agenda});
 				agendaItemView.render();
 				

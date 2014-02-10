@@ -3,7 +3,7 @@ define([
   'underscore', 
   'backbone', 
   'models/schedule', 
-  'views/agendas/item',
+  'views/schedules/item',
 ], function($, _, Backbone, Schedule, ScheduleItemView) {
 	"use strict";
 	
@@ -16,13 +16,12 @@ define([
 			this.$el.empty();
 
 			var frag = document.createDocumentFragment();
-			this.collection.each(function(agenda) {
-				var scheduleItemView = new ScheduleItemView({model: agenda});
+			this.collection.each(function(schedule) {
+				var scheduleItemView = new ScheduleItemView({model: schedule});
 				scheduleItemView.render();
 				
 				frag.appendChild(scheduleItemView.el);
 			}, this);
-			
 			this.$el.append(frag);
 		}
 	});

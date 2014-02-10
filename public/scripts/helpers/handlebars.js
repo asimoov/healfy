@@ -14,18 +14,18 @@ define([
 			return ((stop.getTime() - start.getTime()) / interval.getTime()).toFixed(0);
 		});
 
-		Handlebars.registerHelper('format_d', function(date) {
+		Handlebars.registerHelper('format_d', function(date, utc) {
 			var d = new Date(Date.parse(date));
-			var utc = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
+			if(utc) { d = new Date(d.getTime() + (d.getTimezoneOffset() * 60000)); }
 
-			return [utc.getFullYear(), ("0" + (utc.getMonth() + 1)).slice(-2), ("0" + (utc.getDate())).slice(-2)].join('-');
+			return [d.getFullYear(), ("0" + (d.getMonth() + 1)).slice(-2), ("0" + (d.getDate())).slice(-2)].join('-');
 		});
 
-		Handlebars.registerHelper('format_t', function(date) {
+		Handlebars.registerHelper('format_t', function(date, utc) {
 			var d = new Date(Date.parse(date));
-			var utc = new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
+			if(utc) { d = new Date(d.getTime() + (d.getTimezoneOffset() * 60000)); }
 
-			return [("0" + utc.getHours()).slice(-2), ("0" + utc.getMinutes()).slice(-2)].join(':');
+			return [("0" + d.getHours()).slice(-2), ("0" + d.getMinutes()).slice(-2)].join(':');
 		});
 
 		Handlebars.registerHelper('week_s', function(w) {

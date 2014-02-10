@@ -6,6 +6,7 @@ define([
 
 	return Backbone.Collection.extend({
 		url: 'schedules',
-		model: Schedule
+		model: Schedule,
+		comparator: 'predict'
 	});
 });

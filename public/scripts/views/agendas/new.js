@@ -23,10 +23,10 @@ define([
 
 			this.model.set({extra: $('input[name="extra"]', ev.target).val()});
 			this.model.set({status: $('select[name="status"] option:selected', ev.target).val()});
-			this.model.set({interval: "1970-01-01T" + $('input[name="interval"]', ev.target).val()});
+			this.model.set({interval: new Date("1970-01-01T" + $('input[name="interval"]', ev.target).val())});
 			this.model.set({day: $('select[name="day"] option:selected', ev.target).val()});
-			this.model.set({start: "1970-01-01T" + $('input[name="start"]', ev.target).val()});
-			this.model.set({stop: "1970-01-01T" + $('input[name="stop"]', ev.target).val()});
+			this.model.set({start: new Date("1970-01-01T" + $('input[name="start"]', ev.target).val())});
+			this.model.set({stop: new Date("1970-01-01T" + $('input[name="stop"]', ev.target).val())});
 			this.model.set({doctor: $('input[name="doctor"]', ev.target).val()});
 
 			this.model.save().then(function() {

@@ -1,30 +1,40 @@
 define([
-  'backbone',
-  'models/schedule'
-], function(Backbone, Schedule) {
+	'underscore', 
+	'backbone',
+	'collections/schedules',
+	'models/schedule'
+], function(_, Backbone, Schedules, Schedule) {
 	"use strict";
 
 	return Backbone.Model.extend({
 		urlRoot: 'agendas',
-		getSchedules: function() {
+		getSchedules: function(d) {
+			var today = d || new Date();
+			today.setHours(0, 0, 0, 0);
+			if(today.getDay() != this.get('day')) {
+				var diff = this.get('day');
+				today.setDate(today.getDate() + (diff+(7-today.getDay())) % 7);
+			}
+
 			var start = new Date(this.get('start'));
-			start = new Date(start.getTime() + (start.getTimezoneOffset() * 60000));
-
 			var stop = new Date(this.get('stop'));
-			stop = new Date(stop.getTime() + (stop.getTimezoneOffset() * 60000));
-
 			var interval = new Date(this.get('interval'));
 			var quantity = ((stop.getTime() - start.getTime()) / interval.getTime());
 
-			var schedules = [];
+			var schedules = new Schedules(this.get('schedules'));
 			for (var i = 0; i < quantity; ++i) {
 				var position = i * interval.getTime();
-				var current = new Date(start.getTime() + position);
-				var schedule = new Schedule({predict: current});
+				var current = new Date(today.getTime() + start.getTime() + position);
 
-				schedules.push(schedule);
+				var exist = schedules.find(function(schedule) {
+					return (new Date(schedule.get('predict'))).getTime() == current.getTime();
+				});
+
+				var schedule = exist !== undefined ? exist : new Schedule({predict: current, agendaId: this.get('id')});
+				schedules.add(schedule);
 			}
 
+			schedules.sort()
 			return schedules;
 		}
 	}, {

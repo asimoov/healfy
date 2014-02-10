@@ -4,8 +4,9 @@ define([
   'backbone', 
   'handlebars',
   'models/agenda',
+  'views/schedules/index',
   'text!templates/agendas/item.html'
-], function($, _, Backbone, Handlebars, Agenda, item) {
+], function($, _, Backbone, Handlebars, Agenda, SchedulesView, item) {
 	"use strict";
 	
 	return Backbone.View.extend({
@@ -16,6 +17,10 @@ define([
 		},
 		render: function() {
 			this.$el.append(this.template(this.model.toJSON()));
+
+			var schedulesView = new SchedulesView({collection: this.model.getSchedules()});
+			schedulesView.render();
+			this.$el.append(schedulesView.$el);
 		},
 		delete: function(ev) {
 			ev.preventDefault();
