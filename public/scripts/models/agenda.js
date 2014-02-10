@@ -26,6 +26,7 @@ define([
 				var position = i * interval.getTime();
 				var current = new Date(today.getTime() + start.getTime() + position);
 
+				/*jshint -W083*/
 				var exist = schedules.find(function(schedule) {
 					return (new Date(schedule.get('predict'))).getTime() == current.getTime();
 				});
@@ -34,7 +35,6 @@ define([
 				schedules.add(schedule);
 			}
 
-			schedules.sort()
 			return schedules;
 		}
 	}, {

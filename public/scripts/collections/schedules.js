@@ -7,6 +7,8 @@ define([
 	return Backbone.Collection.extend({
 		url: 'schedules',
 		model: Schedule,
-		comparator: 'predict'
+		comparator: function(schedule) {
+			return new Date(schedule.get('predict'));
+		}
 	});
 });
