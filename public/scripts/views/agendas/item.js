@@ -3,10 +3,11 @@ define([
   'underscore', 
   'backbone', 
   'handlebars',
+  'toastr',
   'models/agenda',
   'views/schedules/index',
   'text!templates/agendas/item.html'
-], function($, _, Backbone, Handlebars, Agenda, SchedulesView, item) {
+], function($, _, Backbone, Handlebars, toastr, Agenda, SchedulesView, item) {
 	"use strict";
 	
 	return Backbone.View.extend({
@@ -27,10 +28,9 @@ define([
 			ev.stopPropagation();
 
 			var that = this;
-			this.model.destroy({
-				success: function(model, response) {
-					that.$el.remove();
-				}
+			this.model.destroy().then(function() {
+				that.$el.remove();
+				toastr.success("Removida a Agenda com sucesso!");
 			});
 		}
 	});

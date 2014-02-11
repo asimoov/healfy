@@ -9,6 +9,17 @@ var path = require('path');
 var app = module.exports = express();
 require('./lib/database')(app);
 
+// development only
+app.configure('development', function() {
+	app.use(express.logger('dev'));
+	app.use(express.errorHandler());
+});
+
+// production only
+app.configure('production', function() {
+	app.use(express.logger());
+});
+
 // all environments
 app.configure(function() {
 	app.disable('x-powered-by');
@@ -16,7 +27,6 @@ app.configure(function() {
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', path.join(__dirname, 'views'));
 	app.set('view engine', 'jade');
-	app.use(express.logger('dev'));
 	app.use(express.favicon());
 	app.use(express.cookieParser());
     app.use(express.session({ secret: "changeme" }));
@@ -25,16 +35,6 @@ app.configure(function() {
 	app.use(express.methodOverride());
 	app.use(app.router);
 	app.use(express.static(path.join(__dirname, 'public')));
-});
-
-// development only
-app.configure('development', function() {
-	app.use(express.errorHandler());
-});
-
-// test only
-app.configure('test', function() {
-	app.set('port', 3001);
 });
 
 var modules = [require('./apps/patients'), require('./apps/agendas')];

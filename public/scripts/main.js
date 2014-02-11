@@ -5,6 +5,7 @@ require.config({
 		backbone: 'vendors/backbone',
 		handlebars: 'vendors/handlebars',
 		modernizr: 'vendors/modernizr',
+		toastr: 'vendors/toastr',
 		templates: '../templates'
 	},
 	shim: {

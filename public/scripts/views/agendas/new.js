@@ -3,9 +3,10 @@ define([
   'underscore', 
   'backbone', 
   'handlebars',
+  'toastr',
   'models/agenda',
   'text!templates/agendas/new.html'
-], function($, _, Backbone, Handlebars, Agenda, n) {
+], function($, _, Backbone, Handlebars, toastr, Agenda, n) {
 	"use strict";
 	
 	return Backbone.View.extend({
@@ -31,6 +32,7 @@ define([
 
 			this.model.save().then(function() {
 				Backbone.history.navigate('', {trigger: true});
+				toastr.success("Criada na Agenda realizada com sucesso!");
 			});
 		}
 	});

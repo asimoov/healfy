@@ -5,5 +5,7 @@ define([
 
 	return Backbone.Model.extend({
 		urlRoot: 'schedules'
+	}, {
+		status: ["Agendado", "Confirmado", "Presente", "Pago", "Cancelado"]
 	});
 });

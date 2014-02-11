@@ -3,9 +3,10 @@ define([
   'underscore', 
   'backbone',
   'handlebars',
+  'toastr',
   'models/agenda',
   'text!templates/agendas/edit.html'
-], function($, _, Backbone, Handlebars, Agenda, edit) {
+], function($, _, Backbone, Handlebars, toastr, Agenda, edit) {
 	"use strict";
 
 	return Backbone.View.extend({
@@ -24,7 +25,6 @@ define([
 			ev.preventDefault();
 			ev.stopPropagation();
 
-			var timezone = (new Date()).getTimezoneOffset() / 60;
 			this.model.set({extra: $('input[name="extra"]', ev.target).val()});
 			this.model.set({status: $('select[name="status"] option:selected', ev.target).val()});
 			this.model.set({interval: "1970-01-01T" + $('input[name="interval"]', ev.target).val()});
@@ -33,7 +33,10 @@ define([
 			this.model.set({stop: "1970-01-01T" + $('input[name="stop"]', ev.target).val()});
 			this.model.set({doctor: $('input[name="doctor"]', ev.target).val()});
 
-			this.model.save();
+			this.model.save().then(function() {
+				Backbone.history.navigate('', {trigger: true});
+				toastr.success("Mudança na Agenda realizada com sucesso!");
+			});
 		}
 	});
 });

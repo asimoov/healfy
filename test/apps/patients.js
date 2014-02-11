@@ -4,6 +4,12 @@ var request = require('superagent');
 var expect = require('expect.js')
 
 describe('patients', function() {
+	before(function(done) {
+		app.get('db').done(function() {
+			done();
+		});
+	});
+
 	describe('GETs', function() {
 		it('GET /patients', function(done) {
 			request.get('http://localhost:3001/patients').end(function(res) {
