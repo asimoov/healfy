@@ -15,6 +15,12 @@ define([
 			return ((stop.getTime() - start.getTime()) / interval.getTime()).toFixed(0);
 		});
 
+		Handlebars.registerHelper('showDay', function(date) {
+			var d = new Date(Date.parse(date));
+
+			return d.getDate();
+		});
+
 		Handlebars.registerHelper('format_d', function(date, utc) {
 			var d = new Date(Date.parse(date));
 			if(utc) { d = new Date(d.getTime() + (d.getTimezoneOffset() * 60000)); }

@@ -3,8 +3,10 @@ define([
   'underscore', 
   'backbone', 
   'models/agenda', 
+  'models/calendar', 
   'views/agendas/item',
-], function($, _, Backbone, Agenda, AgendaItemView) {
+  'views/calendars/index'
+], function($, _, Backbone, Agenda, Calendar, AgendaItemView, IndexCalendarView) {
 	"use strict";
 	
 	return Backbone.View.extend({
@@ -24,6 +26,10 @@ define([
 			}, this);
 			
 			this.$el.append(frag);
+
+			var indexCalendarView = new IndexCalendarView({model: new Calendar()});
+			indexCalendarView.render();
+			this.$el.append(indexCalendarView.$el);
 		}
 	});
 });
