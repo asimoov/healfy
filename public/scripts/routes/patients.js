@@ -12,11 +12,10 @@ define([
 
 	return Backbone.Router.extend({
 		routes: {
-			''                 : "index",
-			'new'              : "new",
-			':patient_id'      : "show",
-			':patient_id/edit' : "edit",
-			'*actions'         : "defaultAction"
+			'patient'                 : "index",
+			'patient/new'              : "new",
+			'patient/:patient_id'      : "show",
+			'patient/:patient_id/edit' : "edit"
 		},
 		index: function() {
 			var collection = new Patients();
@@ -41,9 +40,6 @@ define([
 			var editView = new EditView({model: model});
 			editView.render();
 			$("body").empty().append(editView.$el);
-		},
-		defaultAction: function() {
-			console.log('default action');
 		}
 	});
 });

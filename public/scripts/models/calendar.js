@@ -42,7 +42,7 @@ define([
 		return numberDayWeek;
 	};
 
-	return Backbone.Model.extend({
+	var Calendar = Backbone.Model.extend({
 		defaults: {
 			today: new Date(),
 			date: new Date()
@@ -87,6 +87,16 @@ define([
 	}, {
 		week: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
 		weekFullText: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
-		months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+		months: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+		instance: null,
+		getInstance: function() {
+			if(Calendar.instance === null) {
+				Calendar.instance = new Calendar();
+			}
+
+			return Calendar.instance;
+		}
 	});
+
+	return Calendar.getInstance();
 });

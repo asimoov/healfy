@@ -1,12 +1,10 @@
 define([ 
-  'jquery', 
-  'underscore', 
-  'backbone', 
-  'models/agenda', 
-  'models/calendar', 
-  'views/agendas/item',
-  'views/calendars/index'
-], function($, _, Backbone, Agenda, Calendar, AgendaItemView, IndexCalendarView) {
+  'jquery',
+  'underscore',
+  'backbone',
+  'models/agenda',
+  'views/agendas/item'
+], function($, _, Backbone, Agenda, AgendaItemView) {
 	"use strict";
 	
 	return Backbone.View.extend({
@@ -16,6 +14,7 @@ define([
 		},
 		render: function() {
 			this.$el.empty();
+
 			var frag = document.createDocumentFragment();
 			frag.appendChild($("<a href='/#new'>Novo</a>")[0]);
 			this.collection.each(function(agenda) {
@@ -26,10 +25,6 @@ define([
 			}, this);
 			
 			this.$el.append(frag);
-
-			var indexCalendarView = new IndexCalendarView({model: new Calendar()});
-			indexCalendarView.render();
-			this.$el.append(indexCalendarView.$el);
 		}
 	});
 });

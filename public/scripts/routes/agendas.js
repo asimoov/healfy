@@ -12,11 +12,10 @@ define([
 
 	return Backbone.Router.extend({
 		routes: {
-			''                 : "index",
-			'new'              : "new",
-			':agenda_id'       : "show",
-			':agenda_id/edit'  : "edit",
-			'*actions'         : "defaultAction"
+			'agendas'                 : "index",
+			'agendas/new'              : "new",
+			'agendas/:agenda_id'       : "show",
+			'agendas/:agenda_id/edit'  : "edit"
 		},
 		index: function() {
 			var collection = new Agendas();
@@ -41,9 +40,6 @@ define([
 			var editView = new EditView({model: model});
 			editView.render();
 			$("body").empty().append(editView.$el);
-		},
-		defaultAction: function() {
-			console.log('default action');
 		}
 	});
 });
