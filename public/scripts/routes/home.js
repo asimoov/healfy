@@ -24,7 +24,7 @@ define([
 			var agendas = new Agendas();
 			agendas.fetch().then(function() {
 				var calendar = Calendar.getInstance();
-				var agsWeek = agendas.filter(function(agenda) { return calendar.get('date').getDay() === agenda.get('day') });
+				var agsWeek = agendas.filter(function(agenda) { return calendar.get('date').getDay() === agenda.get('day'); });
 
 				agsWeek.forEach(function(agenda) {
 					var scheduleIndexView = new ScheduleIndexView({collection: agenda.getSchedules(calendar.get('date'))});

@@ -18,13 +18,15 @@ define([
 		},
 		render: function() {
 			this.$el.empty();
-			this.addClass();
+			this.applyClass();
 			this.$el.append("<a href='#'>" + this.model.getDate()+ "</a>");
 		},
-		addClass: function() {
-			/* jshint -W030 */
-			this.isCurrent() ? this.$el.addClass('current') : this.$el.removeClass('current');
-			this.isToday() ? this.$el.addClass('today') : this.$el.removeClass('today');
+		applyClass: function() {
+			var isCurrent = this.isCurrent();
+			var isToday = this.isToday();
+			
+			$(this.el).toggleClass('current', isCurrent);
+			$(this.el).toggleClass('today', isToday);
 		},
 		isCurrent: function() {
 			return this.calendar.get('date').getTime() === this.model.getTime();
