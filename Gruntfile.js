@@ -38,7 +38,7 @@ module.exports = function (grunt) {
 				},
 				files: {
 					// target.css file: source.less file
-					"public/stylesheets/style.css": "public/stylesheets/style.less"
+					"public/styles/style.css": "public/styles/style.less"
 				}
 			}
 		},
@@ -61,7 +61,7 @@ module.exports = function (grunt) {
 		},
 		watch: {
 			stylesheets: {
-				files: "public/stylesheets/*.less",
+				files: "public/styles/*.less",
 				tasks: ["less"]
 			},
 			frontend: {

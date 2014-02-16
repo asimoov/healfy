@@ -47,6 +47,10 @@ define([
 			today: new Date(),
 			date: new Date()
 		},
+		initialize: function() {
+			this.get('today').setHours(0, 0, 0, 0);
+			this.get('date').setHours(0, 0, 0, 0);
+		},
 		week: function() {
 			var firstDay = this.get('date');
 			var week = getWeek(firstDay);
@@ -98,5 +102,5 @@ define([
 		}
 	});
 
-	return Calendar.getInstance();
+	return Calendar;
 });

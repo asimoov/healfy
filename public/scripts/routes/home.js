@@ -3,8 +3,10 @@ define([
 	'underscore',
 	'backbone',
 	'models/calendar',
-	'views/calendars/index'
-], function($, _, Backbone, Calendar, CalendarIndexView) {
+	'collections/agendas',
+	'views/calendars/index',
+	'views/schedules/index'
+], function($, _, Backbone, Calendar, Agendas, CalendarIndexView, ScheduleIndexView) {
 	"use strict";
 
 	return Backbone.Router.extend({
@@ -13,12 +15,26 @@ define([
 			'*actions'         : "defaultAction"
 		},
 		index: function() {
-			var calendarIndexView = new CalendarIndexView({model: Calendar});
+			$("body").empty();
+			
+			var calendarIndexView = new CalendarIndexView({model: Calendar.getInstance()});
 			calendarIndexView.render();
-			$("body").empty().append(calendarIndexView.$el);
+			$("body").append(calendarIndexView.$el);
+			
+			var agendas = new Agendas();
+			agendas.fetch().then(function() {
+				var calendar = Calendar.getInstance();
+				var agsWeek = agendas.filter(function(agenda) { return calendar.get('date').getDay() === agenda.get('day') });
+
+				agsWeek.forEach(function(agenda) {
+					var scheduleIndexView = new ScheduleIndexView({collection: agenda.getSchedules(calendar.get('date'))});
+					scheduleIndexView.render();
+					$("body").append(scheduleIndexView.$el);
+				});
+			});
 		},
-		defaultAction: function() {
-			console.log('default action');
+		defaultAction: function(actions) {
+			console.log('default action ' + actions);
 		}
 	});
 });
