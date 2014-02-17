@@ -10,13 +10,12 @@ define([
 	return Backbone.View.extend({
 		tagName:  "ul",
 		initialize: function( ) {
-			this.listenTo(this.collection, 'reset', this.render, this);
+			this.listenTo(this.collection, 'sync', this.render, this);
 		},
 		render: function() {
 			this.$el.empty();
 
 			var frag = document.createDocumentFragment();
-			frag.appendChild($("<a href='/#new'>Novo</a>")[0]);
 			this.collection.each(function(agenda) {
 				var agendaItemView = new AgendaItemView({model: agenda});
 				agendaItemView.render();
