@@ -2,3 +2,4 @@ node_modules
 npm-debug.log
 public/stylesheets/*.css
 public/scripts/main-min.js
+public/styles/style.css
