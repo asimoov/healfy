@@ -11,7 +11,6 @@ define([
 	"use strict";
 	
 	return Backbone.View.extend({
-		tagName:  "li",
 		template: Handlebars.compile(item),
 		events: {
 			'click .delete': 'delete'
@@ -21,7 +20,7 @@ define([
 
 			var schedulesView = new SchedulesView({collection: this.model.getSchedules()});
 			schedulesView.render();
-			this.$el.append(schedulesView.$el);
+			$('.schedules', this.$el).append(schedulesView.$el);
 		},
 		delete: function(ev) {
 			ev.preventDefault();
