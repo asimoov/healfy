@@ -6,6 +6,11 @@ define([
 
 	return Backbone.Collection.extend({
 		url: 'agendas',
-		model: Agenda
+		model: Agenda,
+		byWeek: function(week) {
+			return this.filter(function(agenda) {
+				return agenda.get('day') === week;
+			});
+		}
 	});
 });
