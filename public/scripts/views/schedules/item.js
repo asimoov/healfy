@@ -12,7 +12,15 @@ define([
 		tagName:  "li",
 		template: Handlebars.compile(item),
 		render: function() {
+			this.applyClass();
+			
 			this.$el.append(this.template(this.model.toJSON()));
+		},
+		applyClass: function() {
+			var status = this.model.get('status');
+			
+			$(this.el).toggleClass('schedule', status === 0);
+			$(this.el).toggleClass('confirmed', status === 1);
 		}
 	});
 });

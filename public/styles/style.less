@@ -38,5 +38,20 @@ th {
 	-moz-column-gap: 10px;
 	column-count: 3;
 	column-gap: 5px;
+	list-style: none;
 }
 
+.schedules li:before {
+    content: "• ";
+    color: black; /* or whatever color you prefer */
+}
+
+.schedules li.schedule:before {
+    content: "• ";
+    color: blue; /* or whatever color you prefer */
+}
+
+.schedules li.confirmed:before {
+    content: "• ";
+    color: green; /* or whatever color you prefer */
+}

@@ -9,7 +9,6 @@ define([
 	"use strict";
 	
 	return Backbone.View.extend({
-		tagName:  "ul",
 		initialize: function( ) {
 			this.listenTo(this.collection, 'sync', this.render, this);
 			this.calendar = Calendar.getInstance();
