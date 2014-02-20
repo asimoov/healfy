@@ -6,6 +6,7 @@ require.config({
 		handlebars: 'vendors/handlebars',
 		modernizr: 'vendors/modernizr',
 		toastr: 'vendors/toastr',
+		d3: 'vendors/d3',
 		templates: '../templates'
 	},
 	shim: {
@@ -21,6 +22,9 @@ require.config({
 	},
 	handlebars: {
 		exports: 'Handlebars'
+	},
+	d3: {
+		exports: 'd3'
 	}
   }
 });
@@ -32,19 +36,20 @@ require([
 ], function(Modernizr, Application) {
 	"use strict";
 
-	if (Modernizr.borderradius && 
-		Modernizr.boxshadow && 
-		Modernizr.applicationcache && 
-		Modernizr.indexeddb && 
-		Modernizr.history && 
-		Modernizr.svg && 
-		Modernizr.csscolumns &&
+	if (true//Modernizr.borderradius && 
+		//Modernizr.boxshadow && 
+		//Modernizr.applicationcache && 
+		//Modernizr.indexeddb && 
+		//Modernizr.history && 
+		//Modernizr.svg && 
+		//Modernizr.csscolumns &&
 		//Modernizr.inputtypes.number &&
 		//Modernizr.inputtypes.date &&
-		Modernizr.input.required && 
-		Modernizr.input.pattern &&
-		Modernizr.input.placeholder &&
-		(Modernizr.flexbox || Modernizr.flexboxlegacy)) {
+		//Modernizr.input.required && 
+		//Modernizr.input.pattern &&
+		//Modernizr.input.placeholder &&
+		//(Modernizr.flexbox || Modernizr.flexboxlegacy)
+		) {
 		Application.initialize();
 	} else {
 		console.log("borderradius: " + Modernizr.borderradius);

@@ -3,15 +3,14 @@ define([
   'underscore', 
   'backbone', 
   'handlebars',
+  'd3',
   'models/calendar',
-  'text!templates/calendar/item.html'
-], function($, _, Backbone, Handlebars, Calendar, item) {
+], function($, _, Backbone, Handlebars, d3, Calendar) {
 	"use strict";
 	
 	return Backbone.View.extend({
 		tagName:  "td",
 		className: 'day',
-		template: Handlebars.compile(item),
 		events: {
 			'click': 'selected'
 		},
@@ -22,8 +21,52 @@ define([
 		render: function() {
 			this.$el.empty();
 			this.applyClass();
-			this.$el.append(this.template({day: this.model.getDate()}));
-			//this.$el.append("<a href='#'>" + this.model.getDate()+ "</a>");
+			this.graph();
+		},
+		graph: function() {
+			var data = [
+				{start: 0, size: 1, color: "red"},
+				{start: 1, size: 2, color: "green"},
+				{start: 3, size: 3, color: "blue"},
+			];
+
+			var arc1 = d3.svg.arc()
+			.innerRadius(15)
+			.outerRadius(20)
+			.startAngle(function(d, i) { return d.start; })
+			.endAngle(function(d, i) { return d.start + d.size; });
+
+			var arc2 = d3.svg.arc()
+			.innerRadius(21)
+			.outerRadius(26)
+			.startAngle(function(d, i) { return d.start; })
+			.endAngle(function(d, i) { return d.start + d.size; });
+
+			var chart = d3.select(this.el).append("svg")
+			.attr("class", "chart")
+			.append("svg:g")
+			.attr("transform", "translate(26, 26)");
+
+			chart.append('text')
+			.attr("transform", "translate(-8, 5)")
+    		.text(this.model.getDate());
+
+			chart.selectAll("path.red-path")
+			.data(data)
+			.enter().append("svg:path")
+			.style("fill", function(d, i) {
+				return d.color;
+			})
+			.attr("d", arc1);
+
+			chart.selectAll("path.arc-path")
+			.data(data)
+			.enter().append("svg:path")
+			.style("fill", function(d, i) {
+				return d.color;
+			})
+			.attr("d", arc2);
+
 		},
 		applyClass: function() {
 			var isCurrent = this.isCurrent();
