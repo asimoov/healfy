@@ -21,20 +21,21 @@ define([
 		render: function() {
 			this.$el.empty();
 			this.applyClass();
+
 			this.graph();
 		},
 		graph: function() {
 			var data = [
 				{start: 0, size: 1, color: "red"},
 				{start: 1, size: 2, color: "green"},
-				{start: 3, size: 3, color: "blue"},
+				{start: 2, size: 3, color: "blue"},
 			];
 
 			var arc1 = d3.svg.arc()
 			.innerRadius(15)
 			.outerRadius(20)
 			.startAngle(function(d, i) { return d.start; })
-			.endAngle(function(d, i) { return d.start + d.size; });
+			.endAngle(function(d, i) { return d.size; });
 
 			var arc2 = d3.svg.arc()
 			.innerRadius(21)
@@ -49,7 +50,7 @@ define([
 
 			chart.append('text')
 			.attr("transform", "translate(-8, 5)")
-    		.text(this.model.getDate());
+			.text(this.model.getDate());
 
 			chart.selectAll("path.red-path")
 			.data(data)
@@ -66,7 +67,6 @@ define([
 				return d.color;
 			})
 			.attr("d", arc2);
-
 		},
 		applyClass: function() {
 			var isCurrent = this.isCurrent();
