@@ -37,31 +37,24 @@ app.configure(function() {
 	app.use(express.static(path.join(__dirname, 'public')));
 });
 
-var modules = [require('./apps/patients'), require('./apps/agendas')];
+var modules = [require('./apps/patients'), require('./apps/agendas'), , require('./apps/providers')];
+var db = app.get('db');
 modules.forEach(function(componet) {
-	var db = app.get('db');
-
 	var models = componet.models();
 	Object.keys(models).forEach(function(modelName) {
 		db.models[modelName] = db.import(models[modelName]);
-	});
-
-	Object.keys(models).forEach(function(modelName) {
-		if ('associate' in db.models[modelName]) {
-			db.models[modelName].associate(db.models);
-		}
-	});
-
-	db.done(function(err) {
-		if (!!err) {
-			console.log('An error occurred while create the table:', err);
-		}
 	});
 
 	var routes = componet.routes();
 	Object.keys(routes).forEach(function(routesName) {
 		require(routes[routesName])(app, db);
 	});
+});
+
+Object.keys(db.models).forEach(function(modelName) {
+	if ('associate' in db.models[modelName]) {
+		db.models[modelName].associate(db.models);
+	}
 });
 
 http.createServer(app).listen(app.get('port'), function() {

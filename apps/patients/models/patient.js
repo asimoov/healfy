@@ -90,6 +90,12 @@ module.exports = function(sequelize, DataTypes) {
 				notEmpty: true
 			}
 		}
+	}, {
+		classMethods: {
+			associate: function(models) {
+				Patient.hasOne(models.Provider);
+			}
+		}
 	});
 
 	return Patient;
