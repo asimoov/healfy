@@ -1,3 +1,7 @@
+/**
+ * Lista de todas as datas de acordo com o tipo de visualização (semanal ou mensal).
+ * 
+ */
 define([ 
   'jquery', 
   'underscore', 

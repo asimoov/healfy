@@ -1,3 +1,7 @@
+/**
+ * Todos os horários do profissional
+ * 
+ */
 define([ 
   'jquery',
   'underscore',
