@@ -1,3 +1,7 @@
+/**
+ * Marcação da consulta
+ *  
+ */
 define([ 
   'jquery', 
   'underscore', 
