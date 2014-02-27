@@ -1,9 +1,8 @@
 define([ 
   'handlebars',
-  'toastr',
   'models/agenda',
   'models/patient'
-], function(Handlebars, toastr, Agenda, Patient) {
+], function(Handlebars, Agenda, Patient) {
 	"use strict";
 
 	var initialize = function() {
@@ -57,21 +56,6 @@ define([
 		Handlebars.registerHelper('status_select_to', function(selected, html) {
 			return Handlebars.helpers.select_to(Patient.status, selected, html);
 		});
-
-		toastr.options = {
-			"closeButton": false,
-			"debug": false,
-			"positionClass": "toast-top-right",
-			"onclick": null,
-			"showDuration": "300",
-			"hideDuration": "1000",
-			"timeOut": "5000",
-			"extendedTimeOut": "1000",
-			"showEasing": "swing",
-			"hideEasing": "linear",
-			"showMethod": "fadeIn",
-			"hideMethod": "fadeOut"
-		};
 	};
 
 	return {

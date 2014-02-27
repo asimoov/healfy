@@ -34,7 +34,7 @@ module.exports = {
 		done()
 	},
 	down: function(migration, DataTypes, done) {
-		migration.dropTable('schedules');		
+		migration.dropTable('providers');		
 
 		// add reverting commands here, calling 'done' when finished
 		done()

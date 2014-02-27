@@ -22,26 +22,25 @@ define([
 			this.$el.empty();
 			this.$el.append(this.template({calendar: this.model.toJSON()}));
 
-			var week = this.model.week();
+			var that = this;
+			var agendas = new Agendas();
+			agendas.fetch();
+
+			var week = that.model.week();
 			var frag = document.createDocumentFragment();
 			week.forEach(function(date) {
-				var calendarItemView = new CalendarItemView({model: date});
+				//var agWeek = new Agendas(agendas.byWeek(date.getDay()));
+				var calendarItemView = new CalendarItemView({model: date, collection: agendas});
 				calendarItemView.render();
 				
 				frag.appendChild(calendarItemView.el);
-			}, this);
-			$('#content-calendar', this.$el).html(frag);
+			}, that);
+			$('#content-calendar', that.$el).html(frag);
 
-			if(this.options.agendas) {
-				var agendas = new Agendas();
-				var that = this;
-				agendas.fetch().then(function() {
-					var agWeek = new Agendas(agendas.byWeek(that.calendar.get('date').getDay()));
-					var agendasIndexView = new AgendasIndexView({collection: agWeek});
-					agendasIndexView.render();
-					that.$el.append(agendasIndexView.$el);
-				});
-			}
+			//var agWeek = new Agendas(agendas.byWeek(that.calendar.get('date').getDay()));
+			var agendasIndexView = new AgendasIndexView({collection: agendas});
+			agendasIndexView.render();
+			that.$el.append(agendasIndexView.$el);
 		}
 	});
 });

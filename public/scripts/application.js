@@ -1,16 +1,20 @@
 define([
-'jquery', 
+  'jquery', 
   'underscore', 
   'backbone',
+  'helpers/hackIE',
   'helpers/handlebars',
+  'helpers/toastr',
   'routes/agendas',
   'routes/home',
   'routes/patients',
-], function($, _, Backbone, Helpers, AgendasRoute, HomeRoute, PatientsRoute) {
+], function($, _, Backbone, HackIEHelper, HandlebarsHelper, ToastrHelper, AgendasRoute, HomeRoute, PatientsRoute) {
   "use strict";
 
   var initialize = function() {
-    Helpers.initialize();
+    HackIEHelper.initialize();
+    HandlebarsHelper.initialize();
+    ToastrHelper.initialize();
 
     new HomeRoute();
     new AgendasRoute();
