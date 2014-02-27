@@ -29,7 +29,6 @@ define([
 			var week = that.model.week();
 			var frag = document.createDocumentFragment();
 			week.forEach(function(date) {
-				//var agWeek = new Agendas(agendas.byWeek(date.getDay()));
 				var calendarItemView = new CalendarItemView({model: date, collection: agendas});
 				calendarItemView.render();
 				
@@ -37,8 +36,7 @@ define([
 			}, that);
 			$('#content-calendar', that.$el).html(frag);
 
-			//var agWeek = new Agendas(agendas.byWeek(that.calendar.get('date').getDay()));
-			var agendasIndexView = new AgendasIndexView({collection: agendas});
+			var agendasIndexView = new AgendasIndexView({model: that.calendar.get('date'), collection: agendas});
 			agendasIndexView.render();
 			that.$el.append(agendasIndexView.$el);
 		}
