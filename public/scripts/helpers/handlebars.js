@@ -59,7 +59,7 @@ define([
 
 		// not equal
 		Handlebars.registerHelper('ne', function( a, b, options) {
-			return (a !== b) ? arguments[arguments.length-1].fn( this ) : options.inverse(this);;
+			return (a !== b) ? arguments[arguments.length-1].fn( this ) : options.inverse(this);
 
 		});
 	};
