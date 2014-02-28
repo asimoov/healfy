@@ -24,8 +24,9 @@ define([
 			this.$el.empty();
 			this.applyClass();
 			
-			this.data = [];
 			var that = this;
+			this.pms = [];
+			this.ams = [];
 			var agWeek = new Agendas(this.collection.byWeek(this.model.getDay()));
 			agWeek.each(function(agenda) {
 				var schedules = agenda.schedulesByDate(that.model);
@@ -33,28 +34,25 @@ define([
 					var tmp = {};
 
 					var date = new Date(schedule.get('predict'));
-					var dateUTC = new Date(date.getTime() + (date.getTimezoneOffset() * 60000));
 
 					var interval = new Date(agenda.get('interval'));
 					var intervalUTC = new Date(interval.getTime() + (interval.getTimezoneOffset() * 60000));
 
-					tmp.start = dateUTC.getHours() * 60 + dateUTC.getMinutes();
-					tmp.size = dateUTC.getHours() * 60 + dateUTC.getMinutes() + intervalUTC.getHours() * 60 + intervalUTC.getMinutes();
+					tmp.start = date.getHours() * 60 + date.getMinutes();
+					tmp.size = date.getHours() * 60 + date.getMinutes() + intervalUTC.getHours() * 60 + intervalUTC.getMinutes();
 					tmp.color = schedule.isNew() ? "green" : "red";
-					that.data.push(tmp);
+					
+					if(tmp.start >= 12 * 60) {
+						that.pms.push(tmp);
+					} else {
+						that.ams.push(tmp);
+					}
 				});
 			});
 
-			console.log(this.data);
 			this.graph();
 		},
 		graph: function() {
-			var data = [
-				{start: 0, size: 1, color: "red"},
-				{start: 1, size: 2, color: "green"},
-				{start: 2, size: 3, color: "blue"},
-			];
-
 			var myScale = d3.scale.linear().domain([0, 720]).range([0, 2 * Math.PI]);
 			var arc1 = d3.svg.arc()
 			.innerRadius(15)
@@ -65,8 +63,8 @@ define([
 			var arc2 = d3.svg.arc()
 			.innerRadius(27)
 			.outerRadius(37)
-			.startAngle(function(d, i) { return d.start; })
-			.endAngle(function(d, i) { return d.start + d.size; });
+			.startAngle(function(d, i) { return myScale(d.start); })
+			.endAngle(function(d, i) { return myScale(d.size); });
 
 			var chart = d3.select(this.el).append("svg")
 			.attr("class", "chart")
@@ -78,21 +76,21 @@ define([
 			.text(this.model.getDate());
 
 			chart.selectAll("path.red-path")
-			.data(this.data)
+			.data(this.ams)
 			.enter().append("svg:path")
 			.style("fill", function(d, i) {
 				return d.color;
 			})
 			.attr("d", arc1);
-/*
+
 			chart.selectAll("path.arc-path")
-			.data(data)
+			.data(this.pms)
 			.enter().append("svg:path")
 			.style("fill", function(d, i) {
 				return d.color;
 			})
 			.attr("d", arc2);
-*/
+
 		},
 		applyClass: function() {
 			var isCurrent = this.isCurrent();
