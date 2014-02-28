@@ -37,7 +37,7 @@ app.configure(function() {
 	app.use(express.static(path.join(__dirname, 'public')));
 });
 
-var modules = [require('./apps/patients'), require('./apps/agendas'), , require('./apps/providers')];
+var modules = [require('./apps/patients'), require('./apps/agendas'), require('./apps/providers'), require('./apps/schedules')];
 var db = app.get('db');
 modules.forEach(function(componet) {
 	var models = componet.models();

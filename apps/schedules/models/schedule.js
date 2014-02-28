@@ -26,9 +26,6 @@ module.exports = function(sequelize, DataTypes) {
 		status: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
-			validate: {
-				notEmpty: true
-			}
 		}
 	}, {
 		classMethods: {

@@ -56,6 +56,12 @@ define([
 		Handlebars.registerHelper('status_select_to', function(selected, html) {
 			return Handlebars.helpers.select_to(Patient.status, selected, html);
 		});
+
+		// not equal
+		Handlebars.registerHelper('ne', function( a, b, options) {
+			return (a !== b) ? arguments[arguments.length-1].fn( this ) : options.inverse(this);;
+
+		});
 	};
 
 	return {
