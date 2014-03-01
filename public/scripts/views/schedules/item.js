@@ -16,20 +16,20 @@ define([
           "click a.cancel" : "cancel",
         },
 		new: function() {
-			var date = this.model.get('predict');
-			var patient = 'Fulano Test';
-			
-			this.model.set({patient: 'Denis Guedes Rangel', status: 0});
-			console.log(this.model.save());
+			this.$el.append("<form action='#'> <input type='text' name='patient'> </form>");
 
-			//console.log(patient + ' ' + date);
+			var that = this;
+			$("form", this.$el).submit(function(ev) {
+				ev.preventDefault();
+				ev.stopPropagation();
+
+				that.model.set({patient: $('input[name="patient"]').val(), status: 0});
+				that.model.save();
+			})
 		},
-		cancel: function() {
-			console.log('aaaaaaa');
-			
+		cancel: function() {			
 			this.model.set({status: 4});
-			console.log(this.model.save());
-					
+			this.model.save();					
 		},		
 		render: function() {
 			this.applyClass();
