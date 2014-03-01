@@ -35,7 +35,7 @@ define([
 			week.forEach(function(date) {
 				var calendarItemView = new CalendarItemView({model: date, collection: agendas});
 				calendarItemView.render();
-				
+
 				frag.appendChild(calendarItemView.el);
 			}, that);
 			$('#content-calendar', that.$el).html(frag);

@@ -24,7 +24,7 @@ define([
 
 				/*jshint -W083*/
 				var exist = _.find(this.get('schedules'), function(schedule) {
-					return (new Date(schedule.predict)).getTime() == current.getTime();
+					return (new Date(schedule.predict)).getTime() == current.getTime() && schedule.status != 4;
 				});
 
 				var schedule = exist !== undefined ? exist : new Schedule({predict: current, agendaId: this.get('id')});

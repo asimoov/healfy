@@ -54,11 +54,24 @@ define([
 		},
 		graph: function() {
 			var myScale = d3.scale.linear().domain([0, 720]).range([0, 2 * Math.PI]);
+
+			var arcBack1 = d3.svg.arc()
+			.innerRadius(15)
+			.outerRadius(25)
+			.startAngle(0)
+			.endAngle(2 * Math.PI);
+
 			var arc1 = d3.svg.arc()
 			.innerRadius(15)
 			.outerRadius(25)
 			.startAngle(function(d, i) { return myScale(d.start); })
 			.endAngle(function(d, i) { return myScale(d.size); });
+
+			var arcBack2 = d3.svg.arc()
+			.innerRadius(27)
+			.outerRadius(37)
+			.startAngle(0)
+			.endAngle(2 * Math.PI);
 
 			var arc2 = d3.svg.arc()
 			.innerRadius(27)
@@ -71,11 +84,11 @@ define([
 			.append("svg:g")
 			.attr("transform", "translate(41, 41)");
 
-			chart.append('text')
-			.attr("transform", "translate(-8, 5)")
-			.text(this.model.getDate());
+			chart.append("path")
+			.style("fill", "#f3f4f5")
+			.attr("d", arcBack1);
 
-			chart.selectAll("path.red-path")
+			chart.selectAll("path.ams-path")
 			.data(this.ams)
 			.enter().append("svg:path")
 			.style("fill", function(d, i) {
@@ -83,7 +96,11 @@ define([
 			})
 			.attr("d", arc1);
 
-			chart.selectAll("path.arc-path")
+			chart.append("path")
+			.style("fill", "#f3f4f5")
+			.attr("d", arcBack2);
+			
+			chart.selectAll("path.pms-path")
 			.data(this.pms)
 			.enter().append("svg:path")
 			.style("fill", function(d, i) {
@@ -91,6 +108,10 @@ define([
 			})
 			.attr("d", arc2);
 
+			chart.append("svg:text")
+			.attr("transform", "translate(0, 5)")
+			.attr("text-anchor", "middle")
+			.text(this.model.getDate());
 		},
 		applyClass: function() {
 			var isCurrent = this.isCurrent();
