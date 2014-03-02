@@ -19,7 +19,7 @@ module.exports = function(app) {
 				res.status(400);
 				res.json({ error: err });
 			} if(schedule) {
-				schedule.updateAttributes(req.body).complete(function(err, agenda) {
+				schedule.updateAttributes(req.body).complete(function(err, schedule) {
 					res.json(schedule);
 				});
 			} else {
@@ -35,7 +35,7 @@ module.exports = function(app) {
 				res.json({ error: err });
 			} else {
 				res.status(201);
-				res.json({schedule: req.schedule, err: err});
+				res.json(schedule);
 			}
 		});
 	});	

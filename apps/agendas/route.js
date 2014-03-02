@@ -39,7 +39,7 @@ module.exports = function(app) {
 				res.json({ error: err });
 			} else {
 				res.status(201);
-				res.json({agenda: req.agenda, err: err});
+				res.json(agenda);
 			}
 		});
 	});

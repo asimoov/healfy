@@ -29,7 +29,10 @@ define([
 		},
 		cancel: function() {			
 			this.model.set({status: 4});
-			this.model.save();					
+			var that = this;
+			this.model.save().then(function() {
+				that.model.set({id: null});
+			});
 		},		
 		render: function() {
 			this.applyClass();
