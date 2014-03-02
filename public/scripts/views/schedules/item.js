@@ -25,7 +25,7 @@ define([
 
 				that.model.set({patient: $('input[name="patient"]').val(), status: 0});
 				that.model.save();
-			})
+			});
 		},
 		cancel: function() {			
 			this.model.set({status: 4});
