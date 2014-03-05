@@ -8,41 +8,41 @@ define([
   'backbone',
   'handlebars',
   'models/calendar',
-  'collections/agendas',
   'views/agendas/index',
   'views/calendars/item',
   'text!templates/calendar/index.html'
-], function($, _, Backbone, Handlebars, Calendar, Agendas, AgendasIndexView, CalendarItemView, index) {
+], function($, _, Backbone, Handlebars, Calendar, AgendasIndexView, CalendarItemView, index) {
 	"use strict";
 
 	return Backbone.View.extend({
 		template: Handlebars.compile(index),
-		initialize: function(options) {
-			this.options = options || {};
+		initialize: function() {
 			this.calendar = Calendar.getInstance();
-			this.listenTo(this.calendar, 'change', this.render);
+			this.listenTo(this.collection, 'sync', this.render, this);
 		},
 		render: function() {
 			this.$el.empty();
 			this.$el.append(this.template({calendar: this.model.toJSON()}));
 
-			var that = this;
-			var agendas = new Agendas();
-			agendas.fetch();
-
-			var week = that.model.week();
+			this.renderCalendar();
+			this.renderAgenda();
+		},
+		renderCalendar: function() {
+			var agendas = this.collection;
+			var week = this.model.week();
 			var frag = document.createDocumentFragment();
 			week.forEach(function(date) {
 				var calendarItemView = new CalendarItemView({model: date, collection: agendas});
 				calendarItemView.render();
 
 				frag.appendChild(calendarItemView.el);
-			}, that);
-			$('#content-calendar', that.$el).html(frag);
-
-			var agendasIndexView = new AgendasIndexView({model: that.calendar.get('date'), collection: agendas});
+			});
+			$('#content-calendar', this.$el).html(frag);
+		},
+		renderAgenda: function() {
+			var agendasIndexView = new AgendasIndexView({collection: this.collection});
 			agendasIndexView.render();
-			that.$el.append(agendasIndexView.$el);
+			this.$el.append(agendasIndexView.$el);
 		}
 	});
 });

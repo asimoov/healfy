@@ -2,9 +2,11 @@ define([
 	'jquery',
 	'underscore',
 	'backbone',
+	'pubsub', 
 	'models/calendar',
+	'collections/agendas',
 	'views/calendars/index'
-], function($, _, Backbone, Calendar, CalendarIndexView) {
+], function($, _, Backbone, Pubsub, Calendar, Agendas, CalendarIndexView) {
 	"use strict";
 
 	return Backbone.Router.extend({
@@ -15,7 +17,14 @@ define([
 		index: function() {
 			$("body").empty();
 			
-			var calendarIndexView = new CalendarIndexView({model: Calendar.getInstance(), agendas: true});
+			var agendas = new Agendas();
+			agendas.fetch();
+
+			Pubsub.on("sync:schedule", function() {
+				agendas.fetch();
+			});
+
+			var calendarIndexView = new CalendarIndexView({model: Calendar.getInstance(), collection: agendas});
 			calendarIndexView.render();
 			$("body").append(calendarIndexView.$el);
 		},

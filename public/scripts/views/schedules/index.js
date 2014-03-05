@@ -6,16 +6,14 @@ define([
   'jquery', 
   'underscore', 
   'backbone', 
+  'models/calendar',
   'models/schedule', 
   'views/schedules/item',
-], function($, _, Backbone, Schedule, ScheduleItemView) {
+], function($, _, Backbone, Calendar, Schedule, ScheduleItemView) {
 	"use strict";
-	
+
 	return Backbone.View.extend({
 		tagName:  "ul",
-		initialize: function( ) {
-			this.listenTo(this.collection, 'reset change', this.render, this);
-		},
 		render: function() {
 			this.$el.empty();
 

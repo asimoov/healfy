@@ -1,7 +1,8 @@
 define([
+  'jquery',
   'backbone',
   'models/agenda'
-], function(Backbone, Agenda) {
+], function($, Backbone, Agenda) {
 	"use strict";
 
 	return Backbone.Collection.extend({

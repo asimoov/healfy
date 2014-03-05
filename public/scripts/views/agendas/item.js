@@ -13,28 +13,16 @@ define([
 	
 	return Backbone.View.extend({
 		template: Handlebars.compile(item),
-		events: {
-			'click .delete': 'delete'
-		},
-		initialize: function( ) {
+		initialize: function() {
 			this.calendar = Calendar.getInstance();
 		},
 		render: function() {
 			this.$el.append(this.template(this.model.toJSON()));
 
-			var schedulesView = new SchedulesView({collection: this.model.schedulesByDate(this.calendar.get('date'))});
+			var schedules = this.model.schedulesByDate(this.calendar.get('date'));
+			var schedulesView = new SchedulesView({collection: schedules});
 			schedulesView.render();
 			$('.schedules', this.$el).append(schedulesView.$el);
-		},
-		delete: function(ev) {
-			ev.preventDefault();
-			ev.stopPropagation();
-
-			var that = this;
-			this.model.destroy().then(function() {
-				that.$el.remove();
-				toastr.success("Removida a Agenda com sucesso!");
-			});
 		}
 	});
 });
