@@ -11,7 +11,8 @@ define([
   'routes/agendas',
   'routes/home',
   'routes/patients',
-], function($, Mask, Bootstrap, _, Backbone, HackIEHelper, HandlebarsHelper, ToastrHelper, Datepicker, AgendasRoute, HomeRoute, PatientsRoute) {
+  'views/layout'
+], function($, Mask, Bootstrap, _, Backbone, HackIEHelper, HandlebarsHelper, ToastrHelper, Datepicker, AgendasRoute, HomeRoute, PatientsRoute, Layout) {
   "use strict";
 
   var initialize = function() {
@@ -20,6 +21,10 @@ define([
     ToastrHelper.initialize();
     Datepicker.initialize();
 
+    var layout = new Layout();
+    layout.render()
+    $('body').empty().append(layout.$el);
+    
     new HomeRoute();
     new AgendasRoute();
     new PatientsRoute();

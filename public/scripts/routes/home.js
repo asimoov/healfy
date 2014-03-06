@@ -15,8 +15,6 @@ define([
 			'*actions' : "defaultAction"
 		},
 		index: function() {
-			$("body").empty();
-			
 			var agendas = new Agendas();
 			agendas.fetch();
 
@@ -26,7 +24,7 @@ define([
 
 			var calendarIndexView = new CalendarIndexView({model: Calendar.getInstance(), collection: agendas});
 			calendarIndexView.render();
-			$("body").append(calendarIndexView.$el);
+			$("#content-geral").empty().append(calendarIndexView.$el);
 		},
 		defaultAction: function(actions) {
 			console.log('default action ' + actions);

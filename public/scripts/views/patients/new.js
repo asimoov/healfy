@@ -9,6 +9,7 @@ define([
 	"use strict";
 	
 	return Backbone.View.extend({
+		className: 'col-xs-12 col-md-10',
 		template: Handlebars.compile(n),
 		events: {
 			'submit .form': "submit",
@@ -36,8 +37,7 @@ define([
 			$( '.trash', this.$el ).tooltip();
 		},
 		remove: function(event) {
-			console.log( event.target );
-			console.log($(evenWt.target).parent().parent().parent().parent().remove());
+			console.log($(event.target).parent().parent().parent().parent().remove());
 		},
 		focus: function() {
 			var that = this;
@@ -62,12 +62,6 @@ define([
 				$('.containerTrash', this).on("click", function (event) {
 					$(event.target).parent().parent().parent().parent().remove();
 				});
-
-				/*
-				$(this).on("blur", function (event) {
-					$(this).find('.containerTrash').hide();
-				});
-				*/
 			});
 		},
 		// Link "Adicionar telefone" dinamico, só é exibido se o último campo estiver com valor.

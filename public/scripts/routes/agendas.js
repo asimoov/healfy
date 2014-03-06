@@ -23,12 +23,12 @@ define([
 
 			var indexView = new IndexView({collection: collection});
 			indexView.render();
-			$("body").empty().append(indexView.$el);
+			$("#content-geral").empty().append(indexView.$el);
 		},
 		new: function() {
 			var newView = new NewView({model: new Agenda()});
 			newView.render();
-			$("body").empty().append(newView.$el);
+			$("#content-geral").empty().append(newView.$el);
 		},
 		show: function(id) {
 			console.log('show');
@@ -39,7 +39,7 @@ define([
 
 			var editView = new EditView({model: model});
 			editView.render();
-			$("body").empty().append(editView.$el);
+			$("#content-geral").empty().append(editView.$el);
 		}
 	});
 });
