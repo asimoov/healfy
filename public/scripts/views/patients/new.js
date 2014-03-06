@@ -4,7 +4,7 @@ define([
   'backbone', 
   'handlebars',
   'models/patient',
-  'text!templates/patients/patient_new_view.html'
+  'text!templates/patients/new.html'
 ], function($, _, Backbone, Handlebars, Patient, n) {
 	"use strict";
 	
