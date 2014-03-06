@@ -22,7 +22,7 @@ define([
     Datepicker.initialize();
 
     var layout = new Layout();
-    layout.render()
+    layout.render();
     $('body').empty().append(layout.$el);
     
     new HomeRoute();
