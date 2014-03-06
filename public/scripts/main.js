@@ -7,26 +7,39 @@ require.config({
 		modernizr: 'vendors/modernizr',
 		toastr: 'vendors/toastr',
 		d3: 'vendors/d3',
+		jqueryUI: '../libs/jquery-ui/ui/jquery-ui',
+		jqueryMaskedInput: 'vendors/jquery.maskedinput',		
+		bootstrap: '../libs/bootstrap/dist/js/bootstrap',		
 		templates: '../templates'
 	},
 	shim: {
+		jqueryUI: {
+			exports: '$',
+			deps: ['jquery']
+		},
+		jqueryMaskedInput: {
+			deps: ['jquery']
+		},
+		bootstrap: {
+			deps: ['jquery']
+		},
 		modernizr: {
-		exports: 'Modernizr'
-	},
-	underscore: {
-		exports: '_'
-	},
-	backbone: {
-		deps: ["underscore", "jquery"],
-		exports: "Backbone"
-	},
-	handlebars: {
-		exports: 'Handlebars'
-	},
-	d3: {
-		exports: 'd3'
+			exports: 'Modernizr'
+		},
+		underscore: {
+			exports: '_'
+		},
+		backbone: {
+			deps: ["underscore", "jquery"],
+			exports: "Backbone"
+		},
+		handlebars: {
+			exports: 'Handlebars'
+		},
+		d3: {
+			exports: 'd3'
+		}
 	}
-  }
 });
 
 require([

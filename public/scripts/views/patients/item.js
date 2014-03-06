@@ -9,16 +9,13 @@ define([
 	"use strict";
 	
 	return Backbone.View.extend({
-		tagName:  "li",
+		className: 'col-md-6 containerPatient',
 		template: Handlebars.compile(item),
 		events: {
 			'click .delete': 'delete'
 		},
 		render: function() {
-			var that = this;
-			window.requestAnimationFrame(function() {
-				that.$el.append(that.template(that.model.toJSON()));
-			});
+			this.$el.append(this.template(this.model.toJSON()));
 		},
 		delete: function(ev) {
 			ev.preventDefault();

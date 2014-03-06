@@ -4,22 +4,83 @@ define([
   'backbone', 
   'handlebars',
   'models/patient',
-  'text!templates/patients/new.html'
+  'text!templates/patients/patient_new_view.html'
 ], function($, _, Backbone, Handlebars, Patient, n) {
 	"use strict";
 	
 	return Backbone.View.extend({
 		template: Handlebars.compile(n),
 		events: {
-			'submit.form': "submit"
+			'submit .form': "submit",
+			'click #add_covenants': "addConvernio",
+			'click #add_telephone': 'addTelphone',
+			'click .containerTel': 'trash'
 		},
 		render: function() {
+			this.$el.empty();
+			this.$el.append(this.template());
+		},
+		addConvernio: function() {
+            var html = '<div class="form-group"><label class="col-sm-2 control-label" for="covenants">Convênios:</label><div class="col-sm-10"><select class="form-control covenants" name="covenants"><option selected value=""></option><option value="1">Bradesco</option><option value="2">Sul América</option><option value="3">Promédica</option></select></div></div>';
+            $( "#container_add_covenants", this.$el ).before(html);
+            this.linkAddField("container_add_covenants", "covenants");
+		},
+		addTelphone: function() {
+			var html = '<div class="form-group containerTel"><label class="col-sm-2 control-label" for="telephone">Telefone:</label><div class="col-sm-9"><input type="text" class="form-control telephone" name="telephone" placeholder="Telefone" value=""><span class="containerTrash"><a href="javascript:;"><img src="images/icons/trash.png" class="trash" data-toggle="tooltip" data-placement="bottom" title="Excluir"></a></span></div></div>';
+
+			$( "#container_add_telephone", this.$el ).before(html);
+
+			this.linkAddField("container_add_telephone", "telephone");
+
+			$( ".telephone", this.$el ).mask("(99).9999-9999");
+			$( '.trash', this.$el ).tooltip();
+		},
+		remove: function(event) {
+			console.log( event.target );
+			console.log($(evenWt.target).parent().parent().parent().parent().remove());
+		},
+		focus: function() {
 			var that = this;
-			window.requestAnimationFrame(function() {
-				that.$el.empty();
-				that.$el.append(that.template());
+
+			// Focus input
+			$( "#name", this.$el ).focus();
+
+			// Mask
+			$( "#cpf", this.$el ).mask("999.999.999-99");
+			$( "#cep", this.$el ).mask("99.999-999");
+			$( ".telephone", this.$el ).mask("(99) 9999-9999");
+
+			// Datepicker
+			$( "#birthday", this.$el ).datepicker({
+				showOtherMonths: true,
+				selectOtherMonths: true
+			});
+
+			this.$el.on("focus", ".containerTel:not(:first)", function () {
+				$('.containerTrash', this).show();
+
+				$('.containerTrash', this).on("click", function (event) {
+					$(event.target).parent().parent().parent().parent().remove();
+				});
+
+				/*
+				$(this).on("blur", function (event) {
+					$(this).find('.containerTrash').hide();
+				});
+				*/
 			});
 		},
+		// Link "Adicionar telefone" dinamico, só é exibido se o último campo estiver com valor.
+		linkAddField: function (container, field) {
+			$( "#" + container).hide();
+			$( "." + field + ":last" ).change(function(){
+				if ($( "." + field + ":last" ).val() === "") {
+					$( "#" + container ).hide();
+				} else {
+					$( "#" + container ).show();
+				}
+			});      
+		},		
 		submit: function(ev) {
 			ev.preventDefault();
 			ev.stopPropagation();
@@ -33,8 +94,8 @@ define([
 			this.model.set({street: $('input[name="street"]', ev.target).val()});
 			this.model.set({number: $('input[name="number"]', ev.target).val()});
 			this.model.set({district: $('input[name="district"]', ev.target).val()});
-			this.model.set({city: $('input[name="city"]', ev.target).val()});
-			this.model.set({state: $('input[name="state"]', ev.target).val()});
+			this.model.set({city: $('select[name="city"]', ev.target).val()});
+			this.model.set({state: $('select[name="state"]', ev.target).val()});
 			this.model.set({cep : $('input[name="cep"]', ev.target).val()});
 			this.model.set({complement : $('input[name="complement"]', ev.target).val()});
 

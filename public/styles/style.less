@@ -78,3 +78,54 @@ th {
 	display: inline;
 }
 
+.limitText {
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%;
+    display: block;
+}
+
+.telephone:blur + .containerTrash {
+	display: none;
+}
+
+.telephone:focus + .containerTrash {
+	display: inline;
+}
+.containerTrash {
+    display: none;
+    opacity: 0.55;
+}
+
+.containerTrash:hover {
+    opacity: 1;
+}
+
+.form-control {
+    width: 230px;
+    display: inline-block;
+}
+
+.buttonCancel{
+    margin-left: 16px;
+}
+
+/** Grid Patient **/
+.containerPatient {
+    width: 380px;
+}
+
+.containerPatient .patientRemove {
+    display: none;
+}
+
+.containerPatient:hover {
+    opacity: 0.40;
+}
+
+.containerPatient:hover .patientRemove {
+    display: inline;
+    position: absolute;
+    margin-left: 201px;
+}

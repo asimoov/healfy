@@ -12,10 +12,10 @@ define([
 
 	return Backbone.Router.extend({
 		routes: {
-			'patient'                 : "index",
-			'patient/new'              : "new",
-			'patient/:patient_id'      : "show",
-			'patient/:patient_id/edit' : "edit"
+			'patients'                 : "index",
+			'patients/new'              : "new",
+			'patients/:patient_id'      : "show",
+			'patients/:patient_id/edit' : "edit"
 		},
 		index: function() {
 			var collection = new Patients();
@@ -29,6 +29,8 @@ define([
 			var newView = new NewView({model: new Patient()});
 			newView.render();
 			$("body").empty().append(newView.$el);
+			newView.focus();
+			//newView.linkAddField(container, field);
 		},
 		show: function(id) {
 			console.log('show');
