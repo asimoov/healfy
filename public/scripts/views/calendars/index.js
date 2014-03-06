@@ -15,6 +15,7 @@ define([
 	"use strict";
 
 	return Backbone.View.extend({
+		className: 'col-xs-12 col-md-10',
 		template: Handlebars.compile(index),
 		initialize: function() {
 			this.calendar = Calendar.getInstance();
