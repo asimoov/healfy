@@ -29,16 +29,14 @@ define([
 			this.renderAgenda();
 		},
 		renderCalendar: function() {
-			var agendas = this.collection;
 			var week = this.model.week();
-			var frag = document.createDocumentFragment();
-			week.forEach(function(date) {
-				var calendarItemView = new CalendarItemView({model: date, collection: agendas});
-				calendarItemView.render();
+			week.forEach(this.addItemCalendar, this);
+		},
+		addItemCalendar: function(date) {
+			var calendarItemView = new CalendarItemView({model: date, collection: this.collection});
+			calendarItemView.render();
 
-				frag.appendChild(calendarItemView.el);
-			});
-			$('#content-calendar', this.$el).html(frag);
+			$('#content-calendar', this.$el).append(calendarItemView.el);
 		},
 		renderAgenda: function() {
 			var agendasIndexView = new AgendasIndexView({collection: this.collection});

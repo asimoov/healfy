@@ -18,15 +18,13 @@ define([
 			this.$el.empty();
 			this.$el.append(this.template());
 
-			var frag = document.createDocumentFragment();
-			this.collection.each(function(patient) {
-				var patientItemView = new PatientItemView({model: patient});
-				patientItemView.render();
-				
-				frag.appendChild(patientItemView.el);
-			}, this);
+			this.collection.each(this.addItem, this);
+		},
+		addItem: function(patient) {
+			var patientItemView = new PatientItemView({model: patient});
+			patientItemView.render();
 			
-			$('.row', this.$el).append(frag);
+			$('.row', this.$el).append(patientItemView.el);
 		}
 	});
 });

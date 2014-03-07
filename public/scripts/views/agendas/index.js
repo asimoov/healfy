@@ -22,16 +22,14 @@ define([
 		render: function() {
 			this.$el.empty();
 
-			var frag = document.createDocumentFragment();
 			var agWeek = new Agendas(this.collection.byWeek(this.calendar.get('date').getDay()));
-			agWeek.each(function(agenda) {
-				var agendaItemView = new AgendaItemView({model: agenda, collection: this.collection});
-				agendaItemView.render();
+			agWeek.each(this.addItem, this);
+		},
+		addItem: function(agenda) {
+			var agendaItemView = new AgendaItemView({model: agenda, collection: this.collection});
+			agendaItemView.render();
 
-				frag.appendChild(agendaItemView.el);
-			}, this);
-			
-			this.$el.append(frag);
+			this.$el.append(agendaItemView.el);
 		}
 	});
 });

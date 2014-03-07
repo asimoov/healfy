@@ -17,14 +17,13 @@ define([
 		render: function() {
 			this.$el.empty();
 
-			var frag = document.createDocumentFragment();
-			this.collection.each(function(schedule) {
-				var scheduleItemView = new ScheduleItemView({model: schedule});
-				scheduleItemView.render();
-				
-				frag.appendChild(scheduleItemView.el);
-			}, this);
-			this.$el.append(frag);
+			this.collection.each(this.addItem, this);
+		},
+		addItem: function(schedule) {
+			var scheduleItemView = new ScheduleItemView({model: schedule});
+			scheduleItemView.render();
+			
+			this.$el.append(scheduleItemView.el);
 		}
 	});
 });
