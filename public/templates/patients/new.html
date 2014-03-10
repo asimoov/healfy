@@ -30,9 +30,9 @@
     </div>        
 
     <div class="form-group">
-        <label class="col-sm-2 control-label" for="name">Sexo:</label>
+        <label class="col-sm-2 control-label" for="sex">Sexo:</label>
         <div class="col-sm-10">
-            <select class="form-control" name="sex">
+            <select class="form-control" name="sex" id="sex">
                 <option selected value=""></option>
                 <option value="1">Masculino</option>
                 <option value="2">Femino</option>
@@ -43,7 +43,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label" for="occupation">Profissão:</label>
         <div class="col-sm-10">
-            <select class="form-control" name="occupation">
+            <select class="form-control" name="occupation" id="occupation">
                 {{{option_tag configOccupation}}}
             </select>
         </div>
@@ -52,7 +52,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label" for="covenants">Convênios:</label>
         <div class="col-sm-10">
-            <select class="form-control covenants" name="covenants">
+            <select class="form-control covenants" name="covenants" id="covenants">
                 <option selected value=""></option>
                 <option value="1">Bradesco</option>
                 <option value="2">Sul América</option>
@@ -69,7 +69,7 @@
     </div>                    
 
     <div class="form-group">
-        <label class="col-sm-2 control-label" for="street">CEP:</label>
+        <label class="col-sm-2 control-label" for="cep">CEP:</label>
         <div class="col-sm-10">
             <input type="text" class="form-control" name="cep" id="cep" placeholder="CEP" value="">
         </div>
@@ -106,7 +106,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label" for="state">UF:</label>
         <div class="col-sm-10">
-            <select class="form-control" name="state">
+            <select class="form-control" name="state" id="state">
                 <option selected value=""></option>
                 <option value="1">BA</option>
                 <option value="2">RJ</option>
@@ -118,7 +118,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label" for="city">Cidade:</label>
         <div class="col-sm-10">
-            <select class="form-control" name="city">
+            <select class="form-control" name="city" id="city">
                 <option selected value=""></option>
                 <option value="1">Salvador</option>
                 <option value="2">Rio de Janeiro</option>

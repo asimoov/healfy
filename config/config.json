@@ -20,10 +20,10 @@
     "force": true
   },
   "production": {
-    "username": "healfy",
-    "password": "healfy",
-    "database": "healfy_production",
-    "host": "localhost",
+    "username": "huuqstlzhvccjm",
+    "password": "ONlQQC-yWrQO0TrPM34lOWTznp",
+    "database": "d2s8sv8t3k2htr",
+    "host": "ec2-54-225-101-199.compute-1.amazonaws.com",
     "port": 5432,
     "dialect": "postgres",
     "logging": false,
