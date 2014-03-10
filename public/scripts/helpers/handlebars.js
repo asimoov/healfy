@@ -62,6 +62,31 @@ define([
 			return (a !== b) ? arguments[arguments.length-1].fn( this ) : options.inverse(this);
 
 		});
+
+		// Generator HTML tag option of the tag select
+		Handlebars.registerHelper('option_tag', function(configOccupation) {				
+			var dataOption 	= configOccupation.dataOption;
+		    var test 		= configOccupation.test || "";
+		    var valueFirst  = configOccupation.valueFirst || "";
+		    var ret 		= '';
+		    
+		    var option_first = '<option value="">' + valueFirst + '</option>';
+		    ret += option_first;
+
+		    for (var i = 0; i < dataOption.length; i++) {
+		        var option = '<option value="' + dataOption[i].id +'"';
+		        if (test !== "") {
+					if (test.toLowerCase() == dataOption[i].value.toLowerCase()) {
+			            option += ' selected="selected"';
+			        }		        	
+		        }
+		        
+		        option += '>'+ Handlebars.Utils.escapeExpression(dataOption[i].value) + '</option>';
+		        ret += option;
+		    }
+
+		    return new Handlebars.SafeString(ret);
+		});
 	};
 
 	return {

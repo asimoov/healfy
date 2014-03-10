@@ -19,7 +19,18 @@ define([
 		},
 		render: function() {
 			this.$el.empty();
-			this.$el.append(this.template());
+
+			var dataOptionOccupation = [
+				{ id: 1, value: "Analista de Sistemas"},
+				{ id: 2, value: "Advogado"},
+				{ id: 3, value: "Administrador"}
+			];
+
+			var configOccupation = {
+				dataOption: dataOptionOccupation
+			};
+
+			this.$el.append(this.template({configOccupation: configOccupation}));
 		},
 		addConvernio: function() {
             var html = '<div class="form-group"><label class="col-sm-2 control-label" for="covenants">Convênios:</label><div class="col-sm-10"><select class="form-control covenants" name="covenants"><option selected value=""></option><option value="1">Bradesco</option><option value="2">Sul América</option><option value="3">Promédica</option></select></div></div>';
