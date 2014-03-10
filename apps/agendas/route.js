@@ -11,9 +11,17 @@ module.exports = function(app) {
 		}
 	});
 
+	app.param('date', function(req, res, next, date) {
+		var regex = new RegExp(/^\d{4}-\d{2}-\d{2}$/);
+		if (regex.test(date)) {
+			next();
+		} else {
+			next('route');
+		}
+	});
+
 	app.get('/agendas', function(req, res) {
-		var Schedule = app.get('db').models.Schedule;
-		Agenda.findAll({include: [Schedule]}).success(function(agendas) {
+		Agenda.findAll().success(function(agendas) {
 			res.json(agendas);
 		});
 	});
@@ -73,6 +81,26 @@ module.exports = function(app) {
 					res.status(204);
 					res.json(agenda);
 				});
+			}
+		});
+	});
+
+	app.get('/agendas/:id/schedules/:date', function(req, res) {
+		var id = req.params.id;
+		var date = new Date(req.params.date);
+		date.setTime(date.getTime() + date.getTimezoneOffset() *60 *1000);
+		function pad(s) { return (s < 10) ? '0' + s : s; }
+
+		var Schedule = app.get('db').models.Schedule;
+		Schedule.findAll({ where: {agendaId: id, 'predict': {between: [[date.getFullYear(), pad(date.getMonth()+1), pad(date.getDate())].join('-'), [date.getFullYear(), pad(date.getMonth()+1), pad(date.getDate()+1)].join('-')]}}}).complete(function(err, schedules) {
+			if (!!err) {
+				res.status(400);
+				res.json({ error: err });
+			} if(schedules) {
+				res.status(200);
+				res.json(schedules);
+			} else {
+				res.status(404);
 			}
 		});
 	});

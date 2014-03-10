@@ -46,7 +46,7 @@ define([
 				});
 			}, this);
 
-			this.arcs.setText(this.model.getDay());
+			this.arcs.setText(this.model.getDate());
 			this.arcs.setAms(ams);
 			this.arcs.setPms(pms);
 		},

@@ -2,7 +2,6 @@ module.exports = function(app) {
 	"use strict";
 
 	var Schedule = app.get('db').models.Schedule;
-
 	app.param('id', function(req, res, next, id) {
 		var regex = new RegExp(/^\d+$/);
 		if (regex.test(id)) {
@@ -38,5 +37,5 @@ module.exports = function(app) {
 				res.json(schedule);
 			}
 		});
-	});	
+	});
 };

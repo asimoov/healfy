@@ -9,6 +9,19 @@ define([
 	return Backbone.Model.extend({
 		urlRoot: 'agendas',
 		schedulesByDate: function(d) {
+			var schedules = this.newsSchedules(d);
+
+			var date = new Date(d);
+			date.setTime(date.getTime() + date.getTimezoneOffset() *60 *1000);
+			function pad(s) { return (s < 10) ? '0' + s : s; }
+			$.getJSON("/agendas/" + this.get("id") + "/schedules/" + [date.getFullYear(), pad(date.getMonth()+1), pad(date.getDate())].join('-'), function(data) {
+				var news = schedules.toJSON();
+				schedules.reset(_.uniq(_.union(data, news), false, function(item, key, a) { return item.predict; }));
+			});
+
+			return schedules;
+		},
+		newsSchedules: function(d) {
 			var today = d || new Date();
 			today.setHours(0, 0, 0, 0);
 
@@ -22,12 +35,7 @@ define([
 				var position = i * interval.getTime();
 				var current = new Date(today.getTime() + start.getTime() + position);
 
-				/*jshint -W083*/
-				var exist = _.find(this.get('schedules'), function(schedule) {
-					return (new Date(schedule.predict)).getTime() == current.getTime() && schedule.status != 4;
-				});
-
-				var schedule = exist !== undefined ? exist : new Schedule({predict: current, agendaId: this.get('id')});
+				var schedule = new Schedule({predict: current, agendaId: this.get('id')});
 				schedules.add(schedule);
 			}
 

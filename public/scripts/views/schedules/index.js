@@ -14,6 +14,9 @@ define([
 
 	return Backbone.View.extend({
 		tagName:  "ul",
+		initialize: function( ) {
+			this.listenTo(this.collection, 'reset', this.render, this);
+		},
 		render: function() {
 			this.$el.empty();
 
