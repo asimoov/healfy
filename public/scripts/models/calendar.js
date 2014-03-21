@@ -1,9 +1,9 @@
 define([
 	'underscore', 
 	'backbone',
-	'collections/schedules',
-	'models/schedule'
-], function(_, Backbone) {
+	'models/day',
+	'collections/week'
+], function(_, Backbone, Day, Week) {
 	"use strict";
 
 	// Current Day
@@ -53,16 +53,16 @@ define([
 		},
 		week: function() {
 			var firstDay = this.get('date');
-			var week = getWeek(firstDay);
+			var numberWeek = getWeek(firstDay);
 
-			var firstWeek = new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() - week);
-			var weeks = [];
+			var firstWeek = new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() - numberWeek);
+			var week = new Week();
 			for (var day = 0; day < 7; day++) {
 				var newDate = new Date(firstWeek.getFullYear(), firstWeek.getMonth(), firstWeek.getDate() + day);
-				weeks.push(newDate);
+				week.add(new Day({target: newDate}));
 			}
 			
-			return weeks;
+			return week;
 		},
 		month: function() {
 			var firstDay = this.get('date');

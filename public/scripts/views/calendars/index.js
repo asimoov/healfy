@@ -26,11 +26,11 @@ define([
 			this.$el.append(this.template({calendar: this.model.toJSON()}));
 
 			this.renderCalendar();
-			this.renderAgenda();
+			//this.renderAgenda();
 		},
 		renderCalendar: function() {
 			var week = this.model.week();
-			week.forEach(this.addItemCalendar, this);
+			week.each(this.addItemCalendar, this);
 		},
 		addItemCalendar: function(date) {
 			var calendarItemView = new CalendarItemView({model: date, collection: this.collection});
@@ -38,10 +38,12 @@ define([
 
 			$('#content-calendar', this.$el).append(calendarItemView.el);
 		},
+		/*
 		renderAgenda: function() {
 			var agendasIndexView = new AgendasIndexView({collection: this.collection});
 			agendasIndexView.render();
 			this.$el.append(agendasIndexView.$el);
 		}
+		*/
 	});
 });

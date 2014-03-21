@@ -15,12 +15,7 @@ define([
 			'*actions' : "defaultAction"
 		},
 		index: function() {
-			var agendas = new Agendas();
-			agendas.fetch();
-
-			Pubsub.on("sync:schedule", function() {
-				agendas.fetch();
-			});
+			var agendas = Agendas.getInstance();
 
 			var calendarIndexView = new CalendarIndexView({model: Calendar.getInstance(), collection: agendas});
 			calendarIndexView.render();

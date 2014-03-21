@@ -1,11 +1,12 @@
 define([
   'jquery',
   'backbone',
+  'pubsub',
   'models/agenda'
-], function($, Backbone, Agenda) {
+], function($, Backbone, Pubsub, Agenda) {
 	"use strict";
 
-	return Backbone.Collection.extend({
+	var Agendas = Backbone.Collection.extend({
 		url: 'agendas',
 		model: Agenda,
 		byWeek: function(week) {
@@ -13,5 +14,21 @@ define([
 				return agenda.get('day') === week;
 			});
 		}
+	}, {
+		instance: null,
+		getInstance: function() {
+			if(Agendas.instance === null) {
+				Agendas.instance = new Agendas();
+				Agendas.instance.fetch();
+			}
+
+			Pubsub.on("sync", function() {
+				Agendas.instance.fetch();
+			});
+
+			return Agendas.instance;
+		}
 	});
+
+	return Agendas;
 });

@@ -26,9 +26,9 @@ define([
 
 			var pms = [];
 			var ams = [];
-			var agWeek = new Agendas(this.collection.byWeek(this.model.getDay()));
+			var agWeek = new Agendas(this.collection.byWeek(this.model.get('target').getDay()));
 			agWeek.each(function(agenda) {
-				var schedules = agenda.schedulesByDate(this.model);
+				var schedules = agenda.schedulesByDate(this.model.get('target'));
 				schedules.each(function(schedule) {
 					var tmp = {};
 
@@ -46,7 +46,7 @@ define([
 				});
 			}, this);
 
-			this.arcs.setText(this.model.getDate());
+			this.arcs.setText(this.model.get('target').getDate());
 			this.arcs.setAms(ams);
 			this.arcs.setPms(pms);
 		},
@@ -60,13 +60,13 @@ define([
 			$(this.el).toggleClass('old', isOld);
 		},
 		isCurrent: function() {
-			return this.calendar.get('date').getTime() === this.model.getTime();
+			return this.calendar.get('date').getTime() === this.model.get('target').getTime();
 		},
 		isToday: function() {
-			return this.calendar.get('today').getTime() === this.model.getTime();
+			return this.calendar.get('today').getTime() === this.model.get('target').getTime();
 		},
 		isOld: function() {
-			return this.calendar.get('today').getTime() > this.model.getTime();
+			return this.calendar.get('today').getTime() > this.model.get('target').getTime();
 		},
 		selected: function() {
 			this.calendar.set({date: this.model});
