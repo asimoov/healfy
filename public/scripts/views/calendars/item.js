@@ -69,7 +69,7 @@ define([
 			return this.calendar.get('today').getTime() > this.model.get('target').getTime();
 		},
 		selected: function() {
-			this.calendar.set({date: this.model});
+			this.calendar.set({date: this.model.get('target')});
 		}
 	});
 });
