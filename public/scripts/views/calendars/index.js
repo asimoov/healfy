@@ -8,10 +8,9 @@ define([
   'backbone',
   'handlebars',
   'models/calendar',
-  'views/agendas/index',
   'views/calendars/item',
   'text!templates/calendar/index.html'
-], function($, _, Backbone, Handlebars, Calendar, AgendasIndexView, CalendarItemView, index) {
+], function($, _, Backbone, Handlebars, Calendar, CalendarItemView, index) {
 	"use strict";
 
 	return Backbone.View.extend({
@@ -26,7 +25,6 @@ define([
 			this.$el.append(this.template({calendar: this.model.toJSON()}));
 
 			this.renderCalendar();
-			//this.renderAgenda();
 		},
 		renderCalendar: function() {
 			var week = this.model.week();
@@ -38,12 +36,5 @@ define([
 
 			$('#content-calendar', this.$el).append(calendarItemView.el);
 		},
-		/*
-		renderAgenda: function() {
-			var agendasIndexView = new AgendasIndexView({collection: this.collection});
-			agendasIndexView.render();
-			this.$el.append(agendasIndexView.$el);
-		}
-		*/
 	});
 });

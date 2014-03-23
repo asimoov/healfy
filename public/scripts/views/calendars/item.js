@@ -17,8 +17,6 @@ define([
 		},
 		initialize: function() {
 			this.calendar = Calendar.getInstance();
-			this.listenTo(this.calendar, 'change', this.render);
-			this.listenTo(this.collection, 'sync', this.render);
 			this.arcs = new Arcs(this.el);
 		},
 		render: function() {

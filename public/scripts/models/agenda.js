@@ -14,9 +14,9 @@ define([
 			var date = new Date(d);
 			date.setTime(date.getTime() + date.getTimezoneOffset() *60 *1000);
 			function pad(s) { return (s < 10) ? '0' + s : s; }
-			$.getJSON("/agendas/" + this.get("id") + "/schedules/" + [date.getFullYear(), pad(date.getMonth()+1), pad(date.getDate())].join('-'), function(data) {
-				var news = schedules.toJSON();
-				schedules.reset(_.uniq(_.union(data, news), false, function(item, key, a) { return item.predict; }));
+			var schedulesbyDay = new Schedules();
+			schedulesbyDay.fetch({data: {agenda_id: this.get("id"), date: [date.getFullYear(), pad(date.getMonth()+1), pad(date.getDate())].join('-')}}).then(function() {
+				schedules.reset(_.uniq(_.union(schedulesbyDay.toJSON(), schedules.toJSON()), false, function(item, key, a) { return new Date(item.predict).toString(); }));
 			});
 
 			return schedules;

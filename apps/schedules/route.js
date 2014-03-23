@@ -11,6 +11,25 @@ module.exports = function(app) {
 		}
 	});
 
+	app.get('/schedules', function(req, res) {
+		var id = req.query.agenda_id;
+		var date = new Date(req.query.date);
+		date.setTime(date.getTime() + date.getTimezoneOffset() *60 *1000);
+		function pad(s) { return (s < 10) ? '0' + s : s; }
+
+		Schedule.findAll({ where: {agendaId: id, 'predict': {between: [[date.getFullYear(), pad(date.getMonth()+1), pad(date.getDate())].join('-'), [date.getFullYear(), pad(date.getMonth()+1), pad(date.getDate()+1)].join('-')]}}}).complete(function(err, schedules) {
+			if (!!err) {
+				res.status(400);
+				res.json({ error: err });
+			} if(schedules) {
+				res.status(200);
+				res.json(schedules);
+			} else {
+				res.status(404);
+			}
+		});
+	});
+
 	app.put('/schedules/:id', function(req, res) {
 		var id = req.params.id;
 		Schedule.find(id).complete(function(err, schedule) {
