@@ -8,6 +8,9 @@ define([
 		getAgenda: function() {
 			var Agendas = require('collections/agendas');
 			return Agendas.getInstance().get(this.get('agendaId'));
+		},
+		isCancel: function() {
+			return this.get('status') === 4;
 		}
 	}, {
 		status: ["Agendado", "Confirmado", "Presente", "Pago", "Cancelado"]

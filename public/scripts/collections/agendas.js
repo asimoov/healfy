@@ -33,12 +33,12 @@ define([
 		getInstance: function() {
 			if(Agendas.instance === null) {
 				Agendas.instance = new Agendas();
-				Agendas.instance.fetch();
+				Agendas.instance.fetch({reset: true});
+				
+				Pubsub.on("sync", function() {
+					Agendas.instance.fetch({reset: true});
+				});
 			}
-
-			Pubsub.on("sync", function() {
-				Agendas.instance.fetch();
-			});
 
 			return Agendas.instance;
 		}

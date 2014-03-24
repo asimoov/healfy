@@ -19,10 +19,11 @@ define([
 		template: Handlebars.compile(index),
 		initialize: function() {
 			this.calendar = Calendar.getInstance();
-			this.listenTo(this.calendar, 'all', this.render, this);
-			this.listenTo(this.collection, 'sync', this.render, this);
+			this.listenTo(this.calendar, 'change', this.render, this);
+			this.listenTo(this.collection, 'reset', this.render, this);
 		},
 		render: function() {
+			console.log('Calendar Index');
 			this.$el.empty();
 			this.$el.append(this.template({calendar: this.calendar.toJSON()}));
 

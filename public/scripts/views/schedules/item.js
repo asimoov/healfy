@@ -41,7 +41,8 @@ define([
 
 				that.model.set({patient: $('input[name="patient"]').val(), status: 0});
 				that.model.save().then(function() {
-					Pubsub.trigger("sync", that.model);
+					Pubsub.trigger("sync");
+					console.log('oi');
 				});
 			});
 		},
@@ -50,7 +51,8 @@ define([
 			var that = this;
 			this.model.save().then(function() {
 				that.model.set({id: null});
-				Pubsub.trigger("sync", that.model);
+				Pubsub.trigger("sync");
+				console.log('oi');
 			});
 		},	
 	});

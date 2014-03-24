@@ -34,7 +34,7 @@ define([
 
 				tmp.start = date.getHours() * 60 + date.getMinutes();
 				tmp.size = tmp.start + intervalUTC.getHours() * 60 + intervalUTC.getMinutes();
-				tmp.color = schedule.isNew() ? "green" : "red";
+				tmp.color = schedule.isNew() || schedule.isCancel() ? "green" : "red";
 
 				/*jshint -W030 */
 				tmp.start >= 12 * 60? pms.push(tmp) : ams.push(tmp);

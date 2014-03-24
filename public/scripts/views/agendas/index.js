@@ -15,10 +15,11 @@ define([
 	return Backbone.View.extend({
 		initialize: function() {
 			this.calendar = Calendar.getInstance();
-			this.listenTo(this.collection, 'sync', this.render, this);
 			this.listenTo(this.calendar, 'change', this.render, this);
+			this.listenTo(this.collection, 'reset', this.render, this);
 		},
 		render: function() {
+			console.log('Agenda Index');
 			this.$el.empty();
 
 			var agWeek = this.collection.byWeek(this.calendar.get('date').getDay());
