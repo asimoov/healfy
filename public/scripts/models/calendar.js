@@ -87,7 +87,16 @@ define([
 			} while (month == nextMonth);
 
 			return months;
-		}
+		},
+		isCurrent: function(data) {
+			return this.get('date').getTime() === data.getTime();
+		},
+		isToday: function(data) {
+			return this.get('today').getTime() === data.getTime();
+		},
+		isOld: function(data) {
+			return this.get('today').getTime() > data.getTime();
+		},
 	}, {
 		week: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
 		weekFullText: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],

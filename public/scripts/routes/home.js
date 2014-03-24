@@ -19,7 +19,7 @@ define([
 			var agendas = Agendas.getInstance();
 			$("#content-geral").empty();
 
-			var calendarIndexView = new CalendarIndexView({model: Calendar.getInstance(), collection: agendas});
+			var calendarIndexView = new CalendarIndexView({collection: agendas});
 			calendarIndexView.render();
 			$("#content-geral").append(calendarIndexView.$el);
 

@@ -4,9 +4,8 @@ define([
   'backbone', 
   'handlebars',
   'models/calendar',
-  'collections/agendas',
   'views/graphs/arcs'
-], function($, _, Backbone, Handlebars, Calendar, Agendas, Arcs) {
+], function($, _, Backbone, Handlebars, Calendar, Arcs) {
 	"use strict";
 	
 	return Backbone.View.extend({
@@ -24,8 +23,7 @@ define([
 
 			var pms = [];
 			var ams = [];
-			var agWeek = new Agendas(this.collection.byWeek(this.model.get('target').getDay()));
-			agWeek.each(function(agenda) {
+			this.collection.each(function(agenda) {
 				var schedules = agenda.schedulesByDate(this.model.get('target'));
 				schedules.each(function(schedule) {
 					var tmp = {};
@@ -58,13 +56,13 @@ define([
 			$(this.el).toggleClass('old', isOld);
 		},
 		isCurrent: function() {
-			return this.calendar.get('date').getTime() === this.model.get('target').getTime();
+			return this.calendar.isCurrent(this.model.get('target'));
 		},
 		isToday: function() {
-			return this.calendar.get('today').getTime() === this.model.get('target').getTime();
+			return this.calendar.isToday(this.model.get('target'));
 		},
 		isOld: function() {
-			return this.calendar.get('today').getTime() > this.model.get('target').getTime();
+			return this.calendar.isOld(this.model.get('target'));
 		},
 		selected: function() {
 			this.calendar.set({date: this.model.get('target')});

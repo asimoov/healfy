@@ -8,9 +8,10 @@ define([
   'backbone',
   'handlebars',
   'models/calendar',
+  'collections/agendas',
   'views/calendars/item',
   'text!templates/calendar/index.html'
-], function($, _, Backbone, Handlebars, Calendar, CalendarItemView, index) {
+], function($, _, Backbone, Handlebars, Calendar, Agendas, CalendarItemView, index) {
 	"use strict";
 
 	return Backbone.View.extend({
@@ -18,20 +19,19 @@ define([
 		template: Handlebars.compile(index),
 		initialize: function() {
 			this.calendar = Calendar.getInstance();
+			this.listenTo(this.calendar, 'all', this.render, this);
 			this.listenTo(this.collection, 'sync', this.render, this);
 		},
 		render: function() {
 			this.$el.empty();
-			this.$el.append(this.template({calendar: this.model.toJSON()}));
+			this.$el.append(this.template({calendar: this.calendar.toJSON()}));
 
-			this.renderCalendar();
-		},
-		renderCalendar: function() {
-			var week = this.model.week();
+			var week = this.calendar.week();
 			week.each(this.addItemCalendar, this);
 		},
 		addItemCalendar: function(date) {
-			var calendarItemView = new CalendarItemView({model: date, collection: this.collection});
+			var agWeek = new Agendas(this.collection.byWeek(date.get('target').getDay()));
+			var calendarItemView = new CalendarItemView({model: date, collection: agWeek});
 			calendarItemView.render();
 
 			$('#content-calendar', this.$el).append(calendarItemView.el);
