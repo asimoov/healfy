@@ -8,9 +8,8 @@ define([
   'backbone',
   'models/agenda',
   'models/calendar',
-  'collections/agendas',
   'views/agendas/item'
-], function($, _, Backbone, Agenda, Calendar, Agendas, AgendaItemView) {
+], function($, _, Backbone, Agenda, Calendar, AgendaItemView) {
 	"use strict";
 
 	return Backbone.View.extend({
@@ -22,7 +21,7 @@ define([
 		render: function() {
 			this.$el.empty();
 
-			var agWeek = new Agendas(this.collection.byWeek(this.calendar.get('date').getDay()));
+			var agWeek = this.collection.byWeek(this.calendar.get('date').getDay());
 			agWeek.each(this.addItem, this);
 		},
 		addItem: function(agenda) {

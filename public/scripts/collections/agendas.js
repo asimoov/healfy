@@ -2,17 +2,31 @@ define([
   'jquery',
   'backbone',
   'pubsub',
-  'models/agenda'
-], function($, Backbone, Pubsub, Agenda) {
+  'models/agenda',
+  'collections/schedules'
+], function($, Backbone, Pubsub, Agenda, Schedules) {
 	"use strict";
 
 	var Agendas = Backbone.Collection.extend({
 		url: 'agendas',
 		model: Agenda,
 		byWeek: function(week) {
-			return this.filter(function(agenda) {
+			return new Agendas(this.filter(function(agenda) {
 				return agenda.get('day') === week;
+			}));
+		},
+		schedulesByDate: function(date) {
+			var schedules = new Schedules();
+			this.each(function(agenda) {
+				var s = agenda.schedulesByDate(date);
+				schedules.listenTo(s, 'reset', function() {
+					schedules.reset(s.toJSON());
+				});
+
+				schedules.reset(s.toJSON());
 			});
+			
+			return schedules;
 		}
 	}, {
 		instance: null,

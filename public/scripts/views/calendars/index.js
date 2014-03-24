@@ -30,8 +30,8 @@ define([
 			week.each(this.addItemCalendar, this);
 		},
 		addItemCalendar: function(date) {
-			var agWeek = new Agendas(this.collection.byWeek(date.get('target').getDay()));
-			var calendarItemView = new CalendarItemView({model: date, collection: agWeek});
+			var schedules = this.collection.byWeek(date.get('target').getDay()).schedulesByDate(date.get('target'));
+			var calendarItemView = new CalendarItemView({model: date, collection: schedules});
 			calendarItemView.render();
 
 			$('#content-calendar', this.$el).append(calendarItemView.el);

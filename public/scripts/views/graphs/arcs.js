@@ -34,57 +34,30 @@ define(['d3'], function(d3) {
 		chart.append("path")
 		.style("fill", "#f3f4f5")
 		.attr("d", pmBackgound);
-
-		var createAm = false;
-		var createPm = false;
-		var createText = false;
 		return {
 			setAms: function(data) {
-				if(!createAm && data.length !== 0) {
-					chart.selectAll("path.ams-path")
-					.data(data)
-					.enter().append("svg:path")
-					.style("fill", function(d, i) {
-						return d.color;
-					})
-					.attr("d", amArcs);
-					createAm = true;
-				} else {
-					chart.selectAll("path.ams-path")
-					.data(data)
-					.style("fill", function(d, i) {
-						return d.color;
-					})
-					.attr("d", amArcs);
-				}
+				chart.selectAll("path.ams-path")
+				.data(data)
+				.enter().append("svg:path")
+				.style("fill", function(d, i) {
+					return d.color;
+				})
+				.attr("d", amArcs);
 			},
 			setPms: function(data) {
-				if(!createPm && data.length !== 0) {
-					chart.selectAll("path.pms-path")
-					.data(data)
-					.enter().append("svg:path")
-					.style("fill", function(d, i) {
-						return d.color;
-					})
-					.attr("d", pmArcs);
-					createPm = true;
-				} else {
-					chart.selectAll("path.pms-path")
-					.data(data)
-					.style("fill", function(d, i) {
-						return d.color;
-					})
-					.attr("d", pmArcs);
-				}
+				chart.selectAll("path.pms-path")
+				.data(data)
+				.enter().append("svg:path")
+				.style("fill", function(d, i) {
+					return d.color;
+				})
+				.attr("d", pmArcs);
 			},
 			setText: function(text) {
-				if(!createText) {
-					chart.append("svg:text")
-					.attr("transform", "translate(0, 5)")
-					.attr("text-anchor", "middle")
-					.text(text);
-					createText = true;
-				}
+				chart.append("svg:text")
+				.attr("transform", "translate(0, 5)")
+				.attr("text-anchor", "middle")
+				.text(text);
 			}
 		};
 	};

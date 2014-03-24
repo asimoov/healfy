@@ -16,35 +16,34 @@ define([
 		},
 		initialize: function() {
 			this.calendar = Calendar.getInstance();
-			this.arcs = new Arcs(this.el);
+			this.listenTo(this.collection, 'reset', this.render, this);
 		},
 		render: function() {
+			this.$el.empty();
 			this.applyClass();
 
 			var pms = [];
 			var ams = [];
-			this.collection.each(function(agenda) {
-				var schedules = agenda.schedulesByDate(this.model.get('target'));
-				schedules.each(function(schedule) {
-					var tmp = {};
+			this.collection.each(function(schedule) {
+				var tmp = {};
 
-					var date = new Date(schedule.get('predict'));
+				var date = new Date(schedule.get('predict'));
 
-					var interval = new Date(agenda.get('interval'));
-					var intervalUTC = new Date(interval.getTime() + (interval.getTimezoneOffset() * 60000));
+				var interval = new Date(schedule.getAgenda().get('interval'));
+				var intervalUTC = new Date(interval.getTime() + (interval.getTimezoneOffset() * 60000));
 
-					tmp.start = date.getHours() * 60 + date.getMinutes();
-					tmp.size = tmp.start + intervalUTC.getHours() * 60 + intervalUTC.getMinutes();
-					tmp.color = schedule.isNew() ? "green" : "red";
+				tmp.start = date.getHours() * 60 + date.getMinutes();
+				tmp.size = tmp.start + intervalUTC.getHours() * 60 + intervalUTC.getMinutes();
+				tmp.color = schedule.isNew() ? "green" : "red";
 
-					/*jshint -W030 */
-					tmp.start >= 12 * 60? pms.push(tmp) : ams.push(tmp);
-				});
+				/*jshint -W030 */
+				tmp.start >= 12 * 60? pms.push(tmp) : ams.push(tmp);
 			}, this);
 
-			this.arcs.setText(this.model.get('target').getDate());
-			this.arcs.setAms(ams);
-			this.arcs.setPms(pms);
+			var arcs = new Arcs(this.el);
+			arcs.setText(this.model.get('target').getDate());
+			arcs.setAms(ams);
+			arcs.setPms(pms);
 		},
 		applyClass: function() {
 			var isCurrent = this.isCurrent();
