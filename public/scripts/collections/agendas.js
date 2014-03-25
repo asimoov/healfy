@@ -20,7 +20,7 @@ define([
 			this.each(function(agenda) {
 				var s = agenda.schedulesByDate(date);
 				schedules.listenTo(s, 'reset', function() {
-					schedules.reset(s.toJSON());
+					schedules.reset(_.uniq(_.union(s.toJSON(), schedules.toJSON()), false, function(item, key, a) { return new Date(item.predict).toString(); }));
 				});
 
 				schedules.reset(s.toJSON());

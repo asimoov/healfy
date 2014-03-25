@@ -31,7 +31,10 @@ define([
 			$(this.el).toggleClass('schedule', status === 0);
 			$(this.el).toggleClass('confirmed', status === 1);
 		},
-		new: function() {
+		new: function(ev) {
+			ev.preventDefault();
+			ev.stopPropagation();
+
 			this.$el.append("<form action='#'> <input type='text' name='patient'> </form>");
 
 			var that = this;
@@ -46,7 +49,10 @@ define([
 				});
 			});
 		},
-		cancel: function() {			
+		cancel: function(ev) {
+			ev.preventDefault();
+			ev.stopPropagation();
+
 			this.model.set({status: 4});
 			var that = this;
 			this.model.save().then(function() {
