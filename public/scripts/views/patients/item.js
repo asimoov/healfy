@@ -12,7 +12,7 @@ define([
 		className: 'col-md-6 containerPatient',
 		template: Handlebars.compile(item),
 		events: {
-			'click .delete': 'delete'
+			'click .patientRemove': 'delete'
 		},
 		render: function() {
 			this.$el.append(this.template(this.model.toJSON()));
