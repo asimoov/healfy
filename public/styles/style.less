@@ -31,24 +31,23 @@ th {
 	margin-right: auto;
 }
 
+
 .schedules {
 	margin-left: 140px;
 	margin-top: 10px;
 }
 
 .schedules ul {
-	-webkit-column-count: 2;
-	-webkit-column-gap: 10px;
-	-moz-column-count: 3;
-	-moz-column-gap: 10px;
-	column-count: 3;
-	column-gap: 5px;
-	list-style: none;
+    width:760px;
+    margin-bottom:20px;
+    overflow:hidden;
 }
 
-.schedules li{
-	padding: 4px 0px;
-	width: 210px;	
+.schedules li {
+    line-height:1.5em;
+    float:left;
+    display:inline;
+    width:33.333%;
 }
 
 .schedules li:hover {
@@ -128,4 +127,13 @@ th {
     display: inline;
     position: absolute;
     margin-left: 201px;
+}
+
+.col-md-1-5 {
+    width: 14.285714286%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
 }

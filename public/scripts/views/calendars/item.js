@@ -9,8 +9,7 @@ define([
 	"use strict";
 	
 	return Backbone.View.extend({
-		tagName:  "td",
-		className: 'day',
+		className: 'col-md-1-5',
 		events: {
 			'click': 'selected'
 		},

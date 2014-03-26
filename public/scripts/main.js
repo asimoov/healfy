@@ -46,6 +46,9 @@ require([
 	// Load our app module and pass it to our definition function
 	'modernizr',
 	'application',
+	'jqueryUI',
+	'jqueryMaskedInput',
+	'bootstrap'
 ], function(Modernizr, Application) {
 	"use strict";
 

@@ -1,7 +1,5 @@
 define([
-  'jqueryUI',
-  'jqueryMaskedInput',
-  'bootstrap',
+  'jquery',
   'underscore', 
   'backbone',
   'helpers/hackIE',
@@ -12,7 +10,7 @@ define([
   'routes/home',
   'routes/patients',
   'views/layout'
-], function($, Mask, Bootstrap, _, Backbone, HackIEHelper, HandlebarsHelper, ToastrHelper, Datepicker, AgendasRoute, HomeRoute, PatientsRoute, Layout) {
+], function($, _, Backbone, HackIEHelper, HandlebarsHelper, ToastrHelper, Datepicker, AgendasRoute, HomeRoute, PatientsRoute, Layout) {
   "use strict";
 
   var initialize = function() {

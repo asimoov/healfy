@@ -23,9 +23,11 @@ define(['d3'], function(d3) {
 		var pmArcs = arc(innerRadius + diff, outerRadius + diff, function(d, i) { return scale(d.start); }, function(d, i) { return scale(d.size); });
 
 		var chart = d3.select(el).append("svg")
+		.attr("preserveAspectRatio", "xMinYMin meet")
+		.attr("viewBox", "0 0 80 100")
 		.attr("class", "chart")
 		.append("svg:g")
-		.attr("transform", "translate(50, 50)");
+		.attr("transform", "translate(40, 40)");
 
 		chart.append("path")
 		.style("fill", "#f3f4f5")
