@@ -17,6 +17,10 @@ define([
 	return Backbone.View.extend({
 		className: 'col-xs-12 col-md-10',
 		template: Handlebars.compile(index),
+		events: {
+			"click #previous": "previous",
+			"click #next": "next"
+		},
 		initialize: function() {
 			this.calendar = Calendar.getInstance();
 			this.listenTo(this.calendar, 'change', this.render, this);
@@ -37,5 +41,13 @@ define([
 
 			$('#content-calendar', this.$el).append(calendarItemView.el);
 		},
+		previous: function() {
+			var date = this.calendar.get('date');
+			this.calendar.set({date: new Date(date.getFullYear(), date.getMonth(), date.getDate() - (7 + date.getDay()))});
+		},
+		next: function() {
+			var date = this.calendar.get('date');
+			this.calendar.set({date: new Date(date.getFullYear(), date.getMonth(), date.getDate() + (7 - date.getDay()))});
+		}
 	});
 });
