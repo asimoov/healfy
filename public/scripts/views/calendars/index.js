@@ -18,6 +18,7 @@ define([
 		className: 'col-xs-12 col-md-10',
 		template: Handlebars.compile(index),
 		events: {
+			"click #today": "today",
 			"click #previous": "previous",
 			"click #next": "next"
 		},
@@ -40,6 +41,9 @@ define([
 			calendarItemView.render();
 
 			$('#content-calendar', this.$el).append(calendarItemView.el);
+		},
+		today: function(){
+			this.calendar.set({date: this.calendar.get('today')});
 		},
 		previous: function() {
 			var date = this.calendar.get('date');

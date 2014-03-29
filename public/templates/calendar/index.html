@@ -1,5 +1,10 @@
 <div class="row col-md-12 text-center">
-	<a id="previous" href="#">&lt;&lt;</a> {{format_d calendar.date}} <a id="next" href="#">&gt;&gt;</a
+	<a id="previous" href="#">&lt;&lt;</a>
+	{{format_d calendar.date}}
+	<a id="next" href="#">&gt;&gt;</a>
+</div>
+<div class="row col-md-12 text-center">
+	<a id="today" href="#">{{format_d calendar.today}}</a>
 </div>
 <div class="row">
 	<div class="col-md-1-5 text-center">DOM</div>
