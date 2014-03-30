@@ -9,8 +9,9 @@ define([
   'routes/agendas',
   'routes/home',
   'routes/patients',
+  'routes/providers',
   'views/layout'
-], function($, _, Backbone, HackIEHelper, HandlebarsHelper, ToastrHelper, Datepicker, AgendasRoute, HomeRoute, PatientsRoute, Layout) {
+], function($, _, Backbone, HackIEHelper, HandlebarsHelper, ToastrHelper, Datepicker, AgendasRoute, HomeRoute, PatientsRoute, ProvidersRoute, Layout) {
   "use strict";
 
   var initialize = function() {
@@ -26,6 +27,7 @@ define([
     new HomeRoute();
     new AgendasRoute();
     new PatientsRoute();
+    new ProvidersRoute();
 
     Backbone.history.start();
   };
