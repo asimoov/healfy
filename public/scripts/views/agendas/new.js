@@ -12,6 +12,7 @@ define([
 	
 	return Backbone.View.extend({
 		template: Handlebars.compile(n),
+		className: 'col-xs-12 col-md-10',
 		events: {
 			'submit.form': "submit"
 		},

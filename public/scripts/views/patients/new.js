@@ -93,7 +93,7 @@ define([
 			this.model.set({name: $('input[name="name"]', ev.target).val()});
 			this.model.set({rg: $('input[name="rg"]', ev.target).val()});
 			this.model.set({cpf: $('input[name="cpf"]', ev.target).val()});
-			this.model.set({birthday: $('input[name="birthday"]', ev.target).val()});
+			this.model.set({birthday: new Date($('input[name="birthday"]', ev.target).val())});
 			this.model.set({sex: $('select[name="sex"] option:selected', ev.target).val()});
 			this.model.set({status: 0});
 			this.model.set({street: $('input[name="street"]', ev.target).val()});
