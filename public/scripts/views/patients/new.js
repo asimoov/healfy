@@ -3,16 +3,17 @@ define([
   'underscore', 
   'backbone', 
   'handlebars',
+  'toastr',
   'models/patient',
   'text!templates/patients/new.html'
-], function($, _, Backbone, Handlebars, Patient, n) {
+], function($, _, Backbone, Handlebars, toastr, Patient, n) {
 	"use strict";
 	
 	return Backbone.View.extend({
 		className: 'col-xs-12 col-md-10',
 		template: Handlebars.compile(n),
 		events: {
-			'submit .form': "submit",
+			'submit.form-horizontal': "submit",
 			'click #add_covenants': "addConvernio",
 			'click #add_telephone': 'addTelphone',
 			'click .containerTel': 'trash'
@@ -93,20 +94,32 @@ define([
 			this.model.set({name: $('input[name="name"]', ev.target).val()});
 			this.model.set({rg: $('input[name="rg"]', ev.target).val()});
 			this.model.set({cpf: $('input[name="cpf"]', ev.target).val()});
-			this.model.set({birthday: new Date($('input[name="birthday"]', ev.target).val())});
+			this.model.set({birthday: this.parseDate($('input[name="birthday"]', ev.target).val())});
 			this.model.set({sex: $('select[name="sex"] option:selected', ev.target).val()});
 			this.model.set({status: 0});
-			this.model.set({street: $('input[name="street"]', ev.target).val()});
+			this.model.set({street: $('textarea[name="street"]', ev.target).val()});
 			this.model.set({number: $('input[name="number"]', ev.target).val()});
 			this.model.set({district: $('input[name="district"]', ev.target).val()});
 			this.model.set({city: $('select[name="city"]', ev.target).val()});
 			this.model.set({state: $('select[name="state"]', ev.target).val()});
-			this.model.set({cep : $('input[name="cep"]', ev.target).val()});
-			this.model.set({complement : $('input[name="complement"]', ev.target).val()});
+			this.model.set({cep: $('input[name="cep"]', ev.target).val()});
+			this.model.set({complement: $('textarea[name="complement"]', ev.target).val()});
 
 			this.model.save().then(function() {
 				Backbone.history.navigate('', {trigger: true});
+				toastr.success("Criada paciente com sucesso!");
 			});
+		},
+		parseDate: function(str) {
+			var t = str.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+			if(t !== null) {
+				var d =+ t[1], m =+ t[2], y =+ t[3];
+				var date = new Date(y, m-1, d);
+				if(date.getFullYear() === y && date.getMonth() === m-1) {
+					return date;   
+				}
+			}
+			return null;
 		}
 	});
 });

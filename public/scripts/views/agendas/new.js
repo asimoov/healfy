@@ -14,7 +14,7 @@ define([
 		template: Handlebars.compile(n),
 		className: 'col-xs-12 col-md-10',
 		events: {
-			'submit.form': "submit"
+			'submit.form-horizontal': "submit"
 		},
 		render: function() {
 			this.$el.empty();

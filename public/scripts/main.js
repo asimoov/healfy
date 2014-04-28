@@ -3,6 +3,7 @@ require.config({
 		jquery: 'vendors/jquery',
 		underscore: 'vendors/underscore',
 		backbone: 'vendors/backbone',
+		'virtual-collection': 'vendors/backbone.virtual-collection',
 		handlebars: 'vendors/handlebars',
 		modernizr: 'vendors/modernizr',
 		toastr: 'vendors/toastr',

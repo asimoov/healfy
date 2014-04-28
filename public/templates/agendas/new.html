@@ -1,7 +1,6 @@
 <h1>Novo data the agenda</h1>
 
 <form class="form-horizontal" role="form" action="/patients/<%= model.id %>" method="post">
-	<input type="hidden" name="_method" value="put" />
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Dia da semana:</label>
 		<div class="col-sm-10">
@@ -12,7 +11,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">Intervalo:</label>
 		<div class="col-sm-10">
-			<input class="form-control" type="time" name="interval" value="{{format_t interval}}" required />
+			<input class="form-control" type="text" name="interval" value="{{format_t interval}}" pattern="^[0-9]{2}:[0-9]{2}$" placeholder="00:00" required />
 		</div>
 	</div>
 

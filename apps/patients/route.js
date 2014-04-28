@@ -38,7 +38,7 @@ module.exports = function(app) {
 				res.json({ error: err });
 			} else {
 				res.status(201);
-				res.json(req.patient);
+				res.json(patient);
 			}
 		});
 	});
