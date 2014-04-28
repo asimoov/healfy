@@ -8,6 +8,27 @@ define([
 
 	return Backbone.Model.extend({
 		urlRoot: 'agendas',
+		validate: function(attrs) {
+			if(attrs.start !== null) {
+				this.trigger('invalid:start', 'Form field a is messed up!', this);
+			}
+
+			if(attrs.stop !== null) {
+				this.trigger('invalid:stop', 'Form field a is messed up!', this);
+			}
+
+			if(attrs.interval !== null) {
+				this.trigger('invalid:interval', 'Form field a is messed up!', this);
+			}
+
+			if(attrs.extrar !== null) {
+				this.trigger('invalid:extrar', 'Form field a is messed up!', this);
+			}
+
+			if(attrs.provider !== null) {
+				this.trigger('invalid:provider', 'Form field a is messed up!', this);
+			}
+		},
 		schedulesByDate: function(d) {
 			var schedules = this.newsSchedules(d);
 
