@@ -14,10 +14,17 @@ module.exports = function(app) {
 	app.get('/schedules', function(req, res) {
 		var id = req.query.agenda_id;
 		var date = new Date(req.query.date);
-		date.setTime(date.getTime() + date.getTimezoneOffset() *60 *1000);
+		var nextDate = new Date(req.query.date);
+
+		var timeZone = date.getTimezoneOffset() * 60 * 1000;
+		var nextDay = 60 * 60 * 1000 * 24;
+		
+		date.setTime(date.getTime() + timeZone);
+		nextDate.setTime(date.getTime() + timeZone + nextDay);
+
 		function pad(s) { return (s < 10) ? '0' + s : s; }
 
-		Schedule.findAll({ where: {agendaId: id, 'predict': {between: [[date.getFullYear(), pad(date.getMonth()+1), pad(date.getDate())].join('-'), [date.getFullYear(), pad(date.getMonth()+1), pad(date.getDate()+1)].join('-')]}}}).complete(function(err, schedules) {
+		Schedule.findAll({ where: {agendaId: id, 'predict': {between: [[date.getFullYear(), pad(date.getMonth()+1), pad(date.getDate())].join('-'), [nextDate.getFullYear(), pad(nextDate.getMonth()+1), pad(nextDate.getDate())].join('-')]}}}).complete(function(err, schedules) {
 			if (!!err) {
 				res.status(400);
 				res.json({ error: err });

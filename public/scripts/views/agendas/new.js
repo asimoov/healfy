@@ -5,14 +5,16 @@ define([
   'handlebars',
   'toastr',
   'models/agenda',
+  'collections/agendas',
   'text!templates/agendas/new.html'
-], function($, _, Backbone, Handlebars, toastr, Agenda, n) {
+], function($, _, Backbone, Handlebars, toastr, Agenda, Agendas, n) {
 	"use strict";
 	
 	return Backbone.View.extend({
 		template: Handlebars.compile(n),
+		className: 'col-xs-12 col-md-10',
 		events: {
-			"submit.form" : "submit",
+			"submit.form-horizontal": "submit"
 			"focus input" : "onFocus"
 		},
 		initialize: function() {
@@ -26,15 +28,18 @@ define([
 			ev.preventDefault();
 			ev.stopPropagation();
 
-			this.model.set({extra: $('input[name="extra"]', ev.target).val()});
-			this.model.set({status: $('select[name="status"] option:selected', ev.target).val()});
-			this.model.set({interval: new Date("1970-01-01T" + $('input[name="interval"]', ev.target).val())});
-			this.model.set({day: $('select[name="day"] option:selected', ev.target).val()});
-			this.model.set({start: new Date("1970-01-01T" + $('input[name="start"]', ev.target).val())});
-			this.model.set({stop: new Date("1970-01-01T" + $('input[name="stop"]', ev.target).val())});
-			this.model.set({doctor: $('input[name="doctor"]', ev.target).val()});
+			var model = this.model;
 
-			this.model.save().then(function() {
+			model.set({extra: $('input[name="extra"]', ev.target).val()});
+			model.set({status: $('select[name="status"] option:selected', ev.target).val()});
+			model.set({interval: new Date("1970-01-01T" + $('input[name="interval"]', ev.target).val())});
+			model.set({day: $('select[name="day"] option:selected', ev.target).val()});
+			model.set({start: new Date("1970-01-01T" + $('input[name="start"]', ev.target).val())});
+			model.set({stop: new Date("1970-01-01T" + $('input[name="stop"]', ev.target).val())});
+			model.set({doctor: $('input[name="doctor"]', ev.target).val()});
+
+			model.save().then(function() {
+				Agendas.getInstance().add(model);
 				Backbone.history.navigate('', {trigger: true});
 				toastr.success("Criada na Agenda realizada com sucesso!");
 			});

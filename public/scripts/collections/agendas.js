@@ -2,18 +2,24 @@ define([
   'jquery',
   'backbone',
   'pubsub',
+  'virtual-collection',
   'models/agenda',
   'collections/schedules'
-], function($, Backbone, Pubsub, Agenda, Schedules) {
+], function($, Backbone, Pubsub, VirtualCollection, Agenda, Schedules) {
 	"use strict";
 
 	var Agendas = Backbone.Collection.extend({
 		url: 'agendas',
 		model: Agenda,
 		byWeek: function(week) {
-			return new Agendas(this.filter(function(agenda) {
-				return agenda.get('day') === week;
-			}));
+			var vc = new VirtualCollection(this, {
+				filter: function (agenda) {
+					return agenda.get('day') === week;
+				}
+			});
+			vc.schedulesByDate = this.schedulesByDate;
+
+			return vc;
 		},
 		schedulesByDate: function(date) {
 			var schedules = new Schedules();

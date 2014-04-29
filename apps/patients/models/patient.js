@@ -21,7 +21,8 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		status: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: false,
+			defaultValue: 1
 		},
 		cpf: {
 			type: DataTypes.STRING,

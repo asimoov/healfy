@@ -8,6 +8,7 @@ var path = require('path');
 
 var app = module.exports = express();
 require('./lib/database')(app);
+require('./lib/socket')(app);
 
 // development only
 app.configure('development', function() {

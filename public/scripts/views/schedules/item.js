@@ -5,19 +5,23 @@ define([
   'handlebars',
   'pubsub',
   'models/schedule',
+  'collections/patients',
+  'views/schedules/new',
   'text!templates/schedules/item.html'
-], function($, _, Backbone, Handlebars, Pubsub, Schedule, item) {
+], function($, _, Backbone, Handlebars, Pubsub, Schedule, Patients, NewView, item) {
 	"use strict";
 
 	return Backbone.View.extend({
 		tagName:  "li",
 		template: Handlebars.compile(item),
-		events: {          
+		events: {
 			"click a.new" : "new",
 			"click a.cancel" : "cancel",
 		},
 		initialize: function( ) {
 			this.listenTo(this.model, 'change', this.render, this);
+			this.collection = new Patients();
+			this.collection.fetch();
 		},
 		render: function() {
 			this.$el.empty();
@@ -35,6 +39,12 @@ define([
 			ev.preventDefault();
 			ev.stopPropagation();
 
+			$('div', this.$el).empty().remove();
+			var newView = new NewView({model: this.model, collection: this.collection});
+			newView.render();
+			this.$el.append(newView.$el);
+
+			/*
 			this.$el.append("<form action='#'> <input type='text' name='patient'> </form>");
 
 			var that = this;
@@ -45,9 +55,9 @@ define([
 				that.model.set({patient: $('input[name="patient"]').val(), status: 0});
 				that.model.save().then(function() {
 					Pubsub.trigger("sync");
-					console.log('oi');
 				});
 			});
+			*/
 		},
 		cancel: function(ev) {
 			ev.preventDefault();
@@ -58,7 +68,6 @@ define([
 			this.model.save().then(function() {
 				that.model.set({id: null});
 				Pubsub.trigger("sync");
-				console.log('oi');
 			});
 		},	
 	});

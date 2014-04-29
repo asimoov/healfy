@@ -1,0 +1,20 @@
+<form class="form-horizontal" role="form" action="/#" method="post">
+	<datalist id="patients-list">
+	{{#each patients}}
+		<option value="{{name}}" label="{{id}}"></option>
+	{{/each}}
+	</datalist>
+
+	<div class="form-group">
+		<div class="col-sm-10">
+			<input type="text" class="form-control" name="patient" list="patients-list" autofocus>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" name="submit" id="submit" class="btn btn-primary">Salvar</button>
+			<button type="button" name="cancel" id="cancel" class="btn btn-default buttonCancel">Cancelar</button>
+		</div>
+	</div>
+</form>
