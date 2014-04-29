@@ -90,19 +90,21 @@ define([
 			ev.preventDefault();
 			ev.stopPropagation();
 
-			this.model.set({name: $('input[name="name"]', ev.target).val()});
-			this.model.set({rg: $('input[name="rg"]', ev.target).val()});
-			this.model.set({cpf: $('input[name="cpf"]', ev.target).val()});
-			this.model.set({birthday: $('input[name="birthday"]', ev.target).val()});
-			this.model.set({sex: $('select[name="sex"] option:selected', ev.target).val()});
-			this.model.set({status: 0});
-			this.model.set({street: $('input[name="street"]', ev.target).val()});
-			this.model.set({number: $('input[name="number"]', ev.target).val()});
-			this.model.set({district: $('input[name="district"]', ev.target).val()});
-			this.model.set({city: $('select[name="city"]', ev.target).val()});
-			this.model.set({state: $('select[name="state"]', ev.target).val()});
-			this.model.set({cep : $('input[name="cep"]', ev.target).val()});
-			this.model.set({complement : $('input[name="complement"]', ev.target).val()});
+			this.model.set({
+				name:       $('input[name="name"]', ev.target).val(),
+				rg:         $('input[name="rg"]', ev.target).val(),
+				cpf:        $('input[name="cpf"]', ev.target).val(),
+				birthday:   $('input[name="birthday"]', ev.target).val(),
+				sex:        $('select[name="sex"] option:selected', ev.target).val(),
+				status:     0,
+				street:     $('input[name="street"]', ev.target).val(),
+				number:     $('input[name="number"]', ev.target).val(),
+				district:   $('input[name="district"]', ev.target).val(),
+				city:       $('select[name="city"]', ev.target).val(),
+				state:      $('select[name="state"]', ev.target).val(),
+				cep:        $('input[name="cep"]', ev.target).val(),
+				complement: $('input[name="complement"]', ev.target).val()
+			});
 
 			this.model.save().then(function() {
 				Backbone.history.navigate('', {trigger: true});

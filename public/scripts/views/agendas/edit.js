@@ -12,10 +12,12 @@ define([
 	return Backbone.View.extend({
 		template: Handlebars.compile(edit),
 		events: {
-			'submit.form': "submit"
+			"submit.form": "submit",
+			"focus input" : "onFocus"
 		},
 		initialize: function( ) {
 			this.listenTo(this.model, 'sync', this.render, this);
+			this.listenTo(this.model, 'invalid', this.onInvalid, this);
 		},
 		render: function() {
 			this.$el.empty();
@@ -37,6 +39,17 @@ define([
 				Backbone.history.navigate('', {trigger: true});
 				toastr.success("Mudança na Agenda realizada com sucesso!");
 			});
+		},
+		onFocus: function(e) {
+			var fieldName = $(e.target).attr('name');
+			var controlGroup = $(this.$el, ".form-group").parents('input[name='+ fieldName +']');
+			$controlGroup.removeClass('error');
+		},
+		onInvalid: function(model, errors) {
+			_.each(errors, function(fieldName) {
+				var controlGroup = $(this.$el, ".form-group").parents('input[name='+ fieldName +']');
+				controlGroup.addClass('error');
+			}, this);
 		}
 	});
 });

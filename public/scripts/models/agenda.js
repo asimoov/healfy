@@ -9,25 +9,29 @@ define([
 	return Backbone.Model.extend({
 		urlRoot: 'agendas',
 		validate: function(attrs) {
+			var errors = [];
+
 			if(attrs.start !== null) {
-				this.trigger('invalid:start', 'Form field a is messed up!', this);
+				errors.push('start');
 			}
 
 			if(attrs.stop !== null) {
-				this.trigger('invalid:stop', 'Form field a is messed up!', this);
+				errors.push('stop');
 			}
 
 			if(attrs.interval !== null) {
-				this.trigger('invalid:interval', 'Form field a is messed up!', this);
+				errors.push('interval');
 			}
 
 			if(attrs.extrar !== null) {
-				this.trigger('invalid:extrar', 'Form field a is messed up!', this);
+				errors.push('extrar');
 			}
 
 			if(attrs.provider !== null) {
-				this.trigger('invalid:provider', 'Form field a is messed up!', this);
+				errors.push('provider');
 			}
+
+			if ( errors.length ) return errors;
 		},
 		schedulesByDate: function(d) {
 			var schedules = this.newsSchedules(d);

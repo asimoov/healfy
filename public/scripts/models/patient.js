@@ -6,57 +6,61 @@ define([
 	return Backbone.Model.extend({
 		urlRoot: 'patients',
 		validate: function(attrs) {
+			var errors = [];
+
 			if(attrs.name !== null) {
-				this.trigger('invalid:name', 'Form field a is messed up!', this);
+				errors.push('name');
 			}
 
 			if(attrs.rg !== null) {
-				this.trigger('invalid:rg', 'Form field a is messed up!', this);
+				errors.push('rg');
 			}
 
 			if(attrs.cpf !== null) {
-				this.trigger('invalid:rg', 'Form field a is messed up!', this);
+				errors.push('cpf');
 			}
 
 			if(attrs.birthday !== null) {
-				this.trigger('invalid:rg', 'Form field a is messed up!', this);
+				errors.push('birthday');
 			}
 
 			if(attrs.sex !== null) {
-				this.trigger('invalid:rg', 'Form field a is messed up!', this);
+				errors.push('sex');
 			}
 
 			if(attrs.status !== null) {
-				this.trigger('invalid:rg', 'Form field a is messed up!', this);
+				errors.push('status');
 			}
 
 			if(attrs.street !== null) {
-				this.trigger('invalid:rg', 'Form field a is messed up!', this);
+				errors.push('street');
 			}
 
 			if(attrs.number !== null) {
-				this.trigger('invalid:rg', 'Form field a is messed up!', this);
+				errors.push('number');
 			}
 
 			if(attrs.district !== null) {
-				this.trigger('invalid:rg', 'Form field a is messed up!', this);
+				errors.push('district');
 			}
 
 			if(attrs.city !== null) {
-				this.trigger('invalid:rg', 'Form field a is messed up!', this);
+				errors.push('city');
 			}
 
 			if(attrs.state !== null) {
-				this.trigger('invalid:rg', 'Form field a is messed up!', this);
+				errors.push('state');
 			}
 
 			if(attrs.cep !== null) {
-				this.trigger('invalid:rg', 'Form field a is messed up!', this);
+				errors.push('cep');
 			}
 
 			if(attrs.complement !== null) {
-				this.trigger('invalid:rg', 'Form field a is messed up!', this);
+				errors.push('complement');
 			}
+
+			if ( errors.length ) return errors;
 		}
 	}, {
 		status: ["Ativo", "Inativo"]
