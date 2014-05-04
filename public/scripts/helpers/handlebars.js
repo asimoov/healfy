@@ -15,6 +15,7 @@ define([
 		});
 
 		Handlebars.registerHelper('format_d', function(date, utc) {
+			date = date || new Date();
 			var d = new Date(Date.parse(date));
 			if(utc) { d = new Date(d.getTime() + (d.getTimezoneOffset() * 60000)); }
 
@@ -22,6 +23,10 @@ define([
 		});
 
 		Handlebars.registerHelper('format_t', function(date, utc) {
+			if(date === null || date === undefined) {
+				return "00:00";
+			}
+
 			var d = new Date(Date.parse(date));
 			if(utc) { d = new Date(d.getTime() + (d.getTimezoneOffset() * 60000)); }
 
@@ -64,14 +69,10 @@ define([
 		});
 
 		// Generator HTML tag option of the tag select
-		Handlebars.registerHelper('option_tag', function(configOccupation) {				
-			var dataOption = configOccupation.dataOption;
-			var test       = configOccupation.test || "";
-			var valueFirst = configOccupation.valueFirst || "";
+		Handlebars.registerHelper('options_tag', function(occupations, occupation) {				
+			var dataOption = occupations;
+			var test       = occupation || "";
 			var ret        = '';
-
-			var option_first = '<option value="">' + valueFirst + '</option>';
-			ret += option_first;
 
 			for (var i = 0; i < dataOption.length; i++) {
 			var option = '<option value="' + dataOption[i].id +'"';

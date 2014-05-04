@@ -6,42 +6,6 @@ define([
 ], function(_, Backbone, Day, Week) {
 	"use strict";
 
-	// Current Day
-	var getDay = function(date) {
-		var currDay = date.getDate();
-
-		return currFormatted(currDay);
-	};
-
-	// String formatted with 0 in front if < 10
-	var formatted = function(curr) {
-		if (curr < 10)
-			curr = "0" + curr;
-
-		return curr;
-	};
-
-	// Current Month
-	var getMonth = function(date) {
-		var currMonth = date.getMonth();
-
-		return currFormatted(currMonth);
-	};
-
-	// Current Year
-	var getYear = function(date) {
-		currYear = date.getFullYear();
-
-		return currYear;
-	};
-
-	// Current Week
-	var getWeek = function(date) {
-		var numberDayWeek = date.getDay();
-
-		return numberDayWeek;
-	};
-
 	var Calendar = Backbone.Model.extend({
 		defaults: {
 			today: new Date(),
@@ -53,7 +17,7 @@ define([
 		},
 		week: function() {
 			var firstDay = this.get('date');
-			var numberWeek = getWeek(firstDay);
+			var numberWeek = firstDay.getDay();
 
 			var firstWeek = new Date(firstDay.getFullYear(), firstDay.getMonth(), firstDay.getDate() - numberWeek);
 			var week = new Week();

@@ -11,7 +11,7 @@ module.exports = function(app) {
 		}
 	});
 
-	app.get('/patients', function(req, res) {
+	app.get('/patients', function(req, res) {	
 		Patient.findAll().success(function(patients) {
 			res.json(patients);
 		});

@@ -12,7 +12,8 @@
     "jade": "*",
     "sequelize": "~2.0.0-dev1",
     "pg": "~2.11.0",
-    "socket.io": "~0.9.16"
+    "socket.io": "~0.9.16",
+    "toobusy": "^0.2.4"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

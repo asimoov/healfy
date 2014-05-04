@@ -3,6 +3,7 @@ define([
   'underscore', 
   'backbone',
   'helpers/hackIE',
+  'helpers/dust',
   'helpers/handlebars',
   'helpers/toastr',
   'helpers/datepicker',
@@ -11,18 +12,18 @@ define([
   'routes/patients',
   'routes/providers',
   'views/layout'
-], function($, _, Backbone, HackIEHelper, HandlebarsHelper, ToastrHelper, Datepicker, AgendasRoute, HomeRoute, PatientsRoute, ProvidersRoute, Layout) {
+], function($, _, Backbone, HackIEHelper, DustHelper, HandlebarsHelper, ToastrHelper, Datepicker, AgendasRoute, HomeRoute, PatientsRoute, ProvidersRoute, Layout) {
   "use strict";
 
   var initialize = function() {
     HackIEHelper.initialize();
+    DustHelper.initialize();
     HandlebarsHelper.initialize();
     ToastrHelper.initialize();
     Datepicker.initialize();
 
-    var layout = new Layout();
+    var layout = new Layout({el: $('body')});
     layout.render();
-    $('body').empty().append(layout.$el);
     
     new HomeRoute();
     new AgendasRoute();

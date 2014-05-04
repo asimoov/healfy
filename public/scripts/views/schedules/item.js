@@ -5,10 +5,9 @@ define([
   'handlebars',
   'pubsub',
   'models/schedule',
-  'collections/patients',
   'views/schedules/new',
   'text!templates/schedules/item.html'
-], function($, _, Backbone, Handlebars, Pubsub, Schedule, Patients, NewView, item) {
+], function($, _, Backbone, Handlebars, Pubsub, Schedule, NewView, item) {
 	"use strict";
 
 	return Backbone.View.extend({
@@ -20,8 +19,6 @@ define([
 		},
 		initialize: function( ) {
 			this.listenTo(this.model, 'change', this.render, this);
-			this.collection = new Patients();
-			this.collection.fetch();
 		},
 		render: function() {
 			this.$el.empty();

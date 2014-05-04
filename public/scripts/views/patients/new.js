@@ -5,13 +5,14 @@ define([
   'handlebars',
   'toastr',
   'models/patient',
-  'text!templates/patients/new.html'
-], function($, _, Backbone, Handlebars, toastr, Patient, n) {
+  'text!templates/patients/new.html',
+  'text!templates/patients/_form.html'
+], function($, _, Backbone, Handlebars, toastr, Patient, index, form) {
 	"use strict";
 	
 	return Backbone.View.extend({
 		className: 'col-xs-12 col-md-10',
-		template: Handlebars.compile(n),
+		template: Handlebars.compile(index),
 		events: {
 			'submit.form-horizontal': "submit",
 			'click #add_covenants': "addConvernio",
@@ -21,17 +22,14 @@ define([
 		render: function() {
 			this.$el.empty();
 
-			var dataOptionOccupation = [
+			var occupations = [
 				{ id: 1, value: "Analista de Sistemas"},
 				{ id: 2, value: "Advogado"},
 				{ id: 3, value: "Administrador"}
 			];
 
-			var configOccupation = {
-				dataOption: dataOptionOccupation
-			};
-
-			this.$el.append(this.template({configOccupation: configOccupation}));
+			Handlebars.registerPartial({form: Handlebars.compile(form)});
+			this.$el.append(this.template({occupations: occupations}));
 		},
 		addConvernio: function() {
             var html = '<div class="form-group"><label class="col-sm-2 control-label" for="covenants">Convênios:</label><div class="col-sm-10"><select class="form-control covenants" name="covenants"><option selected value=""></option><option value="1">Bradesco</option><option value="2">Sul América</option><option value="3">Promédica</option></select></div></div>';
@@ -107,9 +105,10 @@ define([
 				complement: $('input[name="complement"]', ev.target).val()
 			});
 
-			this.model.save().then(function() {
-				Backbone.history.navigate('', {trigger: true});
-				toastr.success("Criada paciente com sucesso!");
+			this.model.save({success: function() {
+					Backbone.history.navigate('', {trigger: true});
+					toastr.success("Criada paciente com sucesso!");
+				}
 			});
 		},
 		parseDate: function(str) {

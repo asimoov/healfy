@@ -5,9 +5,11 @@ require.config({
 		backbone: 'vendors/backbone',
 		'virtual-collection': 'vendors/backbone.virtual-collection',
 		handlebars: 'vendors/handlebars',
+		dust: 'vendors/dust-full',
 		modernizr: 'vendors/modernizr',
 		toastr: 'vendors/toastr',
 		d3: 'vendors/d3',
+		moment: 'vendors/moment-with-langs',
 		jqueryUI: '../libs/jquery-ui/ui/jquery-ui',
 		jqueryMaskedInput: 'vendors/jquery.maskedinput',		
 		bootstrap: '../libs/bootstrap/dist/js/bootstrap',		
@@ -37,6 +39,9 @@ require.config({
 		handlebars: {
 			exports: 'Handlebars'
 		},
+		dust: {
+			exports: 'dust'
+		},
 		d3: {
 			exports: 'd3'
 		}
@@ -53,20 +58,19 @@ require([
 ], function(Modernizr, Application) {
 	"use strict";
 
-	if (true//Modernizr.borderradius && 
-		//Modernizr.boxshadow && 
-		//Modernizr.applicationcache && 
-		//Modernizr.indexeddb && 
-		//Modernizr.history && 
-		//Modernizr.svg && 
-		//Modernizr.csscolumns &&
-		//Modernizr.inputtypes.number &&
-		//Modernizr.inputtypes.date &&
-		//Modernizr.input.required && 
-		//Modernizr.input.pattern &&
-		//Modernizr.input.placeholder &&
-		//(Modernizr.flexbox || Modernizr.flexboxlegacy)
-		) {
+	if (Modernizr.borderradius && 
+		Modernizr.boxshadow && 
+		Modernizr.applicationcache && 
+		Modernizr.indexeddb && 
+		Modernizr.history && 
+		Modernizr.svg && 
+		Modernizr.csscolumns &&
+		Modernizr.inputtypes.number &&
+		Modernizr.inputtypes.date &&
+		Modernizr.input.required && 
+		Modernizr.input.pattern &&
+		Modernizr.input.placeholder &&
+		(Modernizr.flexbox || Modernizr.flexboxlegacy)) {
 		Application.initialize();
 	} else {
 		console.log("borderradius: " + Modernizr.borderradius);
@@ -74,7 +78,10 @@ require([
 		console.log("applicationcache: " + Modernizr.applicationcache);
 		console.log("indexeddb: " + Modernizr.indexeddb);
 		console.log("history: " + Modernizr.history);
+		console.log("svg: " + Modernizr.svg);
+		console.log("csscolumns: " + Modernizr.csscolumns);
 		console.log("inputtypes.number: " + Modernizr.inputtypes.number);
+		console.log("Modernizr.inputtypes.date: " + Modernizr.inputtypes.date);
 		console.log("input.required: " + Modernizr.input.required);
 		console.log("input.pattern: " + Modernizr.input.pattern);
 		console.log("input.placeholder: " + Modernizr.input.placeholder);

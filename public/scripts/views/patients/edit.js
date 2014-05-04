@@ -4,12 +4,13 @@ define([
   'backbone',
   'handlebars',
   'models/patient',
-  'text!templates/patients/edit.html'
-], function($, _, Backbone, Handlebars, Patient, edit) {
+  'text!templates/patients/edit.html',
+  'text!templates/patients/_form.html'
+], function($, _, Backbone, Handlebars, Patient, index, form) {
 	"use strict";
 
 	return Backbone.View.extend({
-		template: Handlebars.compile(edit),
+		template: Handlebars.compile(index),
 		events: {
 			"submit.form": "submit",
 			"focus input" : "onFocus"
@@ -19,11 +20,10 @@ define([
 			this.listenTo(this.model, 'invalid', this.onInvalid, this);
 		},
 		render: function() {
-			var that = this;
-			window.requestAnimationFrame(function() {
-				that.$el.empty();
-				that.$el.append(that.template(that.model.toJSON()));
-			});
+			this.$el.empty();
+
+			Handlebars.registerPartial({form: Handlebars.compile(form)});
+			this.$el.append(this.template(this.model.toJSON()));
 		},
 		submit: function(ev) {
 			ev.preventDefault();

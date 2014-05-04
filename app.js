@@ -7,6 +7,7 @@ var http = require('http');
 var path = require('path');
 
 var app = module.exports = express();
+require('./lib/toobusy')(app);
 require('./lib/database')(app);
 require('./lib/socket')(app);
 
@@ -30,12 +31,13 @@ app.configure(function() {
 	app.set('view engine', 'jade');
 	app.use(express.favicon());
 	app.use(express.cookieParser());
-    app.use(express.session({ secret: "changeme" }));
+	app.use(express.session({ secret: "changeme" }));
 	app.use(express.json());
 	app.use(express.urlencoded());
 	app.use(express.methodOverride());
 	app.use(app.router);
 	app.use(express.static(path.join(__dirname, 'public')));
+	app.use(express.compress());
 });
 
 var modules = [require('./apps/patients'), require('./apps/agendas'), require('./apps/providers'), require('./apps/schedules')];

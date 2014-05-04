@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# rev 4
+# rev 8
 
 CACHE:
 index.html
@@ -7,6 +7,22 @@ robots.txt
 styles/bootstrap.css
 styles/bootstrap-theme.css
 styles/style.css
+libs/jquery-ui/themes/base/jquery.ui.base.css
+libs/jquery-ui/themes/base/jquery.ui.theme.css 
+libs/jquery-ui/themes/base/jquery.ui.core.css
+libs/jquery-ui/themes/base/jquery.ui.accordion.css
+libs/jquery-ui/themes/base/jquery.ui.autocomplete.css
+libs/jquery-ui/themes/base/jquery.ui.button.css
+libs/jquery-ui/themes/base/jquery.ui.datepicker.css
+libs/jquery-ui/themes/base/jquery.ui.dialog.css
+libs/jquery-ui/themes/base/jquery.ui.menu.css
+libs/jquery-ui/themes/base/jquery.ui.progressbar.css
+libs/jquery-ui/themes/base/jquery.ui.resizable.css
+libs/jquery-ui/themes/base/jquery.ui.selectable.css 
+libs/jquery-ui/themes/base/jquery.ui.slider.css
+libs/jquery-ui/themes/base/jquery.ui.spinner.css
+libs/jquery-ui/themes/base/jquery.ui.tabs.css
+libs/jquery-ui/themes/base/jquery.ui.tooltip.css
 
 NETWORK:
 *

@@ -11,23 +11,23 @@ define([
 		validate: function(attrs) {
 			var errors = [];
 
-			if(attrs.start !== null) {
+			if(attrs.start === null) {
 				errors.push('start');
 			}
 
-			if(attrs.stop !== null) {
+			if(attrs.stop === null) {
 				errors.push('stop');
 			}
 
-			if(attrs.interval !== null) {
+			if(attrs.interval === null) {
 				errors.push('interval');
 			}
 
-			if(attrs.extrar !== null) {
-				errors.push('extrar');
+			if(attrs.extra === null) {
+				errors.push('extra');
 			}
 
-			if(attrs.provider !== null) {
+			if(attrs.provider === null) {
 				errors.push('provider');
 			}
 

@@ -2,19 +2,25 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'handlebars',
+  'dust',
   'text!templates/layout.html'
-], function($, _, Backbone, Handlebars, layout) {
+], function($, _, Backbone, dust, layout) {
 	"use strict";
 
 	return Backbone.View.extend({
-		template: Handlebars.compile(layout),
+		template: dust.compile(layout, "layout"),
 		initialize: function() {
 			this.listenTo(Backbone.history, 'route', this.activeMenu, this);
 		},
 		render: function() {
 			this.$el.empty();
-			this.$el.append(this.template());
+
+			dust.loadSource(this.template);
+			dust.render("layout", {},function(err, out) {
+				this.$el.append(out);
+			}.bind(this));
+
+			return this;
 		},
 		activeMenu: function() {
 			if(Backbone.history.getHash() === "") {
