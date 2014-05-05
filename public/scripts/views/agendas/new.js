@@ -13,6 +13,7 @@ define([
 	
 	return Backbone.View.extend({
 		template: dust.compile(index, "new"),
+		partial: dust.compile(form, "form"),
 		className: 'col-xs-12 col-md-10',
 		events: {
 			"submit.form-horizontal": "submit",
@@ -25,8 +26,8 @@ define([
 			this.$el.empty();
 
 			dust.loadSource(this.template);
-			dust.loadSource(dust.compile(form, "form"));
-			dust.render("new", this.model, function(err, out) {
+			dust.loadSource(this.partial);
+			dust.render("new", this.model.toJSON(), function(err, out) {
 				this.$el.append(out);
 			}.bind(this));
 

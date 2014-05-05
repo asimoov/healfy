@@ -12,8 +12,11 @@ define([
 
 			if(value !== undefined) {
 				var format = params.format;
+				var utc = params.utc || false
 
 				var m = moment(new Date(value));
+				if(utc) m = m.utc();
+
 				var output = m.format(format);
 				return chunk.write(output);
 			}

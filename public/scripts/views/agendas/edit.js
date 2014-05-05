@@ -2,15 +2,18 @@ define([
   'jquery', 
   'underscore', 
   'backbone',
-  'handlebars',
+  'dust',
   'toastr',
   'models/agenda',
-  'text!templates/agendas/edit.html'
-], function($, _, Backbone, Handlebars, toastr, Agenda, edit) {
+  'collections/agendas',
+  'text!templates/agendas/edit.html',
+  'text!templates/agendas/_form.html'
+], function($, _, Backbone, dust, toastr, Agenda, Agendas, edit, form) {
 	"use strict";
 
 	return Backbone.View.extend({
-		template: Handlebars.compile(edit),
+		template: dust.compile(edit, "edit"),
+		partial: dust.compile(form, "form"),
 		className: 'col-xs-12 col-md-10',
 		events: {
 			"submit.form": "submit",
@@ -22,34 +25,45 @@ define([
 		},
 		render: function() {
 			this.$el.empty();
-			this.$el.append(this.template(this.model.toJSON()));
+
+			dust.loadSource(this.template);
+			dust.loadSource(this.partial);
+			dust.render("edit", this.model.toJSON(), function(err, out) {
+				this.$el.append(out);
+			}.bind(this));
+
+			return this;
 		},
 		submit: function(ev) {
 			ev.preventDefault();
 			ev.stopPropagation();
 
-			this.model.set({extra: $('input[name="extra"]', ev.target).val()});
-			this.model.set({status: $('select[name="status"] option:selected', ev.target).val()});
-			this.model.set({interval: "1970-01-01T" + $('input[name="interval"]', ev.target).val()});
-			this.model.set({day: $('select[name="day"] option:selected', ev.target).val()});
-			this.model.set({start: "1970-01-01T" + $('input[name="start"]', ev.target).val()});
-			this.model.set({stop: "1970-01-01T" + $('input[name="stop"]', ev.target).val()});
-			this.model.set({doctor: $('input[name="doctor"]', ev.target).val()});
+			var model = this.model;
+			model.set({
+				extra: $('input[name="extra"]', ev.target).val(),
+				status: $('select[name="status"] option:selected', ev.target).val(),
+				interval: new Date("1970-01-01T" + $('input[name="interval"]', ev.target).val()),
+				day: $('select[name="day"] option:selected', ev.target).val(),
+				start: new Date("1970-01-01T" + $('input[name="start"]', ev.target).val()),
+				stop: new Date("1970-01-01T" + $('input[name="stop"]', ev.target).val()),
+				doctor: $('input[name="doctor"]', ev.target).val()
+			});
 
-			this.model.save().then(function() {
+			$.when(model.save()).then(function() {
+				Agendas.getInstance().add(model);
 				Backbone.history.navigate('', {trigger: true});
 				toastr.success("Mudança na Agenda realizada com sucesso!");
 			});
 		},
 		onFocus: function(e) {
 			var fieldName = $(e.target).attr('name');
-			var controlGroup = $(this.$el, ".form-group").parents('input[name='+ fieldName +']');
-			$controlGroup.removeClass('error');
+			var controlGroup = $('input[name='+ fieldName +']').parent();
+			controlGroup.removeClass('has-error');
 		},
 		onInvalid: function(model, errors) {
 			_.each(errors, function(fieldName) {
-				var controlGroup = $(this.$el, ".form-group").parents('input[name='+ fieldName +']');
-				controlGroup.addClass('error');
+				var controlGroup = $('input[name='+ fieldName +']').parent();
+				controlGroup.addClass('has-error');
 			}, this);
 		}
 	});
