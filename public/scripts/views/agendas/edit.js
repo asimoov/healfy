@@ -17,6 +17,7 @@ define([
 		className: 'col-xs-12 col-md-10',
 		events: {
 			"submit.form": "submit",
+			"click.buttonCancel": "cancel",
 			"focus input" : "onFocus"
 		},
 		initialize: function( ) {
@@ -55,8 +56,14 @@ define([
 				toastr.success("Mudança na Agenda realizada com sucesso!");
 			});
 		},
-		onFocus: function(e) {
-			var fieldName = $(e.target).attr('name');
+		cancel: function(ev) {
+			ev.preventDefault();
+			ev.stopPropagation();
+
+			Backbone.history.navigate('', {trigger: true});
+		},
+		onFocus: function(ev) {
+			var fieldName = $(ev.target).attr('name');
 			var controlGroup = $('input[name='+ fieldName +']').parent();
 			controlGroup.removeClass('has-error');
 		},
